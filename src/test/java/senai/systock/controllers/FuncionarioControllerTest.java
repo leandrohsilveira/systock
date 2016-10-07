@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import senai.systock.model.Funcionario;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,8 +27,7 @@ public class FuncionarioControllerTest {
 	private MockMvc mvc;
 
 	@Test
-	@Ignore
-	public void getHello() throws Exception {
+	public void funcionarioTest() throws Exception {
 		mvc.perform(
 				MockMvcRequestBuilders
 				.get("/funcionario")
@@ -33,7 +35,20 @@ public class FuncionarioControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(
 						content()
-							.string(equalTo("Greetings from Spring Boot!")));
+							.json(new JSONObject(new Funcionario("Leandro", "12345678901", "Administrador")).toString()));
+	}
+	
+	@Test
+	@Ignore
+	public void ivanTest() throws Exception {
+		mvc.perform(
+				MockMvcRequestBuilders
+				.get("/funcionario")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(
+						content()
+						.json(new JSONObject(new Funcionario("Ivan", "12345678901", "Administrador")).toString()));
 	}
 
 }
