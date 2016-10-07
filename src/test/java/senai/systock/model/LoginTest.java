@@ -16,7 +16,7 @@ public class LoginTest {
 
 	@Test
 	public void usuarioInexistenteTest() {
-		Login l = new Login("Teste", "123456");
+		Login l = new Login("Vendedor", "123456");
 		try {
 			l.login();
 			fail("O usuário nao existe.");
@@ -29,7 +29,7 @@ public class LoginTest {
 
 	@Test
 	public void senhaIncorretaTeste() {
-		Login l = new Login("teste", "1234567");
+		Login l = new Login("vendedor", "1234567");
 		try {
 			l.login();
 			fail("A senha esta incorreta.");
@@ -41,7 +41,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void usuarioIncorretosenhaIncorretoTest() {
+	public void usuarioInexistenteSenhaIncorretaTest() {
 		Login l = new Login("Teste", "1234567");
 		try {
 			l.login();
@@ -54,7 +54,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void usuarioObrigatorioTest() {
+	public void loginVazioTest() {
 		Login l = new Login("", "123456");
 		try {
 			l.login();
@@ -66,7 +66,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void senhaObrigatoriaTest() {
+	public void senhaVaziaTest() {
 		Login l = new Login("teste", "");
 		try {
 			l.login();
@@ -78,7 +78,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void usuarioObrigatoriosenhaObrigatorioTest() {
+	public void usuarioVazioSenhaVaziaTest() {
 		Login l = new Login("", "");
 		try {
 			l.login();
