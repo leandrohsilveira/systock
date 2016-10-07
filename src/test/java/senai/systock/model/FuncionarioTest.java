@@ -11,14 +11,14 @@ public class FuncionarioTest {
 	@Test
 	public void sucessoTest() throws ValidationException {
 		Funcionario f = new Funcionario("Leandro", "10054908213", "Gerente");
-		f.salvar();
+		f.cadastrar();
 	}
 
 	@Test
 	public void cpfDuplicadoTest() {
 		Funcionario f = new Funcionario("Leandro", "06106775001", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O Funcionario nao pode ser cadastrado com um CPF ja cadastrado.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 1);
@@ -31,7 +31,7 @@ public class FuncionarioTest {
 	public void cpfInvalidoTest() {
 		Funcionario f = new Funcionario("Leandro", "21347472828", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O Funcionario nao pode ser cadastrado com um CPF inválido.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 1);
@@ -42,7 +42,7 @@ public class FuncionarioTest {
 	public void nomeVazioTest() {
 		Funcionario f = new Funcionario("", "10054908213", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O nome do Funcionario é obrigatorio.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 1);
@@ -54,7 +54,7 @@ public class FuncionarioTest {
 	public void nomeVazioCpfDuplicadoTest() {
 		Funcionario f = new Funcionario("", "06106775001", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O nome do Funcionario é obrigatorio. \n O Funcionario nao pode ser cadastrado com um CPF ja cadastrado.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 2);
@@ -68,7 +68,7 @@ public class FuncionarioTest {
 	public void nomeVazioCpfInvalidoTest() {
 		Funcionario f = new Funcionario("", "21347472828", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O nome do Funcionario é obrigatorio. \n O Funcionario nao pode ser cadastrado com um CPF inválido.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 2);
@@ -82,7 +82,7 @@ public class FuncionarioTest {
 	public void cpfVazioTest() {
 		Funcionario f = new Funcionario("Leandro", "", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O CPF do Funcionario é obrigatorio.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 1);
@@ -95,7 +95,7 @@ public class FuncionarioTest {
 	public void nomeVazioCpfVazioTest() {
 		Funcionario f = new Funcionario("", "", "Gerente");
 		try {
-			f.salvar();
+			f.cadastrar();
 			fail("O nome do Funcionario é obrigatorio. \n O CPF do Funcionario é obrigatorio.");
 		} catch (ValidationException e) {
 			assertEquals(e.getMensagens().length, 2);

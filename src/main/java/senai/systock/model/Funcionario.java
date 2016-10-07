@@ -4,7 +4,18 @@ public class Funcionario {
     private String cpf;
     private String cargo;
 
-    public String getNome() {
+    public Funcionario(String nome, String cpf, String cargo) {
+    	this.nome = nome;
+    	this.cpf = cpf;
+    	this.cargo = cargo;
+	}
+    
+	public void cadastrar() {
+		
+	}
+
+
+	public String getNome() {
         return nome;
     }
 
@@ -27,6 +38,7 @@ public class Funcionario {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
     
     
 }

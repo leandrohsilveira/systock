@@ -1,6 +1,6 @@
 package senai.systock.exceptions;
 
-public class ValidationException extends Exception {
+public class ValidationException extends RuntimeException {
 
 	private static final long serialVersionUID = -8858542963283669131L;
 	
