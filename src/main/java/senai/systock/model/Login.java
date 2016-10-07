@@ -8,6 +8,10 @@ public class Login {
         this.usuario = usuario;
         this.senha = senha;
     }
+    
+    public void login() {
+    	
+    }
 
     public String getUsuario() {
         return usuario;
