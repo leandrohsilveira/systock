@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Systock</title>
+
+    <!-- Roboto Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="bower_components/material-icons/css/material-icons.min.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/login.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="systock">
+    <div class="container">
+
+        <form class="form-signin" method="post" action="/login.html">
+
+            <h2 class="form-signin-heading">Please sign in</h2>
+
+            <label for="username" class="sr-only">Email address</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
+
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="username" class="form-control" placeholder="Password" required>
+
+            <div class="checkbox">
+            	<label>
+					<input type="checkbox" value="remember-me"> Remember me
+				</label>
+            </div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+
+</html>

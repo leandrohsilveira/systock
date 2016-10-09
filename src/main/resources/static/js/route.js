@@ -13,6 +13,10 @@
 			.state('index', {
 				url: '/',
 				templateUrl: 'index.html'
+			})
+			.state('funcionarios', {
+				url: '/funcionarios',
+				templateUrl: 'funcionarios.html'
 			});
 
 		$urlRouterProvider.otherwise("/");
