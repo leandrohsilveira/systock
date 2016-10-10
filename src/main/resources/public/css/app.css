@@ -34,3 +34,24 @@
 	background-color: #222222;
 	color: #ffffff;
 }
+
+.btn-primary {
+	border-color: #333333;
+	background-color: #222222;
+	color: #ffffff;
+}
+
+.btn,
+.btn:focus,
+.btn:active,
+.btn:hover {
+	border-radius: 2px;	
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover {
+	border-color: #555555;
+	background-color: #444444;
+	color: #ffffff;
+}
