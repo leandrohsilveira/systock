@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Systock</title>
+
+	<!-- Roboto Font -->
+	<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Roboto|Material+Icons" rel="stylesheet">
+
+	<!-- Material Icons -->
+	<link href="bower_components/material-icons/css/material-icons.min.css" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+	<link href="css/app.css" rel="stylesheet">
+	<link href="css/login.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+      <script src="bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+</head>
+
+<body ng-app="systock">
+
+	<ui-view></ui-view>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  </body>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/route.js"></script>
+
+	<!-- Configs -->
+	<script src="js/config/autenticacao.interceptor.js"></script>
+	<script src="js/config/autenticacao.config.js"></script>
+
+	<!-- Controllers -->
+	<script src="js/controller/login.controller.js"></script>
+	<script src="js/controller/usuario-navbar.controller.js"></script>
+
+</body>
+
 </html>
