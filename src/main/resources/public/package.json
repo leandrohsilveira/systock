@@ -1,0 +1,27 @@
+{
+  "name": "systock",
+  "version": "1.0.0",
+  "description": "Systock",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandrohsilveira/systock.git"
+  },
+  "keywords": [
+    "systock"
+  ],
+  "author": "Leandro Hinckel Silveira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leandrohsilveira/systock/issues"
+  },
+  "homepage": "https://github.com/leandrohsilveira/systock#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0"
+  }
+}
