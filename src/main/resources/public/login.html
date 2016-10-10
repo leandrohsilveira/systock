@@ -1,60 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="header">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Systock</title>
+	<div class="container">
+		<h1 class="text-center app-name">Systock</h1>
+	</div>
 
-    <!-- Roboto Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</div>
+<div class="container">
 
-    <!-- Material Icons -->
-    <link href="bower_components/material-icons/css/material-icons.min.css" rel="stylesheet">
+    <form class="form-signin" ng-submit="vm.entrar()">
 
-    <!-- Bootstrap -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <h2 class="form-signin-heading">Identifique-se</h2>
 
-    <link href="css/login.css" rel="stylesheet">
+		<label for="username" class="sr-only">Login</label>
+        <input type="text" id="username" class="form-control" placeholder="Login" ng-model="vm.login" required autofocus>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
-      <script src="bower_components/respond/dest/respond.min.js"></script>
-    <![endif]-->
-</head>
+        <label for="password" class="sr-only">Senha</label>
+        <input type="password" id="password" class="form-control" placeholder="Senha" ng-model="vm.senha" required>
 
-<body ng-app="systock">
-    <div class="container">
+        <!-- <div class="checkbox">
+        	<label>
+				<input type="checkbox" value="remember-me"> Remember me
+			</label>
+        </div> -->
 
-        <form class="form-signin" method="post" action="/login.html">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+    </form>
 
-            <h2 class="form-signin-heading">Please sign in</h2>
-
-            <label for="username" class="sr-only">Email address</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
-
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="username" class="form-control" placeholder="Password" required>
-
-            <div class="checkbox">
-            	<label>
-					<input type="checkbox" value="remember-me"> Remember me
-				</label>
-            </div>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
-
-    </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-</body>
-
-</html>
+</div>
