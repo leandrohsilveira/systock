@@ -10,17 +10,17 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class ValidacaoUsuarioTest {
-
+	
 	@Test
 	public void sucessoTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertTrue(validacoes.isEmpty());
 	}
 
 	@Test
 	public void loginComecaComNumeroTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("1leandro", "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("1leandro", "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -30,7 +30,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void loginMaior16CaracteresTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro1234567890", "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro1234567890", "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -39,7 +39,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void loginMenor3CaracteresTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("le", "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("le", "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -48,7 +48,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void senhaMenor8CaracteresTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "1234567").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "1234567", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -57,7 +57,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void senhaMaior32CaracteresTest() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "123456789012345678901234567890123").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "123456789012345678901234567890123", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -66,7 +66,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void loginVazio1Test() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario(null, "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario(null, "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -75,7 +75,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void senhaVazia1Test() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", null).validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", null, new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -84,7 +84,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void loginVazio2Test() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("", "12345678").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("", "12345678", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
@@ -93,7 +93,7 @@ public class ValidacaoUsuarioTest {
 	
 	@Test
 	public void senhaVazia2Test() {
-		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "").validar();
+		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "", new Funcionario("Leandro", "12345678901", "admin")).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();

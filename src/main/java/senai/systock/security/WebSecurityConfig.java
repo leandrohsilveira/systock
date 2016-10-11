@@ -1,5 +1,7 @@
 package senai.systock.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +14,9 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -23,7 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.ldapAuthentication().userDnPatterns("uid={0},ou=people").groupSearchBase("ou=groups").contextSource()
-				.ldif("classpath:test-server.ldif");
+		auth.jdbcAuthentication()
+				.dataSource(dataSource)
+				.usersByUsernameQuery("select login, senha, ativo from usuario where login=?")
+				.authoritiesByUsernameQuery("select u.login, f.cargo from usuario u join funcionario f on f.id = u.funcionario_id where u.login = ?");
 	}
+	
 }

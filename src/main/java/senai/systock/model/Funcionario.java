@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="funcionario")
@@ -19,8 +20,16 @@ public class Funcionario extends EntidadeBase {
 		this.cargo = cargo;
 	}
 	
+	@NotNull
+	@Column(name="nome", nullable=false)
 	private String nome;
+	
+	@NotNull
+	@Column(name="cpf", nullable=false)
 	private String cpf;
+	
+	@NotNull
+	@Column(name="cargo", nullable=false)
 	private String cargo;
 
 	public String getNome() {

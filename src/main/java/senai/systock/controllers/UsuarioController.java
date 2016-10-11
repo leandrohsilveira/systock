@@ -23,10 +23,4 @@ public class UsuarioController {
 		return usuarioRepository.findOne(id);
 	}
 	
-	@JsonView(Usuario.SemSenhaView.class)
-	@GetMapping("/usuarios/teste")
-	public Usuario cadastrarTeste(@RequestParam("login") String login, @RequestParam("senha") String senha) {
-		return usuarioRepository.save(new Usuario(login, senha));
-	}
-	
 }

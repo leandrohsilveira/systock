@@ -2,6 +2,9 @@ package senai.systock.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -18,9 +21,10 @@ public class Usuario extends EntidadeBase {
 	public Usuario() {
 	}
 	
-	public Usuario(String login, String senha) {
+	public Usuario(String login, String senha, Funcionario funcionario) {
 		this.login = login;
 		this.senha = senha;
+		this.funcionario = funcionario;
 	}
 	
     public interface SemSenhaView extends IdView {};
@@ -39,6 +43,19 @@ public class Usuario extends EntidadeBase {
     @JsonView(ComSenhaView.class)
 	private String senha;
     
+    @NotNull
+    @OneToOne(fetch=FetchType.EAGER, optional=false)
+    @PrimaryKeyJoinColumn(name="funcionario_id")
+    @JsonView(SemSenhaView.class)
+    private Funcionario funcionario;
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 	public String getLogin() {
 		return login;

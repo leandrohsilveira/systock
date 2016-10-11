@@ -23,7 +23,6 @@ public class LoginController {
 	
 	@PostMapping(path="/auth", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public void login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
-		logger.info("Login: {}/{}", login, senha);
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, senha));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
