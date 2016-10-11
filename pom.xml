@@ -103,44 +103,44 @@
 	<build>
 		<finalName>systock</finalName>
 		<plugins>
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${project.public.dir}/dist</directory>
-						</fileset>
-						<fileset>
-							<directory>${project.public.dir}/.tmp</directory>
-						</fileset>
-						<fileset>
-							<directory>${project.public.dir}/app/components</directory>
-						</fileset>
-						<fileset>
-							<directory>${project.public.dir}/node_modules</directory>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.github.trecloux</groupId>
-				<artifactId>yeoman-maven-plugin</artifactId>
-				<version>0.5</version>
-				<configuration>
-					<yeomanProjectDirectory>${project.public.dir}</yeomanProjectDirectory>
-					<skipBuild>true</skipBuild>
-					<skipTests>true</skipTests>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-clean-plugin</artifactId> -->
+<!-- 				<version>2.5</version> -->
+<!-- 				<configuration> -->
+<!-- 					<filesets> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>${project.public.dir}/dist</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>${project.public.dir}/.tmp</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>${project.public.dir}/app/components</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>${project.public.dir}/node_modules</directory> -->
+<!-- 						</fileset> -->
+<!-- 					</filesets> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>com.github.trecloux</groupId> -->
+<!-- 				<artifactId>yeoman-maven-plugin</artifactId> -->
+<!-- 				<version>0.5</version> -->
+<!-- 				<configuration> -->
+<!-- 					<yeomanProjectDirectory>${project.public.dir}</yeomanProjectDirectory> -->
+<!-- 					<skipBuild>true</skipBuild> -->
+<!-- 					<skipTests>true</skipTests> -->
+<!-- 				</configuration> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>package</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>build</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
