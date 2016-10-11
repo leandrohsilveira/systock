@@ -5,11 +5,12 @@
 	<artifactId>senai.systock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Systock</name>
-	
+
 	<properties>
+		<project.app.dir>src/main/resources/app</project.app.dir>
 		<project.public.dir>src/main/resources/public</project.public.dir>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -103,44 +104,6 @@
 	<build>
 		<finalName>systock</finalName>
 		<plugins>
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-clean-plugin</artifactId> -->
-<!-- 				<version>2.5</version> -->
-<!-- 				<configuration> -->
-<!-- 					<filesets> -->
-<!-- 						<fileset> -->
-<!-- 							<directory>${project.public.dir}/dist</directory> -->
-<!-- 						</fileset> -->
-<!-- 						<fileset> -->
-<!-- 							<directory>${project.public.dir}/.tmp</directory> -->
-<!-- 						</fileset> -->
-<!-- 						<fileset> -->
-<!-- 							<directory>${project.public.dir}/app/components</directory> -->
-<!-- 						</fileset> -->
-<!-- 						<fileset> -->
-<!-- 							<directory>${project.public.dir}/node_modules</directory> -->
-<!-- 						</fileset> -->
-<!-- 					</filesets> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>com.github.trecloux</groupId> -->
-<!-- 				<artifactId>yeoman-maven-plugin</artifactId> -->
-<!-- 				<version>0.5</version> -->
-<!-- 				<configuration> -->
-<!-- 					<yeomanProjectDirectory>${project.public.dir}</yeomanProjectDirectory> -->
-<!-- 					<skipBuild>true</skipBuild> -->
-<!-- 					<skipTests>true</skipTests> -->
-<!-- 				</configuration> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<phase>package</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>build</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -167,60 +130,26 @@
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> -->
-			<!-- <artifactId>maven-assembly-plugin</artifactId> -->
-			<!-- <configuration> -->
-			<!-- <finalName>systock</finalName> -->
-			<!-- <archive> -->
-			<!-- <manifest> -->
-			<!-- <mainClass>senai.systock.Application</mainClass> -->
-			<!-- </manifest> -->
-			<!-- </archive> -->
-			<!-- <descriptorRefs> -->
-			<!-- <descriptorRef>jar-with-dependencies</descriptorRef> -->
-			<!-- </descriptorRefs> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>make-assembly</id> this is used for inheritance merges -->
-			<!-- <phase>package</phase> bind to the packaging phase -->
-			<!-- <goals> -->
-			<!-- <goal>single</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
-
-
-			<!-- <plugin> -->
-			<!-- <groupId>com.github.eirslett</groupId> -->
-			<!-- <artifactId>frontend-maven-plugin</artifactId> -->
-			<!-- <version>0.0.14</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>install node and npm</id> -->
-			<!-- <goals> -->
-			<!-- <goal>install-node-and-npm</goal> -->
-			<!-- </goals> -->
-			<!-- <phase>generate-resources</phase> -->
-			<!-- </execution> -->
-			<!-- <execution> -->
-			<!-- <id>bower install</id> -->
-			<!-- <goals> -->
-			<!-- <goal>bower</goal> -->
-			<!-- </goals> -->
-
-			<!-- <configuration> -->
-			<!-- <arguments>install</arguments> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- <configuration> -->
-			<!-- <nodeVersion>v4.6.0</nodeVersion> -->
-			<!-- <npmVersion>1.3.8</npmVersion> -->
-			<!-- <workingDirectory>src/main/resources/public</workingDirectory> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>pl.allegro</groupId> -->
+<!-- 				<artifactId>grunt-maven-plugin</artifactId> -->
+<!-- 				<version>1.4.1</version> -->
+<!-- 				<configuration> -->
+<!-- 					<sourceDirectory>${project.app.dir}</sourceDirectory> -->
+<!-- 					<jsSourceDirectory>${project.public.dir}</jsSourceDirectory> -->
+<!-- 					<gruntBuildDirectory>${project.build.directory}/grunt</gruntBuildDirectory> -->
+<!-- 				</configuration> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>install</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>npm</goal> -->
+<!-- 							<goal>bower</goal> -->
+<!-- 							<goal>grunt</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 
 		</plugins>
 	</build>
