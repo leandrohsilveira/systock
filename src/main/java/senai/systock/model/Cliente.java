@@ -1,28 +1,23 @@
 package senai.systock.model;
 
-public class Cliente {
-	private int id;
-	private String nome;
-	private String cpf;
-	private String email;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "cliente")
+@SequenceGenerator(name = "sequence_gen", sequenceName = "cliente_seq", initialValue = 1, allocationSize = 1)
+public class Cliente extends EntidadeBase {
+	
 	public Cliente(String nome, String cpf, String email) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 	}
 	
-	public void cadastrar() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	private String nome;
+	private String cpf;
+	private String email;
 
 	public String getNome() {
 		return nome;

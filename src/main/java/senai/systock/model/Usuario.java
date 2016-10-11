@@ -1,4 +1,59 @@
 package senai.systock.model;
 
-public class Usuario {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+@Entity
+@Table(name="usuario")
+@SequenceGenerator(name="sequence_gen", sequenceName="usuario_seq", initialValue=1, allocationSize=1)
+public class Usuario extends EntidadeBase {
+	
+	public Usuario() {
+	}
+	
+	public Usuario(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
+	}
+	
+    public interface SemSenhaView extends IdView {};
+    public interface ComSenhaView extends SemSenhaView {};
+    
+    @NotNull(message="O login é obrigatório")
+    @Pattern(regexp="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$", message="O login deve começar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos")
+    @Size(min = 3, max = 16, message="O login deve possuir entre 3 e 16 caracteres")
+    @Column(name="login", length=16, nullable=false, unique=true, updatable=false)
+    @JsonView(SemSenhaView.class)
+	private String login;
+	
+    @NotNull(message="A senha é obrigatória")
+    @Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
+    @Column(name="senha", length=32, nullable=false)
+    @JsonView(ComSenhaView.class)
+	private String senha;
+    
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 }

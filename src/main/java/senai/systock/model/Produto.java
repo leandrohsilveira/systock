@@ -1,42 +1,50 @@
 package senai.systock.model;
-public class Produto {
 
-    private String descricao;
-    private Integer quantidade;
-    private Float preco;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-    public Produto(String descricao, Float preco, Integer quantidade) {
-        this.descricao = descricao;
-        this.quantidade = quantidade;
-        this.preco = preco;
-    }
-        
-    public void cadastrar() {
-    	
-    }
+@Entity
+@Table(name="produto")
+@SequenceGenerator(name="sequence_gen", sequenceName="produto_seq", initialValue=1, allocationSize=1)
+public class Produto extends EntidadeBase {
 
-    public String getDescricao() {
-        return descricao;
-    }
+	private String descricao;
+	private Integer quantidade;
+	private Float preco;
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public Produto(String descricao, Float preco, Integer quantidade) {
+		this.descricao = descricao;
+		this.quantidade = quantidade;
+		this.preco = preco;
+	}
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
+	public void cadastrar() {
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
+	}
 
-    public Float getPreco() {
-        return preco;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setPreco(Float preco) {
-        this.preco = preco;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
 
 }

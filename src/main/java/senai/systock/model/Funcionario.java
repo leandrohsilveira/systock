@@ -1,44 +1,50 @@
 package senai.systock.model;
-public class Funcionario {
-    private String nome;
-    private String cpf;
-    private String cargo;
 
-    public Funcionario(String nome, String cpf, String cargo) {
-    	this.nome = nome;
-    	this.cpf = cpf;
-    	this.cargo = cargo;
-	}
-    
-	public void cadastrar() {
-		
-	}
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="funcionario")
+@SequenceGenerator(name="sequence_gen", sequenceName="funcionario_seq", initialValue=1, allocationSize=1)
+public class Funcionario extends EntidadeBase {
+	
+	public Funcionario() {
+	}
+	
+	public Funcionario(String nome, String cpf, String cargo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.cargo = cargo;
+	}
+	
+	private String nome;
+	private String cpf;
+	private String cargo;
 
 	public String getNome() {
-        return nome;
-    }
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public String getCargo() {
-        return cargo;
-    }
+	public String getCargo() {
+		return cargo;
+	}
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
 
-    
-    
 }
