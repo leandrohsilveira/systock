@@ -16,8 +16,8 @@
         return interceptor;
 
 		function responseError(rejection) {
-			if(rejection.status == 403) {
-				console.debug('(403) Forbidden');
+			if(rejection.status == 401) {
+				console.debug('(401) Unauthorized');
 				var path = $location.path();
 				return $location.path('/login').search('next', path);
 			}

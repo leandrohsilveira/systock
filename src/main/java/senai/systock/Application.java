@@ -28,7 +28,7 @@ public class Application {
     		Usuario admin = usuarioRepository.findByLogin("admin");
     		if(admin == null) {
     			Funcionario funcionario = funcionarioRepository.save(new Funcionario("Administrador", "00000000123", "admin"));
-    			usuarioRepository.save(new Usuario("admin", "systock@admin", funcionario));
+    			usuarioRepository.save(new Usuario("admin", "12345678", funcionario));
     		}
     	};
 	}

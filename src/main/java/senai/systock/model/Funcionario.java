@@ -6,6 +6,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import senai.systock.model.EntidadeBase.Public;
+
 @Entity
 @Table(name="funcionario")
 @SequenceGenerator(name="sequence_gen", sequenceName="funcionario_seq", initialValue=1, allocationSize=1)
@@ -14,6 +18,7 @@ public class Funcionario extends EntidadeBase {
 	public Funcionario() {
 	}
 	
+	
 	public Funcionario(String nome, String cpf, String cargo) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -21,6 +26,7 @@ public class Funcionario extends EntidadeBase {
 	}
 	
 	@NotNull
+	@JsonView(Public.class)
 	@Column(name="nome", nullable=false)
 	private String nome;
 	
@@ -29,6 +35,7 @@ public class Funcionario extends EntidadeBase {
 	private String cpf;
 	
 	@NotNull
+	@JsonView(Public.class)
 	@Column(name="cargo", nullable=false)
 	private String cargo;
 

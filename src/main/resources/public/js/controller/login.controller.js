@@ -11,18 +11,20 @@
     function LoginController($http, $stateParams, $location, $cookies, jQuery) {
         var vm = this;
 
+		vm.mensagens = [];
+
 		vm.login = null;
 		vm.senha = null;
 
 		vm.next = null;
 
 		vm.entrar = entrar;
+		vm.removerMensagem = removerMensagem;
 
         activate();
 
         function activate() {
 			vm.next = $stateParams.next;
-			console.log('next = ' + vm.next)
         }
 
 		function entrar() {
@@ -46,7 +48,14 @@
 				})
 				.catch(function (response) {
 					console.error(response);
+					vm.mensagens.push({tipo: 'danger', descricao: response.data.message});
 				});
+		}
+
+		function removerMensagem(indice) {
+			if(vm.mensagens && indice < vm.mensagens.length) {
+				vm.mensagens.splice(indice, 1);
+			}
 		}
     }
 })();

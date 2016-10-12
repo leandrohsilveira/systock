@@ -21,11 +21,11 @@ public class EntidadeBase {
 		this.id = id;
 	}
 	
-	interface IdView {}
+	public interface Public {}
 	
 	@Id
 	@GeneratedValue(generator="sequence_gen")
-	@JsonView(IdView.class)
+	@JsonView(Public.class)
 	private Long id;
 	
 	private boolean ativo;
