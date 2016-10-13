@@ -1,8 +1,12 @@
 package senai.systock.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "cliente")
@@ -15,7 +19,12 @@ public class Cliente extends EntidadeBase {
 		this.email = email;
 	}
 	
+	@NotBlank
+	@Size(min=3, max=255)
+	@Column(name="nome", nullable=false)
 	private String nome;
+	
+	@NotBlank
 	private String cpf;
 	private String email;
 

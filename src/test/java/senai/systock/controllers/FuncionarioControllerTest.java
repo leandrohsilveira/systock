@@ -1,6 +1,5 @@
 package senai.systock.controllers;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import senai.systock.model.Cargo;
 import senai.systock.model.Funcionario;
 
 @RunWith(SpringRunner.class)
@@ -35,7 +35,7 @@ public class FuncionarioControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(
 						content()
-							.json(new JSONObject(new Funcionario("Leandro", "12345678901", "Administrador")).toString()));
+							.json(new JSONObject(new Funcionario("Leandro", "82821408307", Cargo.ADMINISTRADOR)).toString()));
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ public class FuncionarioControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(
 						content()
-						.json(new JSONObject(new Funcionario("Ivan", "12345678901", "Administrador")).toString()));
+						.json(new JSONObject(new Funcionario("Ivan", "82821408307", Cargo.ADMINISTRADOR)).toString()));
 	}
 
 }

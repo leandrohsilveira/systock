@@ -16,13 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import senai.systock.dao.UsuarioRepository;
-import senai.systock.model.EntidadeBase;
-import senai.systock.model.EntidadeBase.Public;
-import senai.systock.model.Funcionario;
 import senai.systock.model.Usuario;
+import senai.systock.repository.UsuarioRepository;
 
 @RestController
 public class LoginController {
@@ -45,7 +40,6 @@ public class LoginController {
 		}
 	}
 	
-	@JsonView(Public.class)
 	@GetMapping(path="/auth", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Usuario getAuth() {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -8,8 +8,6 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 @MappedSuperclass
 public class EntidadeBase {
 	
@@ -21,11 +19,8 @@ public class EntidadeBase {
 		this.id = id;
 	}
 	
-	public interface Public {}
-	
 	@Id
 	@GeneratedValue(generator="sequence_gen")
-	@JsonView(Public.class)
 	private Long id;
 	
 	private boolean ativo;

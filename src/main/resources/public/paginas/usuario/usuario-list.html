@@ -1,0 +1,65 @@
+<div class="row">
+	<h1>Relatório de Usuários</h1>
+	<uib-accordion>
+		<div uib-accordion-group class="panel-default" heading="Filtros">
+			<form class="form-inline" ng-submit="vm.filtros.filtrar()">
+				<div class="form-group">
+					<label class="sr-only" for="filtro_login">Por login</label>
+					<input type="text" class="form-control" id="filtro_login" placeholder="Por login" ng-model="vm.filtros.login">
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="filtro_nome">Por nome</label>
+					<input type="text" class="form-control" id="filtro_nome" placeholder="Por nome" ng-model="vm.filtros.nome">
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="filtro_cpf">Por CPF</label>
+					<input type="text" class="form-control" id="filtro_cpf" placeholder="Por CPF" ng-model="vm.filtros.cpf">
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="filtro_cargo">Por cargo</label>
+					<select id="filtro_cargo" class="form-control" ng-model="vm.filtros.cargo" ng-options="cargo as cargo.rotulo for cargo in vm.cargos"></select>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+				</div>
+			</form>
+		</div>
+	</uib-accordion>
+</div>
+
+<div class="row">
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Usuario</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!vm.possuiUsuarios()">
+					<td colspan="2" class="text-center"><h4>Nenhum usuário encontrado</h4></td>
+				</tr>
+				<tr ng-repeat="usuario in vm.usuarios">
+					<td><i class="material-icons row-icon">person</i></td>
+					<td class="col-xs-11">
+						{{ usuario.funcionario.nome }}
+						<br>
+						{{ usuario.login }}
+						<br>
+						{{ usuario.funcionario.cpf | brCpf }}
+						<br>
+						{{ usuario.funcionario.cargo | capitalize }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<span ng-if="vm.possuiUsuarios()">Exibindo {{ vm.usuarios.length }} de {{ vm.resource.page.totalElements }} registros</span>
+	<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
+</div>

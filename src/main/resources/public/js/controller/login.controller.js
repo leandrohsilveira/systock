@@ -5,10 +5,10 @@
         .module('systock')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$http', '$stateParams', '$location', '$cookies', 'jQuery'];
+    LoginController.$inject = ['LoginService', '$stateParams', '$location', '$cookies'];
 
     /* @ngInject */
-    function LoginController($http, $stateParams, $location, $cookies, jQuery) {
+    function LoginController(LoginService, $stateParams, $location, $cookies) {
         var vm = this;
 
 		vm.mensagens = [];
@@ -32,13 +32,8 @@
 					login: vm.login,
 					senha: vm.senha,
 					_csrf: $cookies.get('csrftoken')
-				},
-				config = {
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}
-				}
-			$http.post('auth', jQuery.param(params), config)
+				};
+			LoginService.login(params)
 				.then(function (response) {
 					if(vm.next) {
 						$location.path(vm.next);

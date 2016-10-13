@@ -37,9 +37,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-br-filters/release/angular-br-filters.min.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/route.js"></script>
@@ -48,9 +50,25 @@
 	<script src="js/config/autenticacao.interceptor.js"></script>
 	<script src="js/config/autenticacao.config.js"></script>
 
+	<!-- Filters -->
+	<script src="js/filter/capitalize.filter.js"></script>
+
+	<!-- Utils -->
+	<script src="js/util/string.utils.js"></script>
+
+	<!-- Resources -->
+	<script src="js/resource/usuario.resource.js"></script>
+	<script src="js/resource/funcionario.resource.js"></script>
+
+	<!-- Services -->
+	<script src="js/service/hal-resource.service.js"></script>
+	<script src="js/service/login.service.js"></script>
+
 	<!-- Controllers -->
 	<script src="js/controller/login.controller.js"></script>
 	<script src="js/controller/usuario-navbar.controller.js"></script>
+	<script src="js/controller/usuario/usuario-list.controller.js"></script>
+	<script src="js/controller/usuario/usuario-form.controller.js"></script>
 
 </body>
 

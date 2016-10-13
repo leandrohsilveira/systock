@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/bower.json").denyAll()
-			.antMatchers("/paginas/**").authenticated()
+			.antMatchers("/paginas/**", "/usuarios/**", "/funcionarios/**").authenticated()
 			.anyRequest().permitAll()
 			.and().exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("AngularJS"))
 			.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());

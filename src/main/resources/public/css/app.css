@@ -49,8 +49,46 @@
 
 .btn-primary:focus,
 .btn-primary:active,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:focus:active,
+.btn-primary:focus:hover,
+.btn-primary:focus:visited,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary:active:visited,
+.btn-primary:hover:focus,
+.btn-primary:hover:active,
+.btn-primary:hover:visited,
+.btn-primary:visited:focus,
+.btn-primary:visited:active,
+.btn-primary:visited:hover,
+.btn-primary[disabled],
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:visited,
+.btn-primary[disabled]:focus:active,
+.btn-primary[disabled]:focus:hover,
+.btn-primary[disabled]:focus:visited,
+.btn-primary[disabled]:active:focus,
+.btn-primary[disabled]:active:hover,
+.btn-primary[disabled]:active:visited,
+.btn-primary[disabled]:hover:focus,
+.btn-primary[disabled]:hover:active,
+.btn-primary[disabled]:hover:visited {
 	border-color: #555555;
 	background-color: #444444;
+	color: #ffffff;
+}
+
+.row-icon {
+	font-size: 40px;
+	padding: 15px;
+}
+
+.panel-default .panel-heading {
+	background-color: #222222;
+	border: 1px solid #222222;
 	color: #ffffff;
 }

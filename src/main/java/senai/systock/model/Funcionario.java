@@ -2,13 +2,14 @@ package senai.systock.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import senai.systock.model.EntidadeBase.Public;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name="funcionario")
@@ -19,25 +20,27 @@ public class Funcionario extends EntidadeBase {
 	}
 	
 	
-	public Funcionario(String nome, String cpf, String cargo) {
+	public Funcionario(String nome, String cpf, Cargo cargo) {
+		setAtivo(true);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.cargo = cargo;
 	}
 	
-	@NotNull
-	@JsonView(Public.class)
+	@NotNull(message="O nome é obrigatório")
+	@Size(min=3, max=255, message="O nome deve possuir entre 3 e 255 caracteres")
 	@Column(name="nome", nullable=false)
 	private String nome;
 	
-	@NotNull
+	@NotNull(message="O CPF é obrigatório")
+	@CPF(message="O CPF é inválido")
 	@Column(name="cpf", nullable=false)
 	private String cpf;
 	
-	@NotNull
-	@JsonView(Public.class)
+	@NotNull(message="O cargo não pode ser nulo")
 	@Column(name="cargo", nullable=false)
-	private String cargo;
+	@Enumerated(EnumType.STRING)
+	private Cargo cargo;
 
 	public String getNome() {
 		return nome;
@@ -55,12 +58,12 @@ public class Funcionario extends EntidadeBase {
 		this.cpf = cpf;
 	}
 
-	public String getCargo() {
+	public Cargo getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-
+	
 }
