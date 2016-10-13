@@ -45,7 +45,6 @@ public class Usuario extends EntidadeBase {
     @NotBlank(message="A senha é obrigatória")
     @Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
     @Transient
-    @JsonIgnore
 	private String senha;
     
     @Column(name="secret", nullable=false)

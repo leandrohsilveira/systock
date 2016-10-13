@@ -38,7 +38,7 @@
 			})
 			.state('app.usuarios.edit', {
 				parent: 'app.usuarios',
-				url: '/{id:\d+}',
+				url: '/:id',
 				controller: 'UsuarioFormController as vm',
 				templateUrl: 'paginas/usuario/usuario-form.html'
 			});

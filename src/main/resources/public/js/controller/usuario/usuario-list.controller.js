@@ -5,35 +5,36 @@
         .module('systock')
         .controller('UsuarioListController', UsuarioListController);
 
-    UsuarioListController.$inject = ['Usuario', 'HALResourceService', 'StringUtils'];
+    UsuarioListController.$inject = ['$state', 'Usuario', 'HALResourceService', 'StringUtils'];
 
     /* @ngInject */
-    function UsuarioListController(Usuario, HALResourceService, StringUtils) {
+    function UsuarioListController($state, Usuario, HALResourceService, StringUtils) {
         var vm = this;
 
 		vm.carregando = true;
 		vm.resource = null;
 		vm.query = null;
 		vm.usuarios = [];
+        vm.cargos = [
+            {value: null, rotulo: 'Todos'},
+            {value: 'ADMINISTRADOR', rotulo: 'Administradores'},
+            {value: 'GERENTE', rotulo: 'Gerentes'},
+            {value: 'VENDEDOR', rotulo: 'Vendedores'}
+        ]
+        vm.filtros = {
+            login: null,
+            nome: null,
+            cpf: null,
+            cargo: vm.cargos[0],
+            nenhumFiltroPreenchido: nenhumFiltroPreenchido,
+            filtrar: filtrar
+        }
+
 		vm.recarregar = recarregar;
 		vm.podeCarregarMais = podeCarregarMais;
 		vm.possuiUsuarios = possuiUsuarios;
 		vm.carregarMais = carregarMais;
-		vm.cargos = [
-			{value: null, rotulo: 'Todos'},
-			{value: 'ADMINISTRADOR', rotulo: 'Administradores'},
-			{value: 'GERENTE', rotulo: 'Gerentes'},
-			{value: 'VENDEDOR', rotulo: 'Vendedores'}
-		]
-
-		vm.filtros = {
-			login: null,
-			nome: null,
-			cpf: null,
-			cargo: vm.cargos[0],
-			nenhumFiltroPreenchido: nenhumFiltroPreenchido,
-			filtrar: filtrar
-		}
+        vm.formularioAberto = formularioAberto;
 
         activate();
 
@@ -91,6 +92,10 @@
 		function podeCarregarMais() {
 			return vm.resource && vm.resource._links && vm.resource._links.next;
 		}
+
+        function formularioAberto() {
+            return $state.is('app.usuarios.new') || $state.is('app.usuarios.edit');
+        }
 
 		function nenhumFiltroPreenchido() {
 			return !vm.filtros.login && !vm.filtros.nome && !vm.filtros.cpf && !vm.filtros.cargo.value;

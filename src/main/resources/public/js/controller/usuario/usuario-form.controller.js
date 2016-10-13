@@ -5,22 +5,38 @@
         .module('systock')
         .controller('UsuarioFormController', UsuarioFormController);
 
-    UsuarioFormController.$inject = ['Usuario', '$state', '$stateParams'];
+    UsuarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams'];
 
     /* @ngInject */
-    function UsuarioFormController(Usuario, $state, $stateParams) {
+    function UsuarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams) {
         var vm = this;
 		vm.usuario = null;
+        vm.funcionario = null;
+        vm.confirmarSenha = null;
 		vm.edit = false;
+        vm.cargos = [
+            {value: null, rotulo: 'Todos'},
+            {value: 'ADMINISTRADOR', rotulo: 'Administradores'},
+            {value: 'GERENTE', rotulo: 'Gerentes'},
+            {value: 'VENDEDOR', rotulo: 'Vendedores'}
+        ];
 
         activate();
 
         function activate() {
-			if($stateParams.id) {
-				vm.usuario = Usuario.get({id: $stateParams.id});
+			if($state.is('app.usuarios.edit')) {
+				Usuario.get({id: $stateParams.id}).$promise
+                    .then(function(response) {
+                        vm.usuario = response;
+                        HALResourceService.follow(vm.usuario, 'GET', 'funcionario')
+                            .then(function(response) {
+                                vm.funcionario = new Funcionario(response.data);
+                            });
+                    });
 				vm.edit = true;
-			} else {
+			} else if($state.is('app.usuarios.new')) {
 				vm.usuario = new Usuario();
+                vm.funcionario = new Funcionario();
 			}
         }
 
