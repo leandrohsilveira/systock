@@ -6,15 +6,18 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,8 +45,9 @@ public class Usuario extends EntidadeBase {
     @Column(name="login", length=16, nullable=false, unique=true, updatable=false)
 	private String login;
 	
-    @NotBlank(message="A senha é obrigatória")
-    @Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
+	@Transient
+	private String senhaAtual;
+	
     @Transient
 	private String senha;
     
@@ -55,10 +59,21 @@ public class Usuario extends EntidadeBase {
     @OneToOne(fetch=FetchType.EAGER, optional=false)
 	@JoinColumn(name="funcionario_id", nullable=false, unique=true)
     private Funcionario funcionario;
-
+	
 	@PrePersist
 	private void prePersist() {
 		secret = passwordEncoder.encode(senha);
+	}
+	
+	@PreUpdate
+	private void preUpdate() {
+		if(!StringUtils.isEmpty(senha)) {
+			if(passwordEncoder.matches(senhaAtual, secret)) {
+				secret = passwordEncoder.encode(senha);
+			} else {
+				throw new ValidationException("A senha atual informada não confere com a senha do usuário.");
+			}
+		}
 	}
 	
 	public Funcionario getFuncionario() {
@@ -91,6 +106,14 @@ public class Usuario extends EntidadeBase {
 	
 	public void setSecret(String secret) {
 		this.secret = secret;
+	}
+	
+    public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
 	}
 	
 }

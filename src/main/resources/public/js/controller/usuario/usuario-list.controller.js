@@ -48,7 +48,7 @@
 			vm.query({
 				action: 'filter',
 				login: StringUtils.getOrNullIfEmpty(vm.filtros.login),
-				nome: StringUtils.getUppercaseOrNullIfEmpty(vm.filtros.nome),
+				nome: StringUtils.getContainsLikeOrNullIfEmpty(vm.filtros.nome),
 				cpf: StringUtils.getReplacedOrNullIfEmpty(vm.filtros.cpf, /\.|\-/g, ''),
 				cargo: vm.filtros.cargo.value,
 				page: 0,

@@ -6,6 +6,7 @@
 			'ui.router',
 			'ui.bootstrap',
 			'ui.bootstrap.alert',
+			'ui.bootstrap.typeahead',
 			'ngCookies',
 			'ngResource',
 			'idf.br-filters'

@@ -9,7 +9,7 @@
     <form class="form-horizontal">
         <div class="form-group">
             <label for="login" class="sr-only control-label">Login</label>
-            <input type="text" class="form-control" id="login" ng-model="vm.usuario.login" placeholder="Login">
+            <input type="text" ng-disabled="vm.edit" class="form-control" id="login" ng-model="vm.usuario.login" placeholder="Login">
         </div>
         <div class="form-group">
             <label for="senha" class="sr-only control-label">Senha</label>
@@ -20,27 +20,30 @@
             <input type="password" class="form-control" id="confirmar_senha" ng-model="vm.confirmarSenha" placeholder="Confirmar senha">
         </div>
 
-        <h3>Vincular funcionário</h3>
+		<h3>Vincular um funcionário</h3>
 
-        <div class="form-group">
-            <label for="funcionario_nome" class="sr-only control-label">Nome</label>
-            <input type="text" class="form-control" id="funcionario_nome" ng-model="vm.funcionario.nome" placeholder="Nome">
-        </div>
-        <div class="form-group">
-            <label for="funcionario_cpf" class="sr-only control-label">CPF</label>
-            <input type="text" class="form-control" id="funcionario_cpf" ng-model="vm.funcionario.cpf" placeholder="CPF">
-        </div>
-        <div class="form-group">
-            <label class="sr-only" for="funcionario_cargo">Cargo</label>
-            <select id="funcionario_cargo" class="form-control" ng-model="vm.funcionario.cargo">
-                <option value="ADMINISTRADOR">Cargo: Administrador</option>
-                <option value="GERENTE">Cargo: Gerente</option>
-                <option value="VENDEDOR">Cargo: Vendedor</option>
-            </select>
-        </div>
+		<div class="form-group">
+			<label for="funcionario_find" class="sr-only control-label">Encontrar funcionário...</label>
+			<input id="funcionario_find"
+					type="text"
+					ng-model="vm.funcionario"
+					placeholder="Encontrar funcionário..."
+					uib-typeahead="funcionario as funcionario.nome for funcionario in vm.selecionarFuncionario($viewValue)"
+					typeahead-loading="carregandoFuncionarios"
+					typeahead-no-results="nenhumFuncionarioEncontrado"
+					autocomplete="off"
+					class="form-control">
+			<span ng-show="carregandoFuncionarios">
+				Procurando funcionários...
+			</span>
+			<span class="text-danger" ng-show="nenhumFuncionarioEncontrado">
+				Nenhum funcionário encontrado.
+			</span>
+		</div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Salvar</button>
+            <a ui-sref="app.usuarios" class="btn btn-default">Cancelar</a>
         </div>
     </form>
 </div>

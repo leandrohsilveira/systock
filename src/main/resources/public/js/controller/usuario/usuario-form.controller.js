@@ -5,21 +5,16 @@
         .module('systock')
         .controller('UsuarioFormController', UsuarioFormController);
 
-    UsuarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams'];
+    UsuarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams', 'StringUtils'];
 
     /* @ngInject */
-    function UsuarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams) {
+    function UsuarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams, StringUtils) {
         var vm = this;
 		vm.usuario = null;
         vm.funcionario = null;
         vm.confirmarSenha = null;
 		vm.edit = false;
-        vm.cargos = [
-            {value: null, rotulo: 'Todos'},
-            {value: 'ADMINISTRADOR', rotulo: 'Administradores'},
-            {value: 'GERENTE', rotulo: 'Gerentes'},
-            {value: 'VENDEDOR', rotulo: 'Vendedores'}
-        ];
+		vm.selecionarFuncionario = selecionarFuncionario;
 
         activate();
 
@@ -27,16 +22,15 @@
 			if($state.is('app.usuarios.edit')) {
 				Usuario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
+						vm.edit = true;
                         vm.usuario = response;
-                        HALResourceService.follow(vm.usuario, 'GET', 'funcionario')
-                            .then(function(response) {
-                                vm.funcionario = new Funcionario(response.data);
-                            });
-                    });
-				vm.edit = true;
+                        return HALResourceService.follow(vm.usuario, 'GET', 'funcionario');
+                    })
+					.then(function(response) {
+						vm.funcionario = new Funcionario(response.data);;
+					});
 			} else if($state.is('app.usuarios.new')) {
 				vm.usuario = new Usuario();
-                vm.funcionario = new Funcionario();
 			}
         }
 
@@ -50,6 +44,18 @@
 
 		function goToUsuarioList() {
 			$state.go('app.usuarios');
+		}
+
+		function selecionarFuncionario(nome) {
+			return Funcionario.search({
+				action: 'findFuncionarioLike',
+				nome: StringUtils.getContainsLikeOrNullIfEmpty(nome),
+				page: 0,
+				size: 5
+			}).$promise
+				.then(function(response) {
+					return response._embedded.funcionarios;
+				});
 		}
 
     }

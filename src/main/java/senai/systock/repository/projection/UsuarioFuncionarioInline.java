@@ -12,6 +12,8 @@ public interface UsuarioFuncionarioInline extends EntidadeBaseProjection {
 	
 	String getSenha();
 	
+	String getSenhaAtual();
+	
 	Funcionario getFuncionario();
 
 }

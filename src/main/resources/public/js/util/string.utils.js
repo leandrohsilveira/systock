@@ -12,6 +12,7 @@
         var service = {
             getOrNullIfEmpty: getOrNullIfEmpty,
 			getUppercaseOrNullIfEmpty: getUppercaseOrNullIfEmpty,
+			getContainsLikeOrNullIfEmpty: getContainsLikeOrNullIfEmpty,
 			getReplacedOrNullIfEmpty :getReplacedOrNullIfEmpty
         };
 
@@ -34,6 +35,13 @@
 		function getReplacedOrNullIfEmpty(value, regex, replace) {
 			if(value) {
 				return value.replace(regex, replace);
+			}
+			return null;
+		}
+
+		function getContainsLikeOrNullIfEmpty(value) {
+			if(value) {
+				return "%" + value.toUpperCase() + "%";
 			}
 			return null;
 		}

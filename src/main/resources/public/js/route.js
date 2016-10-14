@@ -23,27 +23,25 @@
 				parent: 'app',
 				url: '/index',
 				templateUrl: 'paginas/index.html'
-			})
-			.state('app.usuarios', {
-				parent: 'app',
-				url: '/usuarios',
-				controller: 'UsuarioListController as vm',
-				templateUrl: 'paginas/usuario/usuario-list.html'
-			})
-			.state('app.usuarios.new', {
-				parent: 'app.usuarios',
-				url: '/new',
-				controller: 'UsuarioFormController as vm',
-				templateUrl: 'paginas/usuario/usuario-form.html'
-			})
-			.state('app.usuarios.edit', {
-				parent: 'app.usuarios',
-				url: '/:id',
-				controller: 'UsuarioFormController as vm',
-				templateUrl: 'paginas/usuario/usuario-form.html'
 			});
 
 		$urlRouterProvider.otherwise("/app/index");
+	}
+
+	function getFindFuncionarioState(parent) {
+		return {
+			parent: parent,
+			url: '/funcionario/find',
+			templateUrl: 'paginas/usuario/funcionario/usuario-funcionario-find.html'
+		};
+	}
+
+	function getNewFuncionarioState(parent) {
+		return {
+			parent: parent,
+			url: '/funcionario/new',
+			templateUrl: 'paginas/usuario/funcionario/usuario-funcionario-form.html'
+		};
 	}
 
 })();

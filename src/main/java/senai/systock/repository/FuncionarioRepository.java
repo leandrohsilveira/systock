@@ -14,7 +14,7 @@ import senai.systock.repository.projection.FuncionarioProjection;
 @RepositoryRestResource(collectionResourceRel="funcionarios" ,path="funcionarios", excerptProjection=FuncionarioProjection.class)
 public interface FuncionarioRepository extends PagingAndSortingRepository<Funcionario, Long> {
 
-	@Query("select f from Funcionario f where f.nome like %:nome%")
+	@Query("select f from Funcionario f where upper(f.nome) like :nome")
 	Page<Funcionario> findFuncionarioLike(Pageable pageable, @Param("nome") String nome);
 	
 	
