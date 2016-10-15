@@ -39,7 +39,7 @@ public class ValidacaoProdutoTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("A descriÁ„o n„o pode estar vazia", message);
+		assertEquals("A descri√ß√£o n√£o pode estar vazia", message);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class ValidacaoProdutoTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O preÁo n„o pode estar vazio", message);
+		assertEquals("O pre√ßo n√£o pode estar vazio", message);
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class ValidacaoProdutoTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O preÁo deve ser maior que 0", message);
+		assertEquals("O pre√ßo deve ser maior que 0", message);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class ValidacaoProdutoTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O preÁo deve ser maior que 0", message);
+		assertEquals("O pre√ßo deve ser maior que 0", message);
 	}
 
 	@Test

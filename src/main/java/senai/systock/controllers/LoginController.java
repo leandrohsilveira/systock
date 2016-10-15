@@ -51,7 +51,7 @@ public class LoginController {
 		SecurityContextHolder.getContext().setAuthentication(null);
 	}
 	
-	@ResponseStatus(code=HttpStatus.FORBIDDEN, reason="Usu·rio e/ou senha inv·lidos.")
+	@ResponseStatus(code=HttpStatus.FORBIDDEN, reason="Usu√°rio e/ou senha inv√°lidos.")
 	protected class UsuarioSenhaInvalidosException extends RuntimeException {
 
 		private static final long serialVersionUID = 4029375442396250945L;

@@ -32,7 +32,7 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF j· est· cadastrado", message);
+		assertEquals("O CPF j√° est√° cadastrado", message);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O nome È obrigatÛrio", message);
+		assertEquals("O nome √© obrigat√≥rio", message);
 	}
 
 	@Ignore
@@ -76,7 +76,7 @@ public class ValidacaoFuncionarioTest {
 		message = validar.iterator().next().getMessage();
 		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
 		message = validar.iterator().next().getMessage();
-		assertEquals("O CPF j· est· cadastrado", message);
+		assertEquals("O CPF j√° est√° cadastrado", message);
 	}
 	
 	@Ignore
@@ -88,9 +88,9 @@ public class ValidacaoFuncionarioTest {
 		assertEquals(2, validar.size());
 		String message;
 		message = validar.iterator().next().getMessage();
-		assertEquals("O nome È obrigatÛrio", message);
+		assertEquals("O nome √© obrigat√≥rio", message);
 		message = validar.iterator().next().getMessage();
-		assertEquals("O CPF j· est· cadastrado", message);
+		assertEquals("O CPF j√° est√° cadastrado", message);
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class ValidacaoFuncionarioTest {
 		message = iterator.next().getMessage();
 		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
 		message = iterator.next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 	
 	@Test
@@ -116,9 +116,9 @@ public class ValidacaoFuncionarioTest {
 		String message;
 		Iterator<ConstraintViolation<Object>> iterator = validar.iterator();
 		message = iterator.next().getMessage();
-		assertEquals("O nome È obrigatÛrio", message);
+		assertEquals("O nome √© obrigat√≥rio", message);
 		message = iterator.next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 
 	@Test
@@ -128,7 +128,7 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF È obrigatÛrio", message);
+		assertEquals("O CPF √© obrigat√≥rio", message);
 	}
 
 	@Test
@@ -152,7 +152,7 @@ public class ValidacaoFuncionarioTest {
 		message = iterator.next().getMessage();
 		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
 		message = iterator.next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 	
 	@Test
@@ -164,9 +164,9 @@ public class ValidacaoFuncionarioTest {
 		String message;
 		Iterator<ConstraintViolation<Object>> iterator = validar.iterator();
 		message = iterator.next().getMessage();
-		assertEquals("O nome È obrigatÛrio", message);
+		assertEquals("O nome √© obrigat√≥rio", message);
 		message = iterator.next().getMessage();
-		assertEquals("O CPF È obrigatÛrio", message);
+		assertEquals("O CPF √© obrigat√≥rio", message);
 	}
 
 }

@@ -15,7 +15,7 @@
 
         return service;
 
-        function follow(resource, method, link) {
+        function follow(resource, method, link, data) {
 			if(resource && resource._links) {
 				var rel = resource._links[link];
 				if(rel) {
@@ -23,6 +23,7 @@
 					return $http({
 						url: url,
 						method: method,
+						data: data
 					});
 				}
 			}

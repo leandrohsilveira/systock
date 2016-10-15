@@ -21,7 +21,8 @@
 					params: {
 						action: '@action'
 					}
-				}
+				},
+				'update': { method: 'PUT' }
 			}
 		);
     }

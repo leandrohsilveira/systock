@@ -1,17 +1,19 @@
 <div class="page-header">
     <h1>
         Formulário de Usuário
-        <a ui-sref="app.usuarios" class="close pull-right" aria-label="Close"><span aria-hidden="true">&times;</span></a>
     </h1>
 </div>
 <div class="well well-lg">
-    <h3>Dados do Usuário</h3>
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="vm.salvar()">
         <div class="form-group">
             <label for="login" class="sr-only control-label">Login</label>
-            <input type="text" ng-disabled="vm.edit" class="form-control" id="login" ng-model="vm.usuario.login" placeholder="Login">
+            <input type="text" ng-disabled="vm.editar" class="form-control" id="login" ng-model="vm.usuario.login" placeholder="Login">
         </div>
-        <div class="form-group">
+		<div ng-if="vm.editar" class="form-group">
+            <label for="senha" class="sr-only control-label">Senha</label>
+            <input type="password" class="form-control" id="senha" ng-model="vm.usuario.novaSenha" placeholder="Senha">
+        </div>
+        <div ng-if="!vm.editar" class="form-group">
             <label for="senha" class="sr-only control-label">Senha</label>
             <input type="password" class="form-control" id="senha" ng-model="vm.usuario.senha" placeholder="Senha">
         </div>
@@ -20,7 +22,7 @@
             <input type="password" class="form-control" id="confirmar_senha" ng-model="vm.confirmarSenha" placeholder="Confirmar senha">
         </div>
 
-		<h3>Vincular um funcionário</h3>
+		<h4>Vincular um funcionário</h4>
 
 		<div class="form-group">
 			<label for="funcionario_find" class="sr-only control-label">Encontrar funcionário...</label>
@@ -43,7 +45,7 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a ui-sref="app.usuarios" class="btn btn-default">Cancelar</a>
+            <a ui-sref="app.usuarios.consultar" class="btn btn-default">Cancelar</a>
         </div>
     </form>
 </div>

@@ -27,17 +27,17 @@ public class Funcionario extends EntidadeBase {
 		this.cargo = cargo;
 	}
 	
-	@NotNull(message="O nome È obrigatÛrio")
+	@NotNull(message="O nome √© obrigat√≥rio")
 	@Size(min=3, max=255, message="O nome deve possuir entre 3 e 255 caracteres")
 	@Column(name="nome", nullable=false)
 	private String nome;
 	
-	@NotNull(message="O CPF È obrigatÛrio")
-	@CPF(message="O CPF È inv·lido")
+	@NotNull(message="O CPF √© obrigat√≥rio")
+	@CPF(message="O CPF √© inv√°lido")
 	@Column(name="cpf", nullable=false)
 	private String cpf;
 	
-	@NotNull(message="O cargo n„o pode ser nulo")
+	@NotNull(message="O cargo n√£o pode ser nulo")
 	@Column(name="cargo", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Cargo cargo;

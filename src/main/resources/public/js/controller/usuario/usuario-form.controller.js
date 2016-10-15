@@ -13,37 +13,40 @@
 		vm.usuario = null;
         vm.funcionario = null;
         vm.confirmarSenha = null;
-		vm.edit = false;
+		vm.editar = false;
 		vm.selecionarFuncionario = selecionarFuncionario;
+		vm.salvar = salvar;
 
         activate();
 
         function activate() {
-			if($state.is('app.usuarios.edit')) {
+			vm.editar = $stateParams.editar;
+			if(vm.editar) {
 				Usuario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
-						vm.edit = true;
                         vm.usuario = response;
                         return HALResourceService.follow(vm.usuario, 'GET', 'funcionario');
                     })
 					.then(function(response) {
 						vm.funcionario = new Funcionario(response.data);;
 					});
-			} else if($state.is('app.usuarios.new')) {
+			} else {
 				vm.usuario = new Usuario();
 			}
         }
 
-		function save() {
-			if(vm.edit) {
-				vm.usuario.$save(goToUsuarioList);
+		function salvar() {
+			vm.usuario.funcionario = vm.funcionario._links.self.href;
+			if(vm.editar) {
+				HALResourceService.follow(vm.usuario, 'PUT', 'self', vm.usuario)
+					.then(goToUsuarioList);
 			} else {
-				vm.usuario.$update(goToUsuarioList);
+				vm.usuario.$save(goToUsuarioList);
 			}
 		}
 
 		function goToUsuarioList() {
-			$state.go('app.usuarios');
+			$state.go('app.usuarios.consultar');
 		}
 
 		function selecionarFuncionario(nome) {

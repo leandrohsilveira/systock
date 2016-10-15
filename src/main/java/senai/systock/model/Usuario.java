@@ -39,21 +39,18 @@ public class Usuario extends EntidadeBase {
 	public static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();;
 	
     
-	@NotBlank(message="O login È obrigatÛrio")
-    @Pattern(regexp="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$", message="O login deve comeÁar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos")
+	@NotBlank(message="O login √© obrigat√≥rio")
+    @Pattern(regexp="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$", message="O login deve come√ßar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos")
     @Size(min = 3, max = 16, message="O login deve possuir entre 3 e 16 caracteres")
     @Column(name="login", length=16, nullable=false, unique=true, updatable=false)
 	private String login;
-	
+		
 	@Transient
-	private String senhaAtual;
+	private String novaSenha;
 	
-    @Transient
+	@NotBlank(message="A senha √© obrigat√≥ria")
+    @Column(name="senha", nullable=false)
 	private String senha;
-    
-    @Column(name="secret", nullable=false)
-    @JsonIgnore
-    private String secret;
     
 	@NotNull
     @OneToOne(fetch=FetchType.EAGER, optional=false)
@@ -62,17 +59,13 @@ public class Usuario extends EntidadeBase {
 	
 	@PrePersist
 	private void prePersist() {
-		secret = passwordEncoder.encode(senha);
+		senha = passwordEncoder.encode(senha);
 	}
 	
 	@PreUpdate
 	private void preUpdate() {
-		if(!StringUtils.isEmpty(senha)) {
-			if(passwordEncoder.matches(senhaAtual, secret)) {
-				secret = passwordEncoder.encode(senha);
-			} else {
-				throw new ValidationException("A senha atual informada n„o confere com a senha do usu·rio.");
-			}
+		if(!StringUtils.isEmpty(novaSenha)) {
+			senha = passwordEncoder.encode(novaSenha);
 		}
 	}
 	
@@ -100,20 +93,12 @@ public class Usuario extends EntidadeBase {
 		this.senha = senha;
 	}
 	
-	public String getSecret() {
-		return secret;
-	}
-	
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
-	
-    public String getSenhaAtual() {
-		return senhaAtual;
+	public String getNovaSenha() {
+		return novaSenha;
 	}
 
-	public void setSenhaAtual(String senhaAtual) {
-		this.senhaAtual = senhaAtual;
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
 	}
 	
 }

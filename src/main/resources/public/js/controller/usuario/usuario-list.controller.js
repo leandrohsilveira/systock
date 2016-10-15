@@ -34,7 +34,6 @@
 		vm.podeCarregarMais = podeCarregarMais;
 		vm.possuiUsuarios = possuiUsuarios;
 		vm.carregarMais = carregarMais;
-        vm.formularioAberto = formularioAberto;
 
         activate();
 
@@ -92,10 +91,6 @@
 		function podeCarregarMais() {
 			return vm.resource && vm.resource._links && vm.resource._links.next;
 		}
-
-        function formularioAberto() {
-            return $state.is('app.usuarios.new') || $state.is('app.usuarios.edit');
-        }
 
 		function nenhumFiltroPreenchido() {
 			return !vm.filtros.login && !vm.filtros.nome && !vm.filtros.cpf && !vm.filtros.cargo.value;

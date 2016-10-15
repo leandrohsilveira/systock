@@ -28,7 +28,7 @@ public class ValidacaoUsuarioTest {
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
-		assertEquals("O login deve começar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos", message);
+		assertEquals("O login deve comeÃ§ar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos", message);
 	}
 	
 	
@@ -74,7 +74,7 @@ public class ValidacaoUsuarioTest {
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
-		assertEquals("O login é obrigatório", message);
+		assertEquals("O login Ã© obrigatÃ³rio", message);
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ public class ValidacaoUsuarioTest {
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
 		String message = validacoes.iterator().next().getMessage();
-		assertEquals("A senha é obrigatória", message);
+		assertEquals("A senha Ã© obrigatÃ³ria", message);
 	}
 	
 	@Test

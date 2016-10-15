@@ -36,7 +36,7 @@
 			LoginService.login(params)
 				.then(function (response) {
 					if(vm.next) {
-						$location.path(vm.next);
+						$location.path(vm.next).search('next', null);
 					} else {
 						$location.path('/');
 					}

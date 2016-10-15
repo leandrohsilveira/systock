@@ -5,10 +5,10 @@
         .module('systock')
         .factory('AutenticacaoInterceptor', AutenticacaoInterceptor);
 
-    AutenticacaoInterceptor.$inject = ['$q', '$location', '$window'];
+    AutenticacaoInterceptor.$inject = ['$q', '$location', '$injector'];
 
     /* @ngInject */
-    function AutenticacaoInterceptor($q, $location, $window) {
+    function AutenticacaoInterceptor($q, $location, $injector) {
         var interceptor = {
             responseError: responseError
         };
@@ -18,8 +18,13 @@
 		function responseError(rejection) {
 			if(rejection.status == 401) {
 				console.debug('(401) Unauthorized');
-				var path = $location.path();
-				return $location.path('/login').search('next', path);
+				var $state = $injector.get('$state'),
+					current = $location.path(),
+					params = {};
+				if(!/^\/login/.test(current)) {
+					params = { next: current };
+				}
+				$state.transitionTo('login', params);
 			}
 			return $q.reject(rejection);
 		}

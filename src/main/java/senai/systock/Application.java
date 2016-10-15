@@ -31,7 +31,8 @@ public class Application {
     		if(admin == null) {
     			Funcionario funcionario = funcionarioRepository.save(new Funcionario("Administrador do Sistema", "34958572570", Cargo.ADMINISTRADOR));
     			usuarioRepository.save(new Usuario("admin", "12345678", funcionario));
-    			for (int i = 0; i < 100; i++) {
+    			
+    			for (int i = 0; i < 50; i++) {
     				Cargo cargo;
     				switch (i % 10) {
 						case 0:
@@ -53,6 +54,26 @@ public class Application {
 					String senha = "12345678";
 					funcionario = funcionarioRepository.save(new Funcionario(nome, cpf, cargo));
 					usuarioRepository.save(new Usuario(login, senha, funcionario));
+				}
+    			for (int i = 50; i < 80; i++) {
+    				Cargo cargo;
+    				switch (i % 10) {
+						case 0:
+							cargo = Cargo.ADMINISTRADOR;
+							break;
+						case 1:
+						case 2:
+						case 3:
+							cargo = Cargo.GERENTE;
+							break;
+						default:
+							cargo = Cargo.VENDEDOR;
+							break;
+					}
+    				
+    				String nome = String.format("%s - %d", cargo.getDescricao(), i + 1);
+					String cpf = CPFUtils.gerarCPF();
+					funcionarioRepository.save(new Funcionario(nome, cpf, cargo));
 				}
     		}
     	};

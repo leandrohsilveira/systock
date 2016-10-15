@@ -31,7 +31,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF j· est· cadastrado para um cliente", message);
+		assertEquals("O CPF j√° est√° cadastrado para um cliente", message);
 	}
 	
 	@Test
@@ -41,7 +41,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF È inv·lido", message);
+		assertEquals("O CPF √© inv√°lido", message);
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail j· est· cadastrado para um cliente", message);
+		assertEquals("O E-mail j√° est√° cadastrado para um cliente", message);
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail È inv·lido", message);
+		assertEquals("O E-mail √© inv√°lido", message);
 	}
 	
 	@Test
@@ -71,7 +71,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail È inv·lido", message);
+		assertEquals("O E-mail √© inv√°lido", message);
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O Nome n„o pode ser vazio", message);
+		assertEquals("O Nome n√£o pode ser vazio", message);
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF n„o pode ser vazio", message);
+		assertEquals("O CPF n√£o pode ser vazio", message);
 	}
 	
 	@Test
@@ -101,7 +101,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail n„o pode ser vazio", message);
+		assertEquals("O E-mail n√£o pode ser vazio", message);
 	}
 
 }
