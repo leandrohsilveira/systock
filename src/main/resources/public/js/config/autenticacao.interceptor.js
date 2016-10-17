@@ -16,15 +16,20 @@
         return interceptor;
 
 		function responseError(rejection) {
-			if(rejection.status == 401) {
-				console.debug('(401) Unauthorized');
-				var $state = $injector.get('$state'),
-					current = $location.path(),
-					params = {};
-				if(!/^\/login/.test(current)) {
-					params = { next: current };
+			var params = {},
+				current = $location.path();
+
+			if(!/^\/login/.test(current)) {
+				switch (rejection.status) {
+					case 403:
+						params.msg = 'Sem privilégios para acessar esta página, tente acessar com outro usuário.';
+					case 401:
+						var $state = $injector.get('$state');
+						params.next = current;
+						$state.transitionTo('login', params);
+					default:
+						break;
 				}
-				$state.transitionTo('login', params);
 			}
 			return $q.reject(rejection);
 		}

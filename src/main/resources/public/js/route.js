@@ -15,7 +15,7 @@
 				templateUrl: 'layout.html'
 			})
 			.state('login', {
-				url: '/login?next',
+				url: '/login?next&msg',
 				templateUrl: 'login.html',
 				controller: 'LoginController as vm'
 			})

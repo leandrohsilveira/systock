@@ -54,7 +54,7 @@
 				action: 'findFuncionarioLike',
 				nome: StringUtils.getContainsLikeOrNullIfEmpty(nome),
 				page: 0,
-				size: 5
+				size: 10
 			}).$promise
 				.then(function(response) {
 					return response._embedded.funcionarios;

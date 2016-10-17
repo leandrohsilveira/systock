@@ -7,6 +7,7 @@
 			'ui.bootstrap',
 			'ui.bootstrap.alert',
 			'ui.bootstrap.typeahead',
+			'spring-security-csrf-token-interceptor',
 			'ngCookies',
 			'ngResource',
 			'idf.br-filters'

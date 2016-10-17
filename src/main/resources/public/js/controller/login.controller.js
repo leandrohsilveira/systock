@@ -5,10 +5,10 @@
         .module('systock')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginService', '$stateParams', '$location', '$cookies'];
+    LoginController.$inject = ['LoginService', '$stateParams', '$location'];
 
     /* @ngInject */
-    function LoginController(LoginService, $stateParams, $location, $cookies) {
+    function LoginController(LoginService, $stateParams, $location) {
         var vm = this;
 
 		vm.mensagens = [];
@@ -24,14 +24,16 @@
         activate();
 
         function activate() {
+			if($stateParams.msg) {
+				vm.mensagens.push({tipo: 'info', descricao: $stateParams.msg});
+			}
 			vm.next = $stateParams.next;
         }
 
 		function entrar() {
 			var params = {
 					login: vm.login,
-					senha: vm.senha,
-					_csrf: $cookies.get('csrftoken')
+					senha: vm.senha
 				};
 			LoginService.login(params)
 				.then(function (response) {

@@ -1,5 +1,8 @@
 package senai.systock.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +13,12 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +36,16 @@ public class LoginController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private CsrfTokenRepository csrfTokenRepository;
+	
+	@RequestMapping(method=RequestMethod.HEAD, path="/")
+	public void saveCsrfToken(HttpServletRequest request, HttpServletResponse response) {
+		CsrfToken token = csrfTokenRepository.generateToken(request);
+		csrfTokenRepository.saveToken(token, request, response);
+		response.setHeader(token.getHeaderName(), token.getToken());
+	}
 	
 	@PostMapping(path="/auth", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public void login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
