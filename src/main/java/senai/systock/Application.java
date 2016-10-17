@@ -29,8 +29,14 @@ public class Application {
     	return args -> {
     		Usuario admin = usuarioRepository.findByLogin("admin");
     		if(admin == null) {
-    			Funcionario funcionario = funcionarioRepository.save(new Funcionario("Administrador do Sistema", "34958572570", Cargo.ADMINISTRADOR));
+    			Funcionario funcionario = funcionarioRepository.save(new Funcionario("Administrador do Sistema", CPFUtils.gerarCPF(), Cargo.ADMINISTRADOR));
     			usuarioRepository.save(new Usuario("admin", "12345678", funcionario));
+    			
+    			funcionario = funcionarioRepository.save(new Funcionario("Gerente do Sistema", CPFUtils.gerarCPF(), Cargo.GERENTE));
+    			usuarioRepository.save(new Usuario("gerente", "12345678", funcionario));
+    			
+    			funcionario = funcionarioRepository.save(new Funcionario("Vendedor do Sistema", CPFUtils.gerarCPF(), Cargo.VENDEDOR));
+    			usuarioRepository.save(new Usuario("vendedor", "12345678", funcionario));
     			
     			for (int i = 0; i < 50; i++) {
     				Cargo cargo;
