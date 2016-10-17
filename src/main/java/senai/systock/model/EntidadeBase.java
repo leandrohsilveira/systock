@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
@@ -52,6 +53,11 @@ public class EntidadeBase {
 	
 	public Set<ConstraintViolation<Object>> validar() {
 		return Validation.buildDefaultValidatorFactory().getValidator().validate(this);
+	}
+	
+	@PrePersist
+	private void basePrePersist() {
+		ativo = true;
 	}
 
 	public Long getId() {
