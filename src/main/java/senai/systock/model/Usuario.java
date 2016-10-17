@@ -49,6 +49,7 @@ public class Usuario extends EntidadeBase {
 	private String novaSenha;
 	
 	@NotBlank(message="A senha é obrigatória")
+	@Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
     @Column(name="senha", nullable=false)
 	private String senha;
     

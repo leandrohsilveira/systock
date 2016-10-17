@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -12,7 +13,6 @@ import javax.validation.ConstraintViolation;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class ValidacaoUsuarioTest {
 	
 	@Test
@@ -91,8 +91,14 @@ public class ValidacaoUsuarioTest {
 		Set<ConstraintViolation<Object>> validacoes = new Usuario("", "12345678", new Funcionario("Leandro", "82821408307", Cargo.ADMINISTRADOR)).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
-		String message = validacoes.iterator().next().getMessage();
+		assertEquals(3, validacoes.size());
+		Iterator<ConstraintViolation<Object>> mensagens = validacoes.iterator();
+		String message = mensagens.next().getMessage();
+		assertEquals("O login é obrigatório", message);
+		message = mensagens.next().getMessage();
 		assertEquals("O login deve possuir entre 3 e 16 caracteres", message);
+		message = mensagens.next().getMessage();
+		assertEquals("O login deve começar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos", message);
 	}
 	
 	@Test
@@ -100,7 +106,11 @@ public class ValidacaoUsuarioTest {
 		Set<ConstraintViolation<Object>> validacoes = new Usuario("leandro", "", new Funcionario("Leandro", "82821408307", Cargo.ADMINISTRADOR)).validar();
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
-		String message = validacoes.iterator().next().getMessage();
+		assertEquals(2, validacoes.size());
+		Iterator<ConstraintViolation<Object>> mensagens = validacoes.iterator();
+		String message = mensagens.next().getMessage();
+		assertEquals("A senha é obrigatória", message);
+		message = mensagens.next().getMessage();
 		assertEquals("A senha deve possuir entre 8 e 32 caracteres", message);
 	}
 

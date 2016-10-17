@@ -102,9 +102,9 @@ public class ValidacaoFuncionarioTest {
 		String message;
 		Iterator<ConstraintViolation<Object>> iterator = validar.iterator();
 		message = iterator.next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
-		message = iterator.next().getMessage();
 		assertEquals("O CPF é inválido", message);
+		message = iterator.next().getMessage();
+		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
 	}
 	
 	@Test
@@ -150,9 +150,9 @@ public class ValidacaoFuncionarioTest {
 		String message;
 		Iterator<ConstraintViolation<Object>> iterator = validar.iterator();
 		message = iterator.next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
-		message = iterator.next().getMessage();
 		assertEquals("O CPF é inválido", message);
+		message = iterator.next().getMessage();
+		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
 	}
 	
 	@Test
