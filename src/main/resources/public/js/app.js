@@ -10,6 +10,7 @@
 			'spring-security-csrf-token-interceptor',
 			'ngCookies',
 			'ngResource',
+			'ngMessages',
 			'idf.br-filters'
 		])
 		.constant('jQuery', jQuery);

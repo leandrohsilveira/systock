@@ -61,7 +61,6 @@ public class ValidacaoUsuarioTest {
 	}
 	
 	@Test
-	@Ignore
 	public void senhaMenor8CaracteresTest() {
 		List<ConstraintViolation<Object>> validacoes = new ArrayList<>(new Usuario("leandro", "1234567", new Funcionario("Leandro", "82821408307", Cargo.ADMINISTRADOR)).validar());
 		Collections.sort(validacoes, comparator);
@@ -72,7 +71,6 @@ public class ValidacaoUsuarioTest {
 	}
 	
 	@Test
-	@Ignore
 	public void senhaMaior32CaracteresTest() {
 		List<ConstraintViolation<Object>> validacoes = new ArrayList<>(new Usuario("leandro", "123456789012345678901234567890123", new Funcionario("Leandro", "82821408307", Cargo.ADMINISTRADOR)).validar());
 		Collections.sort(validacoes, comparator);
@@ -124,12 +122,12 @@ public class ValidacaoUsuarioTest {
 		Collections.sort(validacoes, comparator);
 		assertNotNull(validacoes);
 		assertFalse(validacoes.isEmpty());
-		assertEquals(1, validacoes.size());
+		assertEquals(2, validacoes.size());
 		Iterator<ConstraintViolation<Object>> mensagens = validacoes.iterator();
 		String message = mensagens.next().getMessage();
+		assertEquals("A senha deve possuir entre 8 e 32 caracteres", message);
+		message = mensagens.next().getMessage();
 		assertEquals("A senha é obrigatória", message);
-//		message = mensagens.next().getMessage();
-//		assertEquals("A senha deve possuir entre 8 e 32 caracteres", message);
 	}
 
 }

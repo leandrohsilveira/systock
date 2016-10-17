@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
 				.dataSource(dataSource)
-				.usersByUsernameQuery("select login, senha, ativo from usuario where login=?")
+				.usersByUsernameQuery("select login, secret, ativo from usuario where login=?")
 				.authoritiesByUsernameQuery("select u.login, f.cargo from usuario u join funcionario f on f.id = u.funcionario_id where u.login = ?")
 				.passwordEncoder(Usuario.passwordEncoder);
 	}

@@ -4,4 +4,6 @@ public interface EntidadeBaseProjection {
 	
 	Long getId();
 	
+	boolean isAtivo();
+	
 }

@@ -32,12 +32,16 @@
 					});
 			} else {
 				vm.usuario = new Usuario();
+                vm.usuario.ativo = true;
 			}
         }
 
 		function salvar() {
 			vm.usuario.funcionario = vm.funcionario._links.self.href;
 			if(vm.editar) {
+                if(vm.usuario.senha) {
+                    vm.usuario.secret = null;
+                }
 				HALResourceService.follow(vm.usuario, 'PUT', 'self', vm.usuario)
 					.then(goToUsuarioList);
 			} else {

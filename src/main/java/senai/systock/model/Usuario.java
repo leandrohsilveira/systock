@@ -31,6 +31,9 @@ public class Usuario extends EntidadeBase {
 		this.login = login;
 		this.senha = senha;
 		this.funcionario = funcionario;
+		if(!StringUtils.isEmpty(senha)) {
+			secret = passwordEncoder.encode(senha);
+		}
 	}
 	
 	public static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();;
@@ -41,14 +44,15 @@ public class Usuario extends EntidadeBase {
     @Size(min = 3, max = 16, message="O login deve possuir entre 3 e 16 caracteres")
     @Column(name="login", length=16, nullable=false, unique=true, updatable=false)
 	private String login;
-		
-	@Transient
-	private String novaSenha;
 	
-	@NotBlank(message="A senha é obrigatória")
-//	@Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
-    @Column(name="senha", nullable=false)
+	@Size(min = 8, max = 32, message="A senha deve possuir entre 8 e 32 caracteres")
+	@Transient
+	@org.springframework.data.annotation.Transient
 	private String senha;
+	
+    @NotBlank(message="A senha é obrigatória")
+    @Column(name="secret", nullable=false)
+	private String secret;
     
 	@NotNull
     @OneToOne(fetch=FetchType.EAGER, optional=false)
@@ -57,13 +61,15 @@ public class Usuario extends EntidadeBase {
 	
 	@PrePersist
 	private void prePersist() {
-		senha = passwordEncoder.encode(senha);
+		secret = passwordEncoder.encode(senha);
+		senha = null;
 	}
 	
 	@PreUpdate
 	private void preUpdate() {
-		if(!StringUtils.isEmpty(novaSenha)) {
-			senha = passwordEncoder.encode(novaSenha);
+		if(!StringUtils.isEmpty(senha)) {
+			secret = passwordEncoder.encode(senha);
+			senha = null;
 		}
 	}
 	
@@ -90,13 +96,13 @@ public class Usuario extends EntidadeBase {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public String getNovaSenha() {
-		return novaSenha;
+
+	public String getSecret() {
+		return secret;
 	}
 
-	public void setNovaSenha(String novaSenha) {
-		this.novaSenha = novaSenha;
+	public void setSecret(String secret) {
+		this.secret = secret;
 	}
 	
 }

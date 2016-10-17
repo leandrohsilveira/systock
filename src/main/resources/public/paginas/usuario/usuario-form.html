@@ -4,18 +4,34 @@
     </h1>
 </div>
 <div class="well well-lg">
-    <form class="form-horizontal" ng-submit="vm.salvar()">
+    <form name="usuarioForm" class="form-horizontal" ng-submit="vm.salvar()" novalidate>
         <div class="form-group">
-            <label for="login" class="sr-only control-label">Login</label>
-            <input type="text" ng-disabled="vm.editar" class="form-control" id="login" ng-model="vm.usuario.login" placeholder="Login">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-disabled="!vm.editar" ng-model="vm.usuario.ativo"> Ativo
+                </label>
+            </div>
         </div>
-		<div ng-if="vm.editar" class="form-group">
-            <label for="senha" class="sr-only control-label">Senha</label>
-            <input type="password" class="form-control" id="senha" ng-model="vm.usuario.novaSenha" placeholder="Senha">
+        <div class="form-group" ng-class="{'has-success': usuarioForm.login.$valid, 'has-error': usuarioForm.login.$dirty && usuarioForm.login.$invalid }">
+            <label for="login" class="sr-only control-label" required="true">Login</label>
+            <input type="text" ng-disabled="vm.editar" class="form-control" id="login" name="login" ng-model="vm.usuario.login" autocomplete="off" placeholder="Login" required ng-minlength="3" ng-maxlength="16" pattern="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$">
+            <div ng-if="usuarioForm.login.$dirty" ng-messages="usuarioForm.login.$error">
+                <span ng-message="required" class="help-block">O login é obrigatório</span>
+                <span ng-message="pattern" class="help-block">O login deve começar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos</span>
+                <span ng-message="minlength, maxlength" class="help-block">O login deve possuir entre 3 e 16 caracteres</span>
+            </div>
         </div>
-        <div ng-if="!vm.editar" class="form-group">
+        <div ng-if="vm.editar" class="form-group">
             <label for="senha" class="sr-only control-label">Senha</label>
-            <input type="password" class="form-control" id="senha" ng-model="vm.usuario.senha" placeholder="Senha">
+            <input type="password" class="form-control" id="senha" ng-model="vm.usuario.senha" autocomplete="off" placeholder="Senha">
+        </div>
+        <div ng-if="!vm.editar" class="form-group" ng-class="{'has-success': usuarioForm.senha.$valid, 'has-error': usuarioForm.senha.$dirty && usuarioForm.senha.$invalid }">
+            <label for="senha" class="sr-only control-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" ng-model="vm.usuario.senha" autocomplete="off" placeholder="Senha" required ng-minlength="8" ng-maxlength="32">
+            <div ng-if="usuarioForm.senha.$dirty" ng-messages="usuarioForm.senha.$error">
+                <span ng-message="required" class="help-block">A senha é obrigatória</span>
+                <span ng-message="minlength, maxlength" class="help-block">A senha deve possuir entre 8 e 32 caracteres</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="confirmar_senha" class="sr-only control-label">Confirmar senha</label>

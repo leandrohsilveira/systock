@@ -30,6 +30,7 @@
     "angular-cookies": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-br-filters": "^0.6.0",
-    "spring-security-csrf-token-interceptor-extended": "^0.2.1"
+    "spring-security-csrf-token-interceptor-extended": "^0.2.1",
+    "angular-messages": "^1.5.8"
   }
 }
