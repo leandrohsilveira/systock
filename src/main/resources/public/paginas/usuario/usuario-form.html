@@ -21,11 +21,17 @@
                 <span ng-message="minlength, maxlength" class="help-block">O login deve possuir entre 3 e 16 caracteres</span>
             </div>
         </div>
-        <div ng-if="vm.editar" class="form-group">
-            <label for="senha" class="sr-only control-label">Senha</label>
-            <input type="password" class="form-control" id="senha" ng-model="vm.usuario.senha" autocomplete="off" placeholder="Senha">
+
+		<div ng-if="vm.editar" class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.alterarSenha"> Alterar senha
+                </label>
+            </div>
         </div>
-        <div ng-if="!vm.editar" class="form-group" ng-class="{'has-success': usuarioForm.senha.$valid, 'has-error': usuarioForm.senha.$dirty && usuarioForm.senha.$invalid }">
+
+		<!-- Senha -->
+        <div ng-if="!vm.editar || vm.alterarSenha" class="form-group" ng-class="{'has-success': usuarioForm.senha.$valid, 'has-error': usuarioForm.senha.$dirty && usuarioForm.senha.$invalid }">
             <label for="senha" class="sr-only control-label">Senha</label>
             <input type="password" class="form-control" id="senha" name="senha" ng-model="vm.usuario.senha" autocomplete="off" placeholder="Senha" required ng-minlength="8" ng-maxlength="32">
             <div ng-if="usuarioForm.senha.$dirty" ng-messages="usuarioForm.senha.$error">
@@ -33,24 +39,35 @@
                 <span ng-message="minlength, maxlength" class="help-block">A senha deve possuir entre 8 e 32 caracteres</span>
             </div>
         </div>
-        <div class="form-group">
+
+		<!-- Confirmação -->
+        <div ng-if="!vm.editar || vm.alterarSenha" class="form-group" ng-class="{'has-success': (vm.usuario.senha && vm.usuario.senha == vm.confirmarSenha), 'has-error': (usuarioForm.confirmarSenha.$dirty && (vm.usuario.senha != vm.confirmarSenha || usuarioForm.confirmarSenha.$invalid )) }">
             <label for="confirmar_senha" class="sr-only control-label">Confirmar senha</label>
-            <input type="password" class="form-control" id="confirmar_senha" ng-model="vm.confirmarSenha" placeholder="Confirmar senha">
+            <input type="password" class="form-control" name="confirmarSenha" id="confirmar_senha" ng-model="vm.confirmarSenha" placeholder="Confirmar senha" required>
+			<div ng-if="usuarioForm.confirmarSenha.$dirty" ng-messages="usuarioForm.confirmarSenha.$error">
+				<span ng-message="required" class="help-block">A confirmação de senha é obrigatória</span>
+				<span ng-if="vm.usuario.senha != vm.confirmarSenha" class="help-block">A confirmação deve ser igual a senha informada</span>
+			</div>
         </div>
 
 		<h4>Vincular um funcionário</h4>
 
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-success': usuarioForm.funcionario.$valid, 'has-error': usuarioForm.funcionario.$dirty && usuarioForm.funcionario.$invalid }">
 			<label for="funcionario_find" class="sr-only control-label">Encontrar funcionário...</label>
 			<input id="funcionario_find"
 					type="text"
+					name="funcionario"
 					ng-model="vm.funcionario"
 					placeholder="Encontrar funcionário..."
 					uib-typeahead="funcionario as funcionario.nome for funcionario in vm.selecionarFuncionario($viewValue)"
 					typeahead-loading="carregandoFuncionarios"
 					typeahead-no-results="nenhumFuncionarioEncontrado"
+					typeahead-editable="false"
 					autocomplete="off"
-					class="form-control">
+					class="form-control" required>
+			<div ng-if="usuarioForm.funcionario.$dirty" ng-messages="usuarioForm.funcionario.$error">
+				<span ng-message="required" class="help-block">O vínculo com funcionário é obrigatório</span>
+			</div>
 			<span ng-show="carregandoFuncionarios">
 				Procurando funcionários...
 			</span>
@@ -60,7 +77,7 @@
 		</div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="usuarioForm.$invalid || ((!vm.editar || vm.alterarSenha) && vm.usuario.senha != vm.confirmarSenha)">Salvar</button>
             <a ui-sref="app.usuarios.consultar" class="btn btn-default">Cancelar</a>
         </div>
     </form>

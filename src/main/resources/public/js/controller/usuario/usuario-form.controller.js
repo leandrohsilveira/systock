@@ -13,6 +13,7 @@
 		vm.usuario = null;
         vm.funcionario = null;
         vm.confirmarSenha = null;
+		vm.alterarSenha = false;
 		vm.editar = false;
 		vm.selecionarFuncionario = selecionarFuncionario;
 		vm.salvar = salvar;
