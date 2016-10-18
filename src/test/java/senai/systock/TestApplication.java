@@ -8,8 +8,10 @@ import org.springframework.util.StringUtils;
 
 import senai.systock.model.Cargo;
 import senai.systock.model.Funcionario;
+import senai.systock.model.Produto;
 import senai.systock.model.Usuario;
 import senai.systock.repository.FuncionarioRepository;
+import senai.systock.repository.ProdutoRepository;
 import senai.systock.repository.UsuarioRepository;
 import senai.systock.utils.CPFUtils;
 
@@ -25,7 +27,7 @@ public class TestApplication {
 
 
     @Bean
-	public CommandLineRunner inicializarUsuarios(UsuarioRepository usuarioRepository, FuncionarioRepository funcionarioRepository) {
+	public CommandLineRunner inicializarUsuarios(UsuarioRepository usuarioRepository, FuncionarioRepository funcionarioRepository, ProdutoRepository produtoRepository) {
     	return args -> {
 			Funcionario funcionario = funcionarioRepository.save(new Funcionario("Administrador do Sistema", "94149790507", Cargo.ADMINISTRADOR));
 			usuarioRepository.save(new Usuario("admin", "12345678", funcionario));
@@ -35,6 +37,8 @@ public class TestApplication {
 			
 			funcionario = funcionarioRepository.save(new Funcionario("Vendedor do Sistema", "06130074689", Cargo.VENDEDOR));
 			usuarioRepository.save(new Usuario("vendedor", "12345678", funcionario));
+			
+			produtoRepository.save(new Produto("Produto", 23.75f, 3));
     	};
 	}
     

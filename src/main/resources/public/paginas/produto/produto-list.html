@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="page-header">
+		<h1>Consultar Produtos</h1>
+	</div>
+	<div class="painel-filtros">
+		<h3>Filtrar consulta:</h3>
+		<form class="form-inline" ng-submit="vm.filtros.filtrar()">
+			<div class="form-group">
+				<label class="sr-only" for="filtro_descricao">Por descrição</label>
+				<input type="text" class="form-control" id="filtro_descricao" placeholder="Por descrição" ng-model="vm.filtros.descricao">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th colspan="2">Produto</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!vm.possuiProdutos()">
+					<td colspan="2" class="text-center"><h4>Nenhum produto encontrado</h4></td>
+				</tr>
+				<tr ng-repeat="produto in vm.produtos">
+					<td><i class="material-icons">receipt</i></td>
+					<td class="col-xs-10">
+						{{ produto.descricao }}
+						<br>
+						{{ produto.quantidade }} item(ens)
+						<br>
+						{{ produto.preco | currency : 'R$' }}
+					</td>
+					<td>
+						<a class="btn btn-lg" ui-sref="app.produtos.editar({id: produto.id})" ><i class="material-icons">mode_edit</i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<span ng-if="vm.possuiProdutos()">Exibindo {{ vm.produtos.length }} de {{ vm.resource.page.totalElements }} registros</span>
+	<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
+</div>
