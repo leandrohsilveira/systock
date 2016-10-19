@@ -34,6 +34,7 @@
 		vm.podeCarregarMais = podeCarregarMais;
 		vm.possuiUsuarios = possuiUsuarios;
 		vm.carregarMais = carregarMais;
+        vm.getCargoNgClass = getCargoNgClass;
 
         activate();
 
@@ -95,6 +96,17 @@
 		function nenhumFiltroPreenchido() {
 			return !vm.filtros.login && !vm.filtros.nome && !vm.filtros.cpf && !vm.filtros.cargo.value;
 		}
+
+        function getCargoNgClass(usuario) {
+            if(usuario.ativo) {
+                return {
+                    'text-success': usuario.funcionario.cargo == 'ADMINISTRADOR',
+                    'text-primary': usuario.funcionario.cargo == 'GERENTE'
+                };
+            } else {
+                return 'text-danger';
+            }
+        }
 
 		function _storeNewResource(result) {
 			vm.usuarios = [];

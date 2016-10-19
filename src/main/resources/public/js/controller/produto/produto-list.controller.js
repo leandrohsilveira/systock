@@ -25,6 +25,8 @@
 		vm.podeCarregarMais = podeCarregarMais;
 		vm.possuiProdutos = possuiProdutos;
 		vm.carregarMais = carregarMais;
+        vm.getQuantidadeText = getQuantidadeText;
+        vm.getProdutoNgClass = getProdutoNgClass;
 
         activate();
 
@@ -80,6 +82,31 @@
 		function nenhumFiltroPreenchido() {
 			return !vm.filtros.descricao;
 		}
+
+        function getQuantidadeText(quantidade) {
+            switch (quantidade) {
+                case 0:
+                    return "sem item em estoque";
+                case 1:
+                    return "com 1 item em estoque";
+                default:
+                    return "com "+ quantidade +" itens em estoque";
+            }
+        }
+
+        function getProdutoNgClass(produto) {
+            if(produto.ativo) {
+                if(produto.quantidade == 0) {
+                    return 'text-muted';
+                } else if (produto.quantidade < 3) {
+                    return 'text-warning';
+                } else {
+                    return 'text-default';
+                }
+            } else {
+                return 'text-danger';
+            }
+        }
 
 		function _storeNewResource(result) {
 			vm.produtos = [];

@@ -4,23 +4,23 @@
 	</div>
 	<div class="painel-filtros">
 		<h3>Filtrar consulta:</h3>
-		<form ng-submit="vm.filtros.filtrar()">
-			<div class="form-group col-xs-12 col-sm-4 col-lg-5">
+		<form class="clearfix" ng-submit="vm.filtros.filtrar()">
+			<div class="form-group col-xs-12 col-sm-4 col-md-5">
 				<label class="sr-only" for="filtro_cliente">Por cliente (Nome/CPF/E-mail)</label>
 				<input type="text" class="form-control" id="filtro_cliente" placeholder="Por cliente (Nome/CPF/E-mail)" ng-model="vm.filtros.cliente">
 			</div>
-			<div class="form-group col-xs-12 col-sm-4 col-lg-5">
+			<div class="form-group col-xs-12 col-sm-4 col-md-5">
 				<label class="sr-only" for="filtro_funcionario">Por funcionário (Nome/CPF)</label>
 				<input type="text" class="form-control" id="filtro_funcionario" placeholder="Por funcionário (Nome/CPF)" ng-model="vm.filtros.funcionario">
 			</div>
-			<div class="form-group col-xs-12 col-sm-4 col-lg-2">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2">
 				<label class="sr-only" for="filtro_situacao">Por situação</label>
 				<select id="filtro_situacao" class="form-control" ng-model="vm.filtros.situacao" ng-options="situacao as situacao.rotulo for situacao in vm.situacoes"></select>
 			</div>
-			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+			<div class="form-group col-xs-12 col-sm-3 col-md-2">
 				<button type="submit" class="btn btn-primary form-control" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
 			</div>
-			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+			<div class="form-group col-xs-12 col-sm-3 col-md-2">
 				<button type="button" class="btn btn-primary form-control" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
 			</div>
 		</form>
@@ -32,18 +32,18 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#</th>
+					<th class="hidden-xs">#</th>
 					<th colspan="2">Venda</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-if="!vm.possuiVendas()">
-					<td colspan="2" class="text-center"><h4>Nenhuma venda encontrada</h4></td>
+					<td colspan="3" class="text-center"><h4>Nenhuma venda encontrada</h4></td>
 				</tr>
 				<tr ng-repeat="venda in vm.vendas">
-					<td><i class="material-icons">shopping_cart</i></td>
+					<td class="hidden-xs" ng-class="vm.getSituacaoNgClass(venda)"><i class="material-icons row-icon">shopping_cart</i></td>
 					<td class="col-xs-10">
-						<strong>Venda {{ venda.situacao | capitalize }}</strong>
+						<strong ng-class="vm.getSituacaoNgClass(venda)">Venda {{ venda.situacao | capitalize }}</strong>
 						<br>
 						de <strong>{{ venda.funcionario.nome }}</strong> - <strong>{{ venda.funcionario.cpf | brCpf }}</strong>
 						<br>

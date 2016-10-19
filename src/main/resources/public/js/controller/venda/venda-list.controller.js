@@ -37,6 +37,7 @@
 		vm.podeCarregarMais = podeCarregarMais;
 		vm.possuiVendas = possuiVendas;
 		vm.carregarMais = carregarMais;
+        vm.getSituacaoNgClass = getSituacaoNgClass;
 
         activate();
 
@@ -96,6 +97,20 @@
 		function nenhumFiltroPreenchido() {
 			return !vm.filtros.funcionario && !vm.filtros.cliente && !vm.filtros.situacao.value;
 		}
+
+        function getSituacaoNgClass(venda) {
+            switch (venda.situacao) {
+                case 'CONCLUIDA':
+                    return 'text-success';
+                case 'CANCELADA':
+                case 'DEVOLVIDA':
+                    return 'text-danger';
+                case 'TROCADA':
+                    return 'text-warning';
+                default:
+                    return 'text-default';
+            }
+        }
 
 		function _storeNewResource(result) {
 			vm.vendas = [];
