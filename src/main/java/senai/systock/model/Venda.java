@@ -74,12 +74,14 @@ public class Venda extends EntidadeBase {
 	@PrePersist
 	private void prePersist() {
 		dataCriacao = new Date();
+		if(this.situacao == SituacaoVenda.CONCLUIDA) {
+			dataConclusao = new Date();
+		}
 		calcularTotais();
 	}
 	
 	@PreUpdate
 	private void preUpdate() {
-		dataCriacao = new Date();
 		if(this.situacao == SituacaoVenda.CONCLUIDA) {
 			dataConclusao = new Date();
 		}
