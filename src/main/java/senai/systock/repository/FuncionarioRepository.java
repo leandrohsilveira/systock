@@ -15,7 +15,10 @@ import senai.systock.repository.projection.FuncionarioProjection;
 public interface FuncionarioRepository extends PagingAndSortingRepository<Funcionario, Long> {
 
 	@Query("select f from Funcionario f where upper(f.nome) like :nome and f.id not in (select u.funcionario.id from Usuario u where u.funcionario is not null)")
-	Page<Funcionario> findFuncionarioLike(Pageable pageable, @Param("nome") String nome);
+	Page<Funcionario> searchFuncionarioLivreByNome(Pageable pageable, @Param("nome") String nome);
+	
+	@Query("select f from Funcionario f where upper(f.nome) like :nome")
+	Page<Funcionario> searchFuncionarioByNome(Pageable pageable, @Param("nome") String nome);
 	
 	
 	@Query("select f from Funcionario f where (:nome is null or upper(f.nome) like :nome) and (:cpf is null or f.cpf = :cpf) and (:cargo is null or f.cargo = :cargo)")

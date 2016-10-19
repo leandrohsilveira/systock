@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="page-header">
+		<h1>Consultar Vendas</h1>
+	</div>
+	<div class="painel-filtros">
+		<h3>Filtrar consulta:</h3>
+		<form ng-submit="vm.filtros.filtrar()">
+			<div class="form-group col-xs-12 col-sm-4 col-lg-5">
+				<label class="sr-only" for="filtro_cliente">Por cliente (Nome/CPF/E-mail)</label>
+				<input type="text" class="form-control" id="filtro_cliente" placeholder="Por cliente (Nome/CPF/E-mail)" ng-model="vm.filtros.cliente">
+			</div>
+			<div class="form-group col-xs-12 col-sm-4 col-lg-5">
+				<label class="sr-only" for="filtro_funcionario">Por funcionário (Nome/CPF)</label>
+				<input type="text" class="form-control" id="filtro_funcionario" placeholder="Por funcionário (Nome/CPF)" ng-model="vm.filtros.funcionario">
+			</div>
+			<div class="form-group col-xs-12 col-sm-4 col-lg-2">
+				<label class="sr-only" for="filtro_situacao">Por situação</label>
+				<select id="filtro_situacao" class="form-control" ng-model="vm.filtros.situacao" ng-options="situacao as situacao.rotulo for situacao in vm.situacoes"></select>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+				<button type="submit" class="btn btn-primary form-control" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+				<button type="button" class="btn btn-primary form-control" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th colspan="2">Venda</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!vm.possuiVendas()">
+					<td colspan="2" class="text-center"><h4>Nenhuma venda encontrada</h4></td>
+				</tr>
+				<tr ng-repeat="venda in vm.vendas">
+					<td><i class="material-icons">shopping_cart</i></td>
+					<td class="col-xs-10">
+						<strong>Venda {{ venda.situacao | capitalize }}</strong>
+						<br>
+						de <strong>{{ venda.funcionario.nome }}</strong> - <strong>{{ venda.funcionario.cpf | brCpf }}</strong>
+						<br>
+						<span ng-if="venda.cliente">para <strong>{{ venda.cliente.nome }}</strong> - <strong>{{ venda.cliente.cpf | brCpf }}</strong></span>
+						<br>
+						com um total de <strong>{{ venda.total | currency:'R$' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R$' }}</span>
+						<br>
+						<span ng-if="venda.situacao == 'ABERTA'">em {{ venda.dataCriacao | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+						<span ng-if="venda.situacao != 'ABERTA'">em {{ venda.dataConclusao | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+					</td>
+					<td>
+						<a class="btn btn-lg" ui-sref="app.vendas.editar({id: venda.id})" ><i class="material-icons">mode_edit</i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<span ng-if="vm.possuiVendas()">Exibindo {{ vm.vendas.length }} de {{ vm.resource.page.totalElements }} registros</span>
+	<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
+</div>

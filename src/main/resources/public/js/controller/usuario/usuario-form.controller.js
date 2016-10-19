@@ -56,7 +56,7 @@
 
 		function selecionarFuncionario(nome) {
 			return Funcionario.search({
-				action: 'findFuncionarioLike',
+				action: 'searchFuncionarioLivreByNome',
 				nome: StringUtils.getContainsLikeOrNullIfEmpty(nome),
 				page: 0,
 				size: 10

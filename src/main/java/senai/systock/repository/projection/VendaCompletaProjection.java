@@ -12,10 +12,6 @@ import senai.systock.model.Venda;
 @Projection(name="vendaCompleta", types=Venda.class)
 public interface VendaCompletaProjection extends VendaProjection {
 	
-	Cliente getCliente();
-	
-	Funcionario getFuncionario();
-	
 	List<ItemVenda> getItens();
 	
 }

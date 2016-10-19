@@ -1,6 +1,7 @@
 package senai.systock.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -59,13 +62,27 @@ public class Venda extends EntidadeBase {
 	@Column(name="situacao", length=9, nullable=false)
 	private SituacaoVenda situacao;
 	
+	@NotNull(message="A data de criação da venda não pode ser nula")
+	@Column(name="data_criacao", nullable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
+	
+	@Column(name="data_conclusao")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataConclusao;
+
 	@PrePersist
 	private void prePersist() {
+		dataCriacao = new Date();
 		calcularTotais();
 	}
 	
 	@PreUpdate
 	private void preUpdate() {
+		dataCriacao = new Date();
+		if(this.situacao == SituacaoVenda.CONCLUIDA) {
+			dataConclusao = new Date();
+		}
 		calcularTotais();
 	}
 	
@@ -142,6 +159,22 @@ public class Venda extends EntidadeBase {
 	public void addItemVenda(ItemVenda itemVenda) {
 		if(this.itens == null) this.itens = new ArrayList<>();
 		itens.add(itemVenda);
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Date getDataConclusao() {
+		return dataConclusao;
+	}
+
+	public void setDataConclusao(Date dataConclusao) {
+		this.dataConclusao = dataConclusao;
 	}
 	
 	
