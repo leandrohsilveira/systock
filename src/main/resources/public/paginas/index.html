@@ -42,7 +42,7 @@
 						<strong ng-class="vm.getSituacaoNgClass(venda)">Venda {{ venda.situacao | capitalize }}</strong>
 						<div ng-if="venda.cliente">para <strong>{{ venda.cliente.nome }}</strong> - <strong>{{ venda.cliente.cpf | brCpf }}</strong></div>
 						<div>
-						    com um total de <strong>{{ venda.total | currency:'R1' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R1' }}</span>
+						    com um total de <strong>{{ venda.total | currency:'R$' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R$' }}</span>
 						</div>
 						<div>última atualização em {{ venda.dataUltimaAtualizacao | date:'dd/MM/yyyy HH:mm:ss' }}</div>
 					</td>
