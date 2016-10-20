@@ -91,11 +91,11 @@
 		}
 
         function formularioAberto() {
-            return $state.is('app.usuario.new') || $state.is('app.usuario.edit');
+            return $state.is('app.funcionarios.new') || $state.is('app.funcionarios.edit');
         }
 
 		function nenhumFiltroPreenchido() {
-			return !vm.filtros.nome && !vm.filtros.cpf && !vm.filtros.cargo.value;
+			return !vm.filtros.login && !vm.filtros.nome && !vm.filtros.cpf && !vm.filtros.cargo.value;
 		}
 
 		function _storeNewResource(result) {

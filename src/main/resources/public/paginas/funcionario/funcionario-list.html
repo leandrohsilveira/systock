@@ -2,7 +2,8 @@
 	<div class="formulario col-sm-12 col-md-6">
 		<ui-view></ui-view>
 	</div>
-	<div class="listagem" ng-class="{'hidden-xs hidden-sm col-md-6': vm.formularioAberto()}">
+	<div class="listagem"
+		ng-class="{'hidden-xs hidden-sm col-md-6': vm.formularioAberto()}">
 		<div class="row">
 			<div class="page-header">
 				<h1>Consultar Funcionário</h1>
@@ -11,22 +12,28 @@
 				<h3>Filtrar consulta:</h3>
 				<form class="form-inline" ng-submit="vm.filtros.filtrar()">
 					<div class="form-group">
-						<label class="sr-only" for="filtro_nome">Por nome</label>
-						<input type="text" class="form-control" id="filtro_nome" placeholder="Por nome" ng-model="vm.filtros.nome">
+						<label class="sr-only" for="filtro_nome">Por nome</label> <input
+							type="text" class="form-control" id="filtro_nome"
+							placeholder="Por nome" ng-model="vm.filtros.nome">
 					</div>
 					<div class="form-group">
-						<label class="sr-only" for="filtro_cpf">Por CPF</label>
-						<input type="text" class="form-control" id="filtro_cpf" placeholder="Por CPF" ng-model="vm.filtros.cpf">
+						<label class="sr-only" for="filtro_cpf">Por CPF</label> <input
+							type="text" class="form-control" id="filtro_cpf"
+							placeholder="Por CPF" ng-model="vm.filtros.cpf">
 					</div>
 					<div class="form-group">
-						<label class="sr-only" for="filtro_cargo">Por cargo</label>
-						<select id="filtro_cargo" class="form-control" ng-model="vm.filtros.cargo" ng-options="cargo as cargo.rotulo for cargo in vm.cargos"></select>
+						<label class="sr-only" for="filtro_cargo">Por cargo</label> <select
+							id="filtro_cargo" class="form-control"
+							ng-model="vm.filtros.cargo"
+							ng-options="cargo as cargo.rotulo for cargo in vm.cargos"></select>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+						<button type="submit" class="btn btn-primary"
+							ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
 					</div>
 					<div class="form-group">
-						<button type="button" class="btn btn-primary" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+						<button type="button" class="btn btn-primary"
+							ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
 					</div>
 				</form>
 			</div>
@@ -38,33 +45,38 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th colspan="2">Funcionário(s)</th>
+							<th colspan="2">Funcionário</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-if="!vm.possuiFuncionarios()">
-							<td colspan="2" class="text-center"><h4>Nenhum funcionário encontrado</h4></td>
+							<td colspan="2" class="text-center"><h4>Nenhum
+									funcionário encontrado</h4></td>
 						</tr>
-						<tr ng-repeat="funcionario in vm.funcionarios">
+	<tr ng-repeat="usuario in vm.funcionarios">
 							<td><i class="material-icons row-icon">person</i></td>
 							<td class="col-xs-10">
-								{{ funcionario.nome }}
+								{{ usuario.nome }}
 								<br>
-								{{ funcionario.cpf | brCpf }}
+								{{ usuario.cpf | brCpf }}
 								<br>
-								{{ funcionario.cargo | capitalize }}
+								{{ usuario.cargo | capitalize }}
 							</td>
 							<td>
-								<a ui-sref="app.funcionarios.edit({id: funcionario.id})" ><i class="material-icons">mode_edit</i></a>
+								<a ui-sref="app.funcionarios.edit({id: usuario.id})" ><i class="material-icons">mode_edit</i></a>
 							</td>
 						</tr>
-					</tbody>
+										</tbody>
 				</table>
 			</div>
 		</div>
 		<div class="row">
-			<span ng-if="vm.possuiFuncionarios()">Exibindo {{ vm.funcionarios.length }} de {{ vm.resource.page.totalElements }} registros</span>
-			<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
+			<span ng-if="vm.possuiFuncionarios()">Exibindo {{
+				vm.funcionarios.length }} de {{ vm.resource.page.totalElements }}
+				registros</span>
+			<button class="btn btn-primary" ng-if="vm.podeCarregarMais()"
+				ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir
+				mais</button>
 		</div>
 	</div>
 </div>
