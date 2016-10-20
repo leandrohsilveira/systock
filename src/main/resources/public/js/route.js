@@ -23,6 +23,24 @@
 				parent: 'app',
 				url: '/index',
 				templateUrl: 'paginas/index.html'
+			})
+			.state('app.funcionarios', {
+				parent: 'app',
+				url: '/funcionarios',
+				controller: 'FuncionarioListController as vm',
+				templateUrl: 'paginas/funcionario/funcionario-list.html'
+			})
+			.state('app.funcionarios.new', {
+				parent: 'app.funcionarios',
+				url: '/new',
+				controller: 'FuncionarioFormController as vm',
+				templateUrl: 'paginas/funcionario/funcionario-form.html'
+			})
+			.state('app.funcionarios.edit', {
+				parent: 'app.funcionarios',
+				url: '/:id',
+				controller: 'FuncionarioFormController as vm',
+				templateUrl: 'paginas/funcionario/funcionario-form.html'
 			});
 
 		$urlRouterProvider.otherwise("/app/index");
