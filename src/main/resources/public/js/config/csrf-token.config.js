@@ -11,7 +11,8 @@
     function CsrfTokenConfig(csrfProvider) {
         csrfProvider.config({
 			csrfTokenHeader: 'X-CSRF-TOKEN',
-			maxRetries: 0
+			maxRetries: 0,
+			httpTypes: ['HEAD', 'PATCH', 'PUT', 'POST', 'DELETE']
 		});
     }
 

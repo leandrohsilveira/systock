@@ -31,7 +31,7 @@ public class Cliente extends EntidadeBase {
 	
 	@NotBlank(message="O CPF é obrigatório")
 	@CPF(message="O CPF é inválido")
-	@Column(name="cpf", nullable=false, length=11)
+	@Column(name="cpf", nullable=false, length=11, unique=true)
 	private String cpf;
 	
 	@NotBlank(message="O e-mail é obrigatório")

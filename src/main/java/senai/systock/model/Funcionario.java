@@ -34,7 +34,7 @@ public class Funcionario extends EntidadeBase {
 	
 	@NotNull(message="O CPF é obrigatório")
 	@CPF(message="O CPF é inválido")
-	@Column(name="cpf", nullable=false)
+	@Column(name="cpf", nullable=false, unique=true)
 	private String cpf;
 	
 	@NotNull(message="O cargo não pode ser nulo")

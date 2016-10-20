@@ -53,6 +53,9 @@
 				cliente: (vm.filtros.cliente || null),
 				funcionario: (vm.filtros.funcionario || null),
 				situacao: (vm.filtros.situacao.value),
+				sort: 'dataConclusao,dataCriacao',
+				'dataConclusao.dir': 'asc',
+				'dataCriacao.dir': 'asc',
 				page: 0,
 				size: 10
 			}).$promise

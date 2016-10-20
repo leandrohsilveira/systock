@@ -13,7 +13,7 @@ import senai.systock.repository.projection.ProdutoProjection;
 @RepositoryRestResource(path="produtos", collectionResourceRel="produtos", excerptProjection=ProdutoProjection.class)
 public interface ProdutoRepository extends PagingAndSortingRepository<Produto, Long> {
 	
-	@Query("select p from Produto p where upper(p.descricao) like :descricao")
+	@Query("select p from Produto p where upper(p.descricao) like concat('%', upper(:descricao), '%')")
 	Page<Produto> searchByDescricao(Pageable pageable, @Param("descricao") String descricao);
 	
 }

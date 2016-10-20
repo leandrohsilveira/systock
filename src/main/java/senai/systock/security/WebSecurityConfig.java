@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/bower.json").denyAll()
 			.antMatchers("/paginas/usuario/**", "/usuarios/**", "/paginas/funcionario/**", "/funcionarios/**").hasAuthority(Cargo.ADMINISTRADOR.name())
 			.antMatchers("/produtos/**", "/vendas/**", "/clientes/**", "/paginas/**").authenticated()
+			.mvcMatchers(HttpMethod.DELETE, "/vendas/**/itens").authenticated()
 			.mvcMatchers(HttpMethod.DELETE, "**").denyAll()
 			.anyRequest().permitAll()
 			.and().exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("AngularJS"))

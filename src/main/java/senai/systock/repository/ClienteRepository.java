@@ -16,5 +16,8 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, L
 	@Query("select c from Cliente c where upper(c.nome) like :nome")
 	Page<Cliente> findClienteLike(Pageable pageable, @Param("nome") String nome);
 	
+	@Query("select c from Cliente c where (:query is null or (upper(c.nome) like concat('%', upper(:query), '%') or c.cpf = REGEXP_REPLACE(:query, '(\\.|\\-)', '')))")
+	Page<Cliente> query(Pageable pageable, @Param("query") String query);
+	
 	
 }

@@ -39,7 +39,7 @@
 			vm.carregando = true;
 			vm.query({
 				action: 'searchByDescricao',
-				descricao: StringUtils.getContainsLikeOrNullIfEmpty(vm.filtros.descricao),
+				descricao: vm.filtros.descricao || null,
 				page: 0,
 				size: 10
 			}).$promise

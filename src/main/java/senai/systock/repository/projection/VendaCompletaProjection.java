@@ -9,7 +9,7 @@ import senai.systock.model.Funcionario;
 import senai.systock.model.ItemVenda;
 import senai.systock.model.Venda;
 
-//@Projection(name="vendaCompleta", types=Venda.class)
+@Projection(name="vendaCompleta", types=Venda.class)
 public interface VendaCompletaProjection extends VendaProjection {
 	
 	List<ItemVenda> getItens();
