@@ -44,14 +44,14 @@
 					<td class="hidden-xs" ng-class="vm.getSituacaoNgClass(venda)"><i class="material-icons row-icon">shopping_cart</i></td>
 					<td class="col-xs-10">
 						<strong ng-class="vm.getSituacaoNgClass(venda)">Venda {{ venda.situacao | capitalize }}</strong>
-						<br>
-						de <strong>{{ venda.funcionario.nome }}</strong> - <strong>{{ venda.funcionario.cpf | brCpf }}</strong>
-						<br>
-						<span ng-if="venda.cliente">para <strong>{{ venda.cliente.nome }}</strong> - <strong>{{ venda.cliente.cpf | brCpf }}</strong></span>
-						<br>
-						com um total de <strong>{{ venda.total | currency:'R$' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R$' }}</span>
-						<br>
-						última atualização em {{ venda.dataUltimaAtualizacao | date:'dd/MM/yyyy HH:mm:ss' }}
+						<div>
+							de <strong>{{ venda.funcionario.nome }}</strong> - <strong>{{ venda.funcionario.cpf | brCpf }}</strong>
+						</div>
+						<div ng-if="venda.cliente">para <strong>{{ venda.cliente.nome }}</strong> - <strong>{{ venda.cliente.cpf | brCpf }}</strong></div>
+						<div>
+							com um total de <strong>{{ venda.total | currency:'R1' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R1' }}</span>
+						</div>
+						<div>última atualização em {{ venda.dataUltimaAtualizacao | date:'dd/MM/yyyy HH:mm:ss' }}</div>
 					</td>
 					<td>
 						<a class="btn btn-lg" ui-sref="app.vendas.editar({id: venda.id})" ><i class="material-icons">mode_edit</i></a>

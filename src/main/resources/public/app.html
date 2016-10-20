@@ -50,6 +50,10 @@
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-br-filters/release/angular-br-filters.min.js"></script>
+    <script src="bower_components/cpf_cnpj/build/cpf.js"></script>
+    <script src="bower_components/cpf_cnpj/build/cnpj.js"></script>
+    <script src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+    <script src='bower_components/ngMask/dist/ngMask.min.js'></script>
 
     <script src="js/app.js"></script>
     <script src="js/route.js"></script>
@@ -57,6 +61,7 @@
     <script src="js/route/produto.route.js"></script>
     <script src="js/route/venda.route.js"></script>
     <script src="js/route/cliente.route.js"></script>
+    <script src="js/route/funcionario.route.js"></script>
 
 	<!-- Configs -->
 	<script src="js/config/autenticacao.interceptor.js"></script>
@@ -84,10 +89,12 @@
 
 	<!-- Directives -->
 	<script src="js/directive/sys-login-unique.directive.js"></script>
+	<script src="js/directive/sys-unique.directive.js"></script>
 
 	<!-- Controllers -->
 	<script src="js/controller/login.controller.js"></script>
 	<script src="js/controller/usuario-navbar.controller.js"></script>
+	<script src="js/controller/minhas-vendas.controller.js"></script>
 	<script src="js/controller/usuario/usuario-list.controller.js"></script>
 	<script src="js/controller/usuario/usuario-form.controller.js"></script>
 	<script src="js/controller/produto/produto-list.controller.js"></script>
@@ -95,7 +102,7 @@
 	<script src="js/controller/venda/venda-list.controller.js"></script>
 	<script src="js/controller/venda/venda-form.controller.js"></script>
 	<script src="js/controller/funcionario/funcionario-list.controller.js"></script>
-	<script src="js/controller/funcionario/funcionario-form.js"></script>
+	<script src="js/controller/funcionario/funcionario-form.controller.js"></script>
 	<script src="js/controller/cliente/cliente-list.controller.js"></script>
 	<script src="js/controller/cliente/cliente-form.controller.js"></script>
 

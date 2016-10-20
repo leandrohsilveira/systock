@@ -1,70 +1,66 @@
-<div ng-class="{'aberto': vm.formularioAberto()}">
-	<div class="formulario col-sm-12 col-md-6">
-		<ui-view></ui-view>
+<div class="row">
+	<div class="page-header">
+		<h1>Consultar Funcionário</h1>
 	</div>
-	<div class="listagem" ng-class="{'hidden-xs hidden-sm col-md-6': vm.formularioAberto()}">
-		<div class="row">
-			<div class="page-header">
-				<h1>Consultar Funcion�rio</h1>
+	<div class="painel-filtros">
+		<h3>Filtrar consulta:</h3>
+		<form ng-submit="vm.filtros.filtrar()">
+			<div class="form-group col-xs-12 col-sm-4">
+				<label class="sr-only" for="filtro_nome">Por nome</label>
+				<input type="text" class="form-control" id="filtro_nome" placeholder="Por nome" ng-model="vm.filtros.nome">
 			</div>
-			<div class="painel-filtros">
-				<h3>Filtrar consulta:</h3>
-				<form class="form-inline" ng-submit="vm.filtros.filtrar()">
-					<div class="form-group">
-						<label class="sr-only" for="filtro_nome">Por nome</label>
-						<input type="text" class="form-control" id="filtro_nome" placeholder="Por nome" ng-model="vm.filtros.nome">
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="filtro_cpf">Por CPF</label>
-						<input type="text" class="form-control" id="filtro_cpf" placeholder="Por CPF" ng-model="vm.filtros.cpf">
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="filtro_cargo">Por cargo</label>
-						<select id="filtro_cargo" class="form-control" ng-model="vm.filtros.cargo" ng-options="cargo as cargo.rotulo for cargo in vm.cargos"></select>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
-					</div>
-				</form>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label class="sr-only" for="filtro_cpf">Por CPF</label>
+				<input type="text" class="form-control" id="filtro_cpf" mask="999.999.999-99" clean="true" placeholder="Por CPF" ng-model="vm.filtros.cpf">
 			</div>
-		</div>
+			<div class="form-group col-xs-12 col-sm-4 ">
+				<label class="sr-only" for="filtro_cargo">Por cargo</label>
+				<select id="filtro_cargo" class="form-control" ng-model="vm.filtros.cargo" ng-options="cargo as cargo.rotulo for cargo in vm.cargos"></select>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+				<button type="submit" class="btn btn-primary form-control" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-lg-2">
+				<button type="button" class="btn btn-primary form-control" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+			</div>
+		</form>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th colspan="2">Funcion�rio(s)</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-if="!vm.possuiFuncionarios()">
-							<td colspan="2" class="text-center"><h4>Nenhum funcion�rio encontrado</h4></td>
-						</tr>
-						<tr ng-repeat="funcionario in vm.funcionarios">
-							<td><i class="material-icons row-icon">person</i></td>
-							<td class="col-xs-10">
-								{{ funcionario.nome }}
-								<br>
-								{{ funcionario.cpf | brCpf }}
-								<br>
-								{{ funcionario.cargo | capitalize }}
-							</td>
-							<td>
-								<a ui-sref="app.funcionarios.edit({id: funcionario.id})" ><i class="material-icons">mode_edit</i></a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<span ng-if="vm.possuiFuncionarios()">Exibindo {{ vm.funcionarios.length }} de {{ vm.resource.page.totalElements }} registros</span>
-			<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
-		</div>
+<div class="row">
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th colspan="2">Funcionário</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!vm.possuiFuncionarios()">
+					<td colspan="2" class="text-center"><h4>Nenhum funcionário encontrado</h4></td>
+				</tr>
+				<tr ng-repeat="funcionario in vm.funcionarios">
+					<td ng-class="{ 'text-danger': !funcionario.ativo }"><i class="material-icons row-icon">person</i></td>
+					<td class="col-xs-10">
+						Funcionário <strong>{{ funcionario.nome }}</strong>
+						<br>
+						com CPF <strong>{{ funcionario.cpf | brCpf }}</strong>
+						<br>
+						e cargo <strong>{{ funcionario.cargo | capitalize }}</strong>
+						<div ng-if="!funcionario.ativo">
+							está atualmente <strong class="text-danger">INATIVO</strong>
+						</div>
+					</td>
+					<td>
+						<a ui-sref="app.funcionarios.editar({id: funcionario.id})" ><i class="material-icons">mode_edit</i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+</div>
+<div class="row">
+	<span ng-if="vm.possuiFuncionarios()">Exibindo {{ vm.funcionarios.length }} de {{ vm.resource.page.totalElements }} registros</span>
+	<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
 </div>

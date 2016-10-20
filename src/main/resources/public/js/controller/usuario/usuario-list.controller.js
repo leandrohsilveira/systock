@@ -48,10 +48,11 @@
 			vm.carregando = true;
 			vm.query({
 				action: 'filter',
-				login: StringUtils.getOrNullIfEmpty(vm.filtros.login),
-				nome: StringUtils.getContainsLikeOrNullIfEmpty(vm.filtros.nome),
-				cpf: StringUtils.getReplacedOrNullIfEmpty(vm.filtros.cpf, /\.|\-/g, ''),
+				login: vm.filtros.login || null,
+				nome: vm.filtros.nome || null,
+				cpf: vm.filtros.cpf || null,
 				cargo: vm.filtros.cargo.value,
+                sort: 'login,desc',
 				page: 0,
 				size: 10
 			}).$promise

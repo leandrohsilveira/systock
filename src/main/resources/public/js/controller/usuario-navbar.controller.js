@@ -13,6 +13,9 @@
 		vm.usuarioAutenticado = null;
 		vm.logout = logout;
 		vm.possuiUsuarioAutenticado = possuiUsuarioAutenticado;
+        vm.possuiPrivilegioAdministrador = possuiPrivilegioAdministrador;
+        vm.possuiPrivilegioGerente = possuiPrivilegioGerente;
+        vm.possuiPrivilegioVendedor = possuiPrivilegioVendedor;
 
         activate();
 
@@ -39,5 +42,17 @@
 				$state.go('login');
 			});
 		}
+
+        function possuiPrivilegioAdministrador() {
+            return possuiUsuarioAutenticado() && vm.usuarioAutenticado.funcionario.cargo == 'ADMINISTRADOR';
+        }
+
+        function possuiPrivilegioGerente() {
+            return possuiUsuarioAutenticado() && (possuiPrivilegioAdministrador() || vm.usuarioAutenticado.funcionario.cargo == 'GERENTE');
+        }
+
+        function possuiPrivilegioVendedor() {
+            return possuiUsuarioAutenticado() && (possuiPrivilegioGerente() || vm.usuarioAutenticado.funcionario.cargo == 'VENDEDOR');
+        }
     }
 })();

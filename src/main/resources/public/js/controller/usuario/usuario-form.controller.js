@@ -54,10 +54,10 @@
 			$state.go('app.usuarios.consultar');
 		}
 
-		function selecionarFuncionario(nome) {
+		function selecionarFuncionario(query) {
 			return Funcionario.search({
-				action: 'searchFuncionarioLivreByNome',
-				nome: StringUtils.getContainsLikeOrNullIfEmpty(nome),
+				action: 'query',
+				query: query || null,
 				page: 0,
 				size: 10
 			}).$promise

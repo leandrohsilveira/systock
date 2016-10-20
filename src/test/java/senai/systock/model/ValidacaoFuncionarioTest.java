@@ -20,7 +20,7 @@ import senai.systock.util.ConstraintViolationComparator;
 public class ValidacaoFuncionarioTest {
 
 	private static final ConstraintViolationComparator comparator = new ConstraintViolationComparator();
-	
+
 	@Test
 	public void sucessoTest() throws ValidationException {
 		Funcionario f = new Funcionario("Leandro", "10054908213", Cargo.GERENTE);
@@ -52,7 +52,7 @@ public class ValidacaoFuncionarioTest {
 		String message = validar.iterator().next().getMessage();
 		assertEquals("O CPF é inválido", message);
 	}
-	
+
 	@Test
 	public void nomeVazioTest() {
 		Funcionario f = new Funcionario("", "10054908213", Cargo.GERENTE);
@@ -61,9 +61,9 @@ public class ValidacaoFuncionarioTest {
 		assertNotNull(validar);
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
+		assertEquals("O nome deve possuir entre 3 e 80 caracteres", message);
 	}
-	
+
 	@Test
 	public void nomeNullTest() {
 		Funcionario f = new Funcionario(null, "10054908213", Cargo.GERENTE);
@@ -85,11 +85,11 @@ public class ValidacaoFuncionarioTest {
 		assertEquals(2, validar.size());
 		String message;
 		message = validar.iterator().next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
+		assertEquals("O nome deve possuir entre 3 e 80 caracteres", message);
 		message = validar.iterator().next().getMessage();
 		assertEquals("O CPF já está cadastrado", message);
 	}
-	
+
 	@Ignore
 	@Test
 	public void nomeNullCpfDuplicadoTest() {
@@ -117,9 +117,9 @@ public class ValidacaoFuncionarioTest {
 		message = iterator.next().getMessage();
 		assertEquals("O CPF é inválido", message);
 		message = iterator.next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
+		assertEquals("O nome deve possuir entre 3 e 80 caracteres", message);
 	}
-	
+
 	@Test
 	public void nomeNullCpfInvalidoTest() {
 		Funcionario f = new Funcionario(null, "21347472828", Cargo.GERENTE);
@@ -145,7 +145,7 @@ public class ValidacaoFuncionarioTest {
 		String message = validar.iterator().next().getMessage();
 		assertEquals("O CPF é inválido", message);
 	}
-	
+
 	@Test
 	public void cpfNullTest() {
 		Funcionario f = new Funcionario("Leandro", null, Cargo.GERENTE);
@@ -169,9 +169,9 @@ public class ValidacaoFuncionarioTest {
 		message = iterator.next().getMessage();
 		assertEquals("O CPF é inválido", message);
 		message = iterator.next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 255 caracteres", message);
+		assertEquals("O nome deve possuir entre 3 e 80 caracteres", message);
 	}
-	
+
 	@Test
 	public void nomeNullCpfNullTest() {
 		Funcionario f = new Funcionario(null, null, Cargo.GERENTE);

@@ -11,6 +11,8 @@
 			'ngCookies',
 			'ngResource',
 			'ngMessages',
+            'ngCpfCnpj',
+            'ngMask',
 			'idf.br-filters'
 		])
 		.constant('jQuery', jQuery);

@@ -20,24 +20,25 @@ import senai.systock.model.Usuario;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Autowired
 	private CsrfTokenRepository csrfTokenRepository;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/bower.json").denyAll()
-			.antMatchers("/paginas/usuario/**", "/usuarios/**", "/paginas/funcionario/**", "/funcionarios/**").hasAuthority(Cargo.ADMINISTRADOR.name())
-			.antMatchers("/produtos/**", "/vendas/**", "/clientes/**", "/paginas/**").authenticated()
-			.mvcMatchers(HttpMethod.DELETE, "/vendas/**/itens").authenticated()
-			.mvcMatchers(HttpMethod.DELETE, "**").denyAll()
-			.anyRequest().permitAll()
-			.and().exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("AngularJS"))
-			.and().csrf().csrfTokenRepository(csrfTokenRepository);
+				.antMatchers("/bower.json").denyAll()
+				.antMatchers("/paginas/usuario/**", "/usuarios/**", "/paginas/funcionario/**", "/funcionarios/**").hasAuthority(Cargo.ADMINISTRADOR.name())
+				.antMatchers("/paginas/produto/**", "/produtos/**").hasAnyAuthority(Cargo.ADMINISTRADOR.name(), Cargo.GERENTE.name())
+				.antMatchers("/vendas/**", "/clientes/**", "/paginas/**").authenticated()
+				.mvcMatchers(HttpMethod.DELETE, "/vendas/**/itens").authenticated()
+				.mvcMatchers(HttpMethod.DELETE, "**").denyAll()
+				.anyRequest().permitAll()
+				.and().exceptionHandling().authenticationEntryPoint(new Http401AuthenticationEntryPoint("AngularJS"))
+				.and().csrf().csrfTokenRepository(csrfTokenRepository);
 	}
 
 	@Autowired
@@ -48,10 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authoritiesByUsernameQuery("select u.login, f.cargo from usuario u join funcionario f on f.id = u.funcionario_id where u.login = ?")
 				.passwordEncoder(Usuario.passwordEncoder);
 	}
-	
+
 	@Bean
 	public CsrfTokenRepository csrfTokenRepository() {
 		return new HttpSessionCsrfTokenRepository();
 	}
-	
+
 }

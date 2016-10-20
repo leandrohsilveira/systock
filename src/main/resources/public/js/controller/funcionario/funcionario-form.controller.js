@@ -5,51 +5,42 @@
         .module('systock')
         .controller('FuncionarioFormController', FuncionarioFormController);
 
-    FuncionarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams'];
+    FuncionarioFormController.$inject = ['Funcionario', 'HALResourceService', '$state', '$stateParams'];
 
     /* @ngInject */
-    function FuncionarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams) {
+    function FuncionarioFormController(Funcionario, HALResourceService, $state, $stateParams) {
         var vm = this;
-		vm.usuario = null;
         vm.funcionario = null;
-        vm.confirmarSenha = null;
-		vm.edit = false;
-        vm.cargos = [
-            {value: null, rotulo: 'Todos'},
-            {value: 'ADMINISTRADOR', rotulo: 'Administradores'},
-            {value: 'GERENTE', rotulo: 'Gerentes'},
-            {value: 'VENDEDOR', rotulo: 'Vendedores'}
-        ];
+		vm.editar = false;
+        vm.salvar = salvar;
 
         activate();
 
         function activate() {
-			if($state.is('app.funcionarios.edit')) {
-				Usuario.get({id: $stateParams.id}).$promise
+            vm.editar = $stateParams.editar;
+			if(vm.editar) {
+				Funcionario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
-                        vm.usuario = response;
-                        HALResourceService.follow(vm.usuario, 'GET', 'funcionario')
-                            .then(function(response) {
-                                vm.funcionario = new Funcionario(response.data);
-                            });
+                        vm.funcionario = response;
                     });
-				vm.edit = true;
-			} else if($state.is('app.funcionarios.new')) {
-				vm.usuario = new Usuario();
+			} else {
                 vm.funcionario = new Funcionario();
+                vm.funcionario.ativo = true;
+                vm.funcionario.cargo = 'VENDEDOR';
 			}
         }
 
-		function save() {
-			if(vm.edit) {
-				vm.usuario.$save(goToFuncionarioList);
+		function salvar() {
+			if(vm.editar) {
+                HALResourceService.follow(vm.funcionario, 'PUT', 'self', vm.funcionario)
+					.then(goToFuncionarioList);
 			} else {
-				vm.usuario.$update(goToFuncionarioList);
+                vm.funcionario.$save(goToFuncionarioList);
 			}
 		}
 
 		function goToFuncionarioList() {
-			$state.go('app.funcionarios');
+			$state.go('app.funcionarios.consultar');
 		}
 
     }

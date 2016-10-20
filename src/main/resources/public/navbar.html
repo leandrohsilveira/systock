@@ -24,21 +24,21 @@
 			<div class="collapse navbar-collapse" id="systock-navbar-collapse">
 				<ul class="nav navbar-nav">
 					<!-- Item página inicial -->
-					<li ui-sref-active="active"><a ui-sref="app.index">Pagina inicial</a></li>
+					<li ui-sref-active="active"><a ui-sref="app.index">Minhas vendas</a></li>
 
 					<!-- Dropdown Funcionarios -->
-					<li class="dropdown">
+					<li class="dropdown" ng-if="vm.possuiPrivilegioAdministrador()">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="menu-dropdown">Funcionário</span> <span class="caret"></span></a>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a ui-sref-active="active" ui-sref="app.funcionarios.new">Cadastrar</a></li>
-							<li><a ui-sref-active="active" ui-sref="app.funcionarios">Consultar</a></li>
+							<li><a ui-sref-active="active" ui-sref="app.funcionarios.cadastrar">Cadastrar</a></li>
+							<li><a ui-sref-active="active" ui-sref="app.funcionarios.consultar">Consultar</a></li>
 						</ul>
 					</li>
 
 					<!-- Dropdown Usuários -->
-					<li ui-sref-active="active" class="dropdown">
+					<li ui-sref-active="active" class="dropdown" ng-if="vm.possuiPrivilegioAdministrador()">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="menu-dropdown">Usuário</span> <span class="caret"></span></a>
 						</a>
@@ -49,7 +49,7 @@
 					</li>
 
 					<!-- Dropdown Produtos -->
-					<li ui-sref-active="active" class="dropdown">
+					<li ui-sref-active="active" class="dropdown" ng-if="vm.possuiPrivilegioGerente()">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="menu-dropdown">Produto</span> <span class="caret"></span></a>
 						</a>

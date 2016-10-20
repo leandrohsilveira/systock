@@ -46,9 +46,10 @@
 			vm.carregando = true;
 			vm.query({
 				action: 'filter',
-				nome: StringUtils.getUppercaseOrNullIfEmpty(vm.filtros.nome),
-				cpf: StringUtils.getReplacedOrNullIfEmpty(vm.filtros.cpf, /\.|\-/g, ''),
+				nome: vm.filtros.nome || null,
+				cpf: vm.filtros.cpf || null,
 				cargo: vm.filtros.cargo.value,
+                sort: 'nome,desc',
 				page: 0,
 				size: 10
 			}).$promise

@@ -60,7 +60,7 @@
 					name="funcionario"
 					ng-model="vm.funcionario"
 					placeholder="Encontrar funcionário..."
-					uib-typeahead="funcionario as funcionario.nome for funcionario in vm.selecionarFuncionario($viewValue)"
+					uib-typeahead="funcionario as (funcionario.nome + ' - ' + funcionario.cpf) for funcionario in vm.selecionarFuncionario($viewValue)"
 					typeahead-loading="carregandoFuncionarios"
 					typeahead-no-results="nenhumFuncionarioEncontrado"
 					typeahead-editable="false"

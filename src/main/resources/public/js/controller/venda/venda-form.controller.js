@@ -97,8 +97,8 @@
 
 		function selecionarProduto(query) {
 			return Produto.search({
-				action: 'searchByDescricao',
-				descricao: query || null,
+				action: 'query',
+				query: query || null,
 				page: 0,
 				size: 10
 			}).$promise

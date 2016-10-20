@@ -14,29 +14,29 @@ import org.hibernate.validator.constraints.br.CPF;
 @Table(name = "cliente")
 @SequenceGenerator(name = "sequence_gen", sequenceName = "cliente_seq", initialValue = 1, allocationSize = 1)
 public class Cliente extends EntidadeBase {
-	
+
 	public Cliente() {
 	}
-	
+
 	public Cliente(String nome, String cpf, String email) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 	}
-	
-	@NotBlank(message="O nome é obrigatório")
-	@Size(min=3, max=80, message="O nome deve possuir entre 3 e 80 caracteres")
-	@Column(name="nome", nullable=false)
+
+	@NotBlank(message = "O nome é obrigatório")
+	@Size(min = 3, max = 80, message = "O nome deve possuir entre 3 e 80 caracteres")
+	@Column(name = "nome", nullable = false)
 	private String nome;
-	
-	@NotBlank(message="O CPF é obrigatório")
-	@CPF(message="O CPF é inválido")
-	@Column(name="cpf", nullable=false, length=11, unique=true)
+
+	@NotBlank(message = "O CPF é obrigatório")
+	@CPF(message = "O CPF é inválido")
+	@Column(name = "cpf", nullable = false, length = 11, unique = true, updatable = false)
 	private String cpf;
-	
-	@NotBlank(message="O e-mail é obrigatório")
-	@Email(message="O e-mail é inválido", regexp=".+\\@.+")
-	@Column(name="email", nullable=false)
+
+	@NotBlank(message = "O e-mail é obrigatório")
+	@Email(message = "O e-mail é inválido", regexp = ".+\\@.+")
+	@Column(name = "email", nullable = false)
 	private String email;
 
 	public String getNome() {

@@ -19,7 +19,7 @@
             nome: null,
             cpf: null,
             email: null,
-            sort: 'id,desc',
+            sort: 'nome,desc',
             nenhumFiltroPreenchido: nenhumFiltroPreenchido,
             filtrar: filtrar
         }

@@ -10,11 +10,10 @@
 	/* @ngInject */
 	function RouteConfig($stateProvider) {
 		$stateProvider
-			.state('app.produtos', {
-				parent: 'app',
-				url: '/produtos',
-				abstract: true
-			})
+            .state('app.produtos', {
+                parent: 'app',
+                abstract: true
+            })
 			.state('app.produtos.consultar', {
 				parent: 'app',
 				url: '/produtos',
