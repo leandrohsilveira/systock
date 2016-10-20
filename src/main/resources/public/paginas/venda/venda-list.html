@@ -51,8 +51,7 @@
 						<br>
 						com um total de <strong>{{ venda.total | currency:'R$' }}</strong> <span class="hidden-xs" ng-if="venda.desconto">com <strong>{{ venda.desconto | number:1 }}%</strong> de desconto do subtotal {{ venda.subtotal |currency: 'R$' }}</span>
 						<br>
-						<span ng-if="venda.situacao == 'ABERTA'">em {{ venda.dataCriacao | date:'dd/MM/yyyy HH:mm:ss' }}</span>
-						<span ng-if="venda.situacao != 'ABERTA'">em {{ venda.dataConclusao | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+						última atualização em {{ venda.dataUltimaAtualizacao | date:'dd/MM/yyyy HH:mm:ss' }}
 					</td>
 					<td>
 						<a class="btn btn-lg" ui-sref="app.vendas.editar({id: venda.id})" ><i class="material-icons">mode_edit</i></a>

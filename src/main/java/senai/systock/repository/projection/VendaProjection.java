@@ -9,23 +9,25 @@ import senai.systock.model.Funcionario;
 import senai.systock.model.SituacaoVenda;
 import senai.systock.model.Venda;
 
-@Projection(name="venda", types=Venda.class)
+@Projection(name = "venda", types = Venda.class)
 public interface VendaProjection extends EntidadeBaseProjection {
-	
+
 	Cliente getCliente();
-	
+
 	Funcionario getFuncionario();
-	
+
 	Float getSubtotal();
-	
+
 	Float getDesconto();
-	
+
 	Float getTotal();
-	
+
 	SituacaoVenda getSituacao();
-	
+
 	Date getDataCriacao();
-	
+
 	Date getDataConclusao();
-	
+
+	Date getDataUltimaAtualizacao();
+
 }

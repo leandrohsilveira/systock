@@ -17,80 +17,81 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.Formula;
-
 @Entity
-@Table(name="venda")
-@SequenceGenerator(name="sequence_gen", sequenceName="venda_seq", initialValue=1, allocationSize=1)
+@Table(name = "venda")
+@SequenceGenerator(name = "sequence_gen", sequenceName = "venda_seq", initialValue = 1, allocationSize = 1)
 public class Venda extends EntidadeBase {
-	
+
 	public Venda() {
 	}
-	
+
 	public Venda(Funcionario funcionario, SituacaoVenda situacao) {
 		this.funcionario = funcionario;
 		this.situacao = situacao;
 	}
 
-	@NotNull(message="O funcionário responsável pela venda é obrigatório")
-	@ManyToOne(optional=false)
-	@JoinColumn(name="funcionario_id", nullable=false)
+	@NotNull(message = "O funcionário responsável pela venda é obrigatório")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "funcionario_id", nullable = false)
 	private Funcionario funcionario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cliente_id", nullable=true)
+	@JoinColumn(name = "cliente_id", nullable = true)
 	private Cliente cliente;
-	
-	@OneToMany(mappedBy="venda", cascade={ CascadeType.ALL })
+
+	@OneToMany(mappedBy = "venda", cascade = { CascadeType.ALL })
 	private List<ItemVenda> itens;
-	
-	@Column(name="subtotal")
+
+	@Column(name = "subtotal")
 	private Float subtotal = 0f;
-	
-	@Column(name="desconto")
+
+	@Column(name = "desconto")
 	private Float desconto = 0f;
-	
-	@Column(name="total")
+
+	@Column(name = "total")
 	private Float total = 0f;
-	
-	@NotNull(message="A situação da venda não pode ser nula")
-	@Column(name="situacao", length=9, nullable=false)
+
+	@NotNull(message = "A situação da venda não pode ser nula")
+	@Column(name = "situacao", length = 9, nullable = false)
 	private SituacaoVenda situacao;
-	
-	@NotNull(message="A data de criação da venda não pode ser nula")
-	@Column(name="data_criacao", nullable=false)
+
+	@NotNull(message = "A data de criação da venda não pode ser nula")
+	@Column(name = "data_criacao", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
-	
-	@Column(name="data_conclusao")
+
+	@Column(name = "data_conclusao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataConclusao;
+
+	@Column(name = "data_ultima_atualizacao")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
 	@PrePersist
 	private void prePersist() {
 		dataCriacao = new Date();
-		if(this.situacao == SituacaoVenda.CONCLUIDA) {
+		dataUltimaAtualizacao = new Date();
+		if (this.situacao == SituacaoVenda.CONCLUIDA) {
 			dataConclusao = new Date();
 		}
 		calcularTotais();
 	}
-	
+
 	@PreUpdate
 	private void preUpdate() {
-		if(this.situacao == SituacaoVenda.CONCLUIDA) {
+		dataUltimaAtualizacao = new Date();
+		if (this.situacao == SituacaoVenda.CONCLUIDA) {
 			dataConclusao = new Date();
 		}
 		calcularTotais();
 	}
-	
+
 	private void calcularTotais() {
 		this.subtotal = 0f;
-		if(itens != null) {
+		if (itens != null) {
 			for (ItemVenda itemVenda : itens) {
 				float totalItem = itemVenda.getValor() * itemVenda.getQuantidade();
 				itemVenda.setTotal(totalItem);
@@ -99,8 +100,7 @@ public class Venda extends EntidadeBase {
 		}
 		this.total = this.subtotal - (this.subtotal * (this.desconto / 100));
 	}
-	
-	
+
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -159,7 +159,7 @@ public class Venda extends EntidadeBase {
 
 	@Transient
 	public void addItemVenda(ItemVenda itemVenda) {
-		if(this.itens == null) this.itens = new ArrayList<>();
+		if (this.itens == null) this.itens = new ArrayList<>();
 		itens.add(itemVenda);
 	}
 
@@ -178,6 +178,13 @@ public class Venda extends EntidadeBase {
 	public void setDataConclusao(Date dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
-	
-	
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
 }
