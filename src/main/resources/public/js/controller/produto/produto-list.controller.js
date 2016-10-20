@@ -40,6 +40,7 @@
 			vm.query({
 				action: 'searchByDescricao',
 				descricao: vm.filtros.descricao || null,
+                sort: 'id,desc',
 				page: 0,
 				size: 10
 			}).$promise

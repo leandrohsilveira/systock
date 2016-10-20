@@ -10,14 +10,16 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import senai.systock.model.Cliente;
 import senai.systock.repository.projection.ClienteProjection;
 
-@RepositoryRestResource(collectionResourceRel="clientes" ,path="clientes", excerptProjection=ClienteProjection.class)
+@RepositoryRestResource(collectionResourceRel = "clientes", path = "clientes", excerptProjection = ClienteProjection.class)
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Long> {
-	
+
 	@Query("select c from Cliente c where upper(c.nome) like :nome")
 	Page<Cliente> findClienteLike(Pageable pageable, @Param("nome") String nome);
-	
+
 	@Query("select c from Cliente c where (:query is null or (upper(c.nome) like concat('%', upper(:query), '%') or c.cpf = REGEXP_REPLACE(:query, '(\\.|\\-)', '')))")
 	Page<Cliente> query(Pageable pageable, @Param("query") String query);
-	
-	
+
+	@Query("select c from Cliente as c where (:nome is null or upper(c.nome) like concat('%', upper(:nome), '%')) and (:cpf is null or c.cpf = REGEXP_REPLACE(:cpf, '(\\.|\\-)', '')) and (:email is null or upper(c.email) like concat('%', upper(:email), '%'))")
+	Page<Cliente> filter(Pageable pageable, @Param("nome") String nome, @Param("cpf") String cpf, @Param("email") String email);
+
 }

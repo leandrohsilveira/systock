@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="page-header">
+		<h1>Consultar Clientes</h1>
+	</div>
+	<div class="painel-filtros">
+		<h3>Filtrar consulta:</h3>
+		<form class="clearfix" ng-submit="vm.filtros.filtrar()">
+			<div class="form-group col-xs-12 col-sm-4">
+				<label class="sr-only" for="filtro_descricao">Por nome</label>
+				<input type="text" class="form-control" id="filtro_descricao" placeholder="Por descrição" ng-model="vm.filtros.nome">
+			</div>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label class="sr-only" for="filtro_descricao">Por CPF</label>
+				<input type="text" class="form-control" id="filtro_descricao" placeholder="Por CPF" ng-model="vm.filtros.cpf">
+			</div>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label class="sr-only" for="filtro_descricao">Por e-mail</label>
+				<input type="text" class="form-control" id="filtro_descricao" placeholder="Por e-mail" ng-model="vm.filtros.email">
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-md-2">
+				<button type="submit" class="btn btn-primary form-control" ng-disabled="vm.filtros.nenhumFiltroPreenchido() || vm.carregando">Filtrar</button>
+			</div>
+			<div class="form-group col-xs-12 col-sm-3 col-md-2">
+				<button type="button" class="btn btn-primary form-control" ng-disabled="vm.carregando" ng-click="vm.recarregar()">Limpar</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="hidden-xs">#</th>
+					<th colspan="2">Cliente</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!vm.possuiClientes()">
+					<td colspan="3" class="text-center"><h4>Nenhum cliente encontrado</h4></td>
+				</tr>
+				<tr ng-repeat="cliente in vm.clientes">
+					<td class="hidden-xs" ng-class="'text-danger'> !cliente.ativo"><i class="material-icons row-icon">person</i></td>
+					<td class="col-xs-10">
+						<strong>{{ cliente.nome }}</strong>
+						<br>
+						com CPF <strong>{{ cliente.cpf | brCpf }}</strong>
+						<br>
+						e e-mail <strong>{{ cliente.email }}</strong>
+						<div ng-if="!cliente.ativo">
+							está atualmente <strong class="text-danger">INATIVO</strong>
+						</div>
+					</td>
+					<td>
+						<a class="btn btn-lg" ui-sref="app.clientes.editar({id: cliente.id})" ><i class="material-icons">mode_edit</i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<span ng-if="vm.possuiClientes()">Exibindo {{ vm.clientes.length }} de {{ vm.resource.page.totalElements }} registros</span>
+	<button class="btn btn-primary" ng-if="vm.podeCarregarMais()" ng-disabled="vm.carregando" ng-click="vm.carregarMais()">Exibir mais</button>
+</div>

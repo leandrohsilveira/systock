@@ -60,18 +60,18 @@
 					</li>
 
 					<!-- Dropdown Clientes -->
-					<li class="dropdown">
+					<li ui-sref-active="active" class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="menu-dropdown">Cliente</span> <span class="caret"></span></a>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Cadastrar</a></li>
-							<li><a href="#">Consultar</a></li>
+							<li><a ui-sref-active="active" ui-sref="app.clientes.cadastrar">Cadastrar</a></li>
+							<li><a ui-sref-active="active" ui-sref="app.clientes.consultar">Consultar</a></li>
 						</ul>
 					</li>
 
 					<!-- Dropdown Vendas -->
-					<li class="dropdown">
+					<li ui-sref-active="active" class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="menu-dropdown">Venda</span> <span class="caret"></span></a>
 						</a>

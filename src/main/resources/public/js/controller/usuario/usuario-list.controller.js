@@ -26,6 +26,7 @@
             nome: null,
             cpf: null,
             cargo: vm.cargos[0],
+            sort: 'id,desc',
             nenhumFiltroPreenchido: nenhumFiltroPreenchido,
             filtrar: filtrar
         }

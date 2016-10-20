@@ -1,0 +1,48 @@
+<div class="page-header">
+    <h1>
+        Formulário de Cliente
+    </h1>
+</div>
+<div class="well well-lg">
+    <form name="clienteForm" class="form-horizontal" ng-submit="vm.salvar()" novalidate>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-disabled="!vm.editar" ng-model="vm.cliente.ativo"> Ativo
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-success': clienteForm.nome.$valid, 'has-error': clienteForm.nome.$dirty && clienteForm.nome.$invalid }">
+            <label for="nome" class="sr-only control-label" required="true">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" ng-model="vm.cliente.nome" autocomplete="off" placeholder="Nome" required ng-minlength="3" ng-maxlength="80">
+            <div ng-if="clienteForm.nome.$dirty" ng-messages="clienteForm.nome.$error">
+                <span ng-message="required" class="help-block">O nome do cliente é obrigatório</span>
+                <span ng-message="minlength, maxlength" class="help-block">O nome do cliente deve possuir entre 3 e 80 caracteres</span>
+            </div>
+        </div>
+
+		<div class="form-group" ng-class="{'has-success': clienteForm.cpf.$valid, 'has-error': clienteForm.cpf.$dirty && clienteForm.cpf.$invalid }">
+            <label for="cpf" class="sr-only control-label" required="true">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" ng-model="vm.cliente.cpf" autocomplete="off" placeholder="CPF" required ng-maxlength="11">
+            <div ng-if="clienteForm.cpf.$dirty" ng-messages="clienteForm.cpf.$error">
+                <span ng-message="required" class="help-block">O CPF do cliente é obrigatório</span>
+                <span ng-message="maxlength" class="help-block">O CPF do cliente não pode conter mais que 11 caracteres</span>
+            </div>
+        </div>
+
+		<div class="form-group" ng-class="{'has-success': clienteForm.email.$valid, 'has-error': clienteForm.email.$dirty && clienteForm.email.$invalid }">
+            <label for="email" class="sr-only control-label" required="true">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" ng-model="vm.cliente.email" autocomplete="off" placeholder="E-mail" required>
+            <div ng-if="clienteForm.email.$dirty" ng-messages="clienteForm.email.$error">
+                <span ng-message="email" class="help-block">O e-mail do cliente é inválido</span>
+                <span ng-message="required" class="help-block">O e-mail do cliente é obrigatório</span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-disabled="clienteForm.$invalid">Salvar</button>
+            <a ui-sref="app.clientes.consultar" class="btn btn-default">Cancelar</a>
+        </div>
+    </form>
+</div>
