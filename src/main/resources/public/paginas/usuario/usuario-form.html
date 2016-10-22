@@ -42,12 +42,12 @@
         </div>
 
 		<!-- Confirmação -->
-        <div ng-if="!vm.editar || vm.alterarSenha" class="form-group" ng-class="{'has-success': (vm.usuario.senha && vm.usuario.senha == vm.confirmarSenha), 'has-error': (usuarioForm.confirmarSenha.$dirty && (vm.usuario.senha != vm.confirmarSenha || usuarioForm.confirmarSenha.$invalid )) }">
+        <div ng-if="!vm.editar || vm.alterarSenha" class="form-group" ng-class="{'has-success': usuarioForm.confirmarSenha.$valid, 'has-error': usuarioForm.confirmarSenha.$dirty && usuarioForm.confirmarSenha.$invalid }">
             <label for="confirmar_senha" class="sr-only control-label">Confirmar senha</label>
-            <input type="password" class="form-control" name="confirmarSenha" id="confirmar_senha" ng-model="vm.confirmarSenha" placeholder="Confirmar senha" required>
+            <input type="password" class="form-control" name="confirmarSenha" id="confirmar_senha" ng-model="vm.confirmarSenha" match="vm.usuario.senha" placeholder="Confirmar senha" required>
 			<div ng-if="usuarioForm.confirmarSenha.$dirty" ng-messages="usuarioForm.confirmarSenha.$error">
 				<span ng-message="required" class="help-block">A confirmação de senha é obrigatória</span>
-				<span ng-if="vm.usuario.senha != vm.confirmarSenha" class="help-block">A confirmação deve ser igual a senha informada</span>
+				<span ng-message="match" class="help-block">A confirmação deve ser igual a senha informada</span>
 			</div>
         </div>
 
@@ -77,8 +77,10 @@
 			</span>
 		</div>
 
+		{{ usuarioForm.$error }}
+
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" ng-disabled="usuarioForm.$invalid || ((!vm.editar || vm.alterarSenha) && vm.usuario.senha != vm.confirmarSenha)">Salvar</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="usuarioForm.$invalid">Salvar</button>
             <a ui-sref="app.usuarios.consultar" class="btn btn-default">Cancelar</a>
         </div>
     </form>

@@ -14,7 +14,8 @@
             'ngCpfCnpj',
             'ngMask',
 			'idf.br-filters',
-			'ui.utils.masks'
+			'ui.utils.masks',
+			'validation.match'
 		])
 		.constant('jQuery', jQuery);
 })();
