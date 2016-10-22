@@ -27,6 +27,7 @@
 						typeahead-loading="carregandoClientes"
 						typeahead-no-results="nenhumClienteEncontrado"
 						typeahead-editable="false"
+						ng-disabled="vm.situacaoInicial != 'ABERTA'"
 						autocomplete="off"
 						class="form-control">
 				<input id="cliente_find"
@@ -39,6 +40,7 @@
 						typeahead-loading="carregandoClientes"
 						typeahead-no-results="nenhumClienteEncontrado"
 						typeahead-editable="false"
+						ng-disabled="vm.situacaoInicial != 'ABERTA'"
 						autocomplete="off"
 						class="form-control" required>
 				<div ng-if="vendaForm.cliente.$dirty" ng-messages="vendaForm.cliente.$error">
@@ -52,7 +54,7 @@
 				</span>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" ng-if="vm.situacaoInicial == 'ABERTA'">
 				<label for="produto_find" class="sr-only control-label">Encontrar produto...</label>
 				<input id="produto_find"
 						type="text"
@@ -78,7 +80,7 @@
 			<div class="form-group">
 				<div class="input-group">
 					<div class="input-group-addon">Desconto</div>
-					<input type="number" class="form-control" ng-model="vm.venda.desconto" ng-min="0" ng-max="100" required>
+					<input type="number" class="form-control" ng-model="vm.venda.desconto" ng-disabled="vm.situacaoInicial != 'ABERTA'" ng-min="0" ng-max="100" required>
 					<div class="input-group-addon">%</div>
 				</div>
 			</div>
@@ -92,9 +94,9 @@
 				<select name="situacao" id="situacao" class="form-control" ng-model="vm.venda.situacao" required>
 					<option ng-if="vm.situacaoInicial == 'ABERTA'" value="ABERTA">Venda aberta</option>
 					<option ng-if="vm.situacaoInicial == 'CONCLUIDA' || vm.situacaoInicial == 'ABERTA'" value="CONCLUIDA">Venda concluída</option>
-					<option ng-if="vm.situacaoInicial == 'CANCELADA' || vm.situacaoInicial == 'ABERTA'" value="CANCELADA">Venda cancelada</option>
-					<option ng-if="vm.situacaoInicial == 'DEVOLVIDA' || vm.situacaoInicial == 'CONCLUIDA'" value="DEVOLVIDA">Venda devolvida</option>
-					<option ng-if="vm.situacaoInicial == 'TROCADA' || vm.situacaoInicial == 'CONCLUIDA'" value="TROCADA">Troca efetuada</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'CANCELADA' || vm.situacaoInicial == 'ABERTA')" value="CANCELADA">Venda cancelada</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'DEVOLVIDA' || vm.situacaoInicial == 'CONCLUIDA')" value="DEVOLVIDA">Venda devolvida</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'TROCADA' || vm.situacaoInicial == 'CONCLUIDA')" value="TROCADA">Troca efetuada</option>
 				</select>
 				<div ng-if="vendaForm.situacao.$dirty" ng-messages="vendaForm.situacao.$error">
 					<span ng-message="required" class="help-block">A situacao da venda é obrigatória</span>
@@ -126,7 +128,7 @@
 								<div class="form-group" ng-class="{'has-success': itemForm.quantidade.$valid, 'has-error': itemForm.quantidade.$dirty && itemForm.quantidade.$invalid }">
 									<div class="input-group">
 										<div class="input-group-addon">Qt.</div>
-										<input type="number" name="quantidade" class="form-control" ng-model="item.quantidade" ng-change="vm.calcularSubtotal()" ng-min="1" ng-max="item.produto.quantidade" pattern="^\d+$" required>
+										<input type="number" name="quantidade" class="form-control" ng-model="item.quantidade" ng-change="vm.calcularSubtotal()" ng-min="1" ng-max="item.produto.quantidade" ng-disabled="vm.situacaoInicial != 'ABERTA'" pattern="^\d+$" required>
 										<div class="input-group-addon">de {{ item.produto.quantidade }} em estoque.</div>
 									</div>
 									<div ng-if="itemForm.quantidade.$dirty" ng-messages="itemForm.quantidade.$error">
@@ -144,7 +146,7 @@
 								com total de <strong>{{ item.valor * item.quantidade | currency: 'R$' }}</strong>
 							</div>
 							<div>
-								<button type="button" class="btn btn-default" ng-click="vm.removerItem($index)">Remover</button>
+								<button type="button" class="btn btn-default" ng-if="vm.situacaoInicial == 'ABERTA'" ng-click="vm.removerItem($index)">Remover</button>
 							</div>
 						</td>
 					</tr>
