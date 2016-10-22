@@ -17,11 +17,11 @@
 		vm.vendas = [];
 		vm.situacoes = [
 			{value: null, rotulo: 'Todas situações'},
-			{value: 'CONCLUIDA', rotulo: 'Vendas concluidas'},
+			{value: 'CONCLUIDA', rotulo: 'Vendas concluídas'},
 			{value: 'ABERTA', rotulo: 'Vendas abertas'},
-			{value: 'CANCELADA', rotulo: 'Vendas cancelada'},
-			{value: 'DEVOLVIDA', rotulo: 'Vendas devolvida'},
-			{value: 'TROCADA', rotulo: 'Venda trocada'}
+			{value: 'CANCELADA', rotulo: 'Vendas canceladas'},
+			{value: 'DEVOLVIDA', rotulo: 'Vendas devolvidas'},
+			{value: 'TROCADA', rotulo: 'Venda trocadas'}
 		]
 
         vm.filtros = {
