@@ -9,7 +9,7 @@
 
     <form class="form-signin" ng-submit="vm.entrar()">
 
-		 <div uib-alert ng-repeat="mensagem in vm.mensagens" ng-class="'alert-' + (mensagem.tipo || 'info')" close="vm.removerMensagem($index)">{{mensagem.descricao}}</div>
+		<div uib-alert ng-repeat="mensagem in vm.mensagens" ng-class="'alert-' + (mensagem.tipo || 'info')" close="vm.removerMensagem($index)">{{mensagem.descricao}}</div>
 
         <h2 class="form-signin-heading">Identifique-se</h2>
 
