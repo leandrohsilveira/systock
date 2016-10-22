@@ -15,7 +15,9 @@
 		'$q',
 		'$state',
 		'$stateParams',
-		'$http'];
+		'$http',
+		'MensagensGlobaisService'
+	];
 
     /* @ngInject */
     function VendaFormController(
@@ -28,7 +30,10 @@
 			$q,
 			$state,
 			$stateParams,
-			$http) {
+			$http,
+			MensagensGlobaisService
+		) {
+
         var vm = this;
         vm.venda = null;
         vm.funcionario = null;
@@ -150,9 +155,10 @@
 			}
 			if(vm.editar) {
 				HALResourceService.follow(vm.venda, 'PUT', 'self', vm.venda)
-					.then(_salvarItens);
+					.then(_salvarItens)
+					.catch(_erro);
 			} else {
-				vm.venda.$save(_salvarItens);
+				vm.venda.$save(_salvarItens, _erro);
 			}
 
 		}
@@ -215,7 +221,15 @@
 		}
 
         function _goToVendaList() {
+			MensagensGlobaisService.addMensagemGlobal('Os dados da venda foram salvos com sucesso', 'success', /^app\.vendas\.consultar$/);
 			$state.go('app.vendas.consultar');
         }
+
+		function _erro(erro) {
+			console.error(erro);
+			if(erro && erro.data) {
+				console.error('Response error', eror);
+			}
+		}
     }
 })();

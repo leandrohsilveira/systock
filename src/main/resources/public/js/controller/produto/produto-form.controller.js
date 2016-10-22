@@ -5,10 +5,10 @@
         .module('systock')
         .controller('ProdutoFormController', ProdutoFormController);
 
-    ProdutoFormController.$inject = ['Produto', 'HALResourceService', '$state', '$stateParams', 'StringUtils'];
+    ProdutoFormController.$inject = ['Produto', 'HALResourceService', '$state', '$stateParams', 'MensagensGlobaisService'];
 
     /* @ngInject */
-    function ProdutoFormController(Produto, HALResourceService, $state, $stateParams, StringUtils) {
+    function ProdutoFormController(Produto, HALResourceService, $state, $stateParams, MensagensGlobaisService) {
         var vm = this;
 		vm.produto = null;
 		vm.editar = false;
@@ -39,6 +39,7 @@
 		}
 
 		function goToProdutoList() {
+			MensagensGlobaisService.addMensagemGlobal('Os dados do produto foram salvos com sucesso', 'success', /^app\.produtos\.consultar$/);
 			$state.go('app.produtos.consultar');
 		}
 

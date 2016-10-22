@@ -5,10 +5,10 @@
         .module('systock')
         .controller('FuncionarioFormController', FuncionarioFormController);
 
-    FuncionarioFormController.$inject = ['Funcionario', 'HALResourceService', '$state', '$stateParams'];
+    FuncionarioFormController.$inject = ['Funcionario', 'HALResourceService', 'MensagensGlobaisService', '$state', '$stateParams'];
 
     /* @ngInject */
-    function FuncionarioFormController(Funcionario, HALResourceService, $state, $stateParams) {
+    function FuncionarioFormController(Funcionario, HALResourceService, MensagensGlobaisService, $state, $stateParams) {
         var vm = this;
         vm.funcionario = null;
 		vm.editar = false;
@@ -40,6 +40,7 @@
 		}
 
 		function goToFuncionarioList() {
+			MensagensGlobaisService.addMensagemGlobal('Os dados do funcionário foram salvos com sucesso', 'success', /^app\.funcionarios\.consultar$/);
 			$state.go('app.funcionarios.consultar');
 		}
 

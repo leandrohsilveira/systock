@@ -5,10 +5,10 @@
         .module('systock')
         .controller('UsuarioFormController', UsuarioFormController);
 
-    UsuarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams', 'StringUtils'];
+    UsuarioFormController.$inject = ['Usuario', 'Funcionario', 'HALResourceService', '$state', '$stateParams', 'MensagensGlobaisService'];
 
     /* @ngInject */
-    function UsuarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams, StringUtils) {
+    function UsuarioFormController(Usuario, Funcionario, HALResourceService, $state, $stateParams, MensagensGlobaisService) {
         var vm = this;
 		vm.usuario = null;
         vm.funcionario = null;
@@ -51,6 +51,7 @@
 		}
 
 		function goToUsuarioList() {
+			MensagensGlobaisService.addMensagemGlobal('Os dados do usuário foram salvos com sucesso', 'success', /^app\.usuarios\.consultar$/);
 			$state.go('app.usuarios.consultar');
 		}
 

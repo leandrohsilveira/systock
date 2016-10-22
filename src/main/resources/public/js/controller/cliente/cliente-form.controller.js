@@ -5,10 +5,10 @@
         .module('systock')
         .controller('ClienteFormController', ClienteFormController);
 
-    ClienteFormController.$inject = ['Cliente', 'HALResourceService', '$state', '$stateParams', 'StringUtils'];
+    ClienteFormController.$inject = ['Cliente', 'HALResourceService', '$state', '$stateParams', 'MensagensGlobaisService'];
 
     /* @ngInject */
-    function ClienteFormController(Cliente, HALResourceService, $state, $stateParams, StringUtils) {
+    function ClienteFormController(Cliente, HALResourceService, $state, $stateParams, MensagensGlobaisService) {
         var vm = this;
 		vm.cliente = null;
 		vm.editar = false;
@@ -39,6 +39,7 @@
 		}
 
 		function goToClienteList() {
+			MensagensGlobaisService.addMensagemGlobal('Os dados do cliente foram salvos com sucesso', 'success', /^app\.clientes\.consultar$/);
 			$state.go('app.clientes.consultar');
 		}
 
