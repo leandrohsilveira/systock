@@ -39,7 +39,7 @@
 						<br>
 						<strong ng-class="vm.getProdutoNgClass(produto)">{{ vm.getQuantidadeText(produto.quantidade) }}</strong>
 						<br>
-						custando <strong>{{ produto.preco | currency : 'R$' }}</strong>
+						custando <strong>{{ produto.preco | currency: 'R$' }}</strong>
 						<div ng-if="!produto.ativo">
 							está atualmente <strong class="text-danger">INATIVO</strong>
 						</div>

@@ -13,7 +13,8 @@
 			'ngMessages',
             'ngCpfCnpj',
             'ngMask',
-			'idf.br-filters'
+			'idf.br-filters',
+			'ui.utils.masks'
 		])
 		.constant('jQuery', jQuery);
 })();
