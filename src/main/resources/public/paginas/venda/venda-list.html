@@ -41,7 +41,7 @@
 					<td colspan="3" class="text-center"><h4>Nenhuma venda encontrada</h4></td>
 				</tr>
 				<tr ng-repeat="venda in vm.vendas">
-					<td class="hidden-xs" ng-class="vm.getSituacaoNgClass(venda)"><i class="material-icons row-icon">shopping_cart</i></td>
+					<td class="hidden-xs row-center" ng-class="vm.getSituacaoNgClass(venda)"><i class="material-icons row-icon">shopping_cart</i></td>
 					<td class="col-xs-10">
 						<strong ng-class="vm.getSituacaoNgClass(venda)">Venda {{ venda.situacao | capitalize }}</strong>
 						<div>
@@ -53,8 +53,8 @@
 						</div>
 						<div>última atualização em {{ venda.dataUltimaAtualizacao | date:'dd/MM/yyyy HH:mm:ss' }}</div>
 					</td>
-					<td>
-						<a class="btn btn-lg" ui-sref="app.vendas.editar({id: venda.id})" ><i class="material-icons">mode_edit</i></a>
+					<td class="row-center">
+						<a class="btn btn-default" ui-sref="app.vendas.editar({id: venda.id})" ><i class="material-icons row-icon-sm">mode_edit</i></a>
 					</td>
 				</tr>
 			</tbody>

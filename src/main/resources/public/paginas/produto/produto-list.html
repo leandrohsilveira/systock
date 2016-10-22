@@ -33,7 +33,7 @@
 					<td colspan="3" class="text-center"><h4>Nenhum produto encontrado</h4></td>
 				</tr>
 				<tr ng-repeat="produto in vm.produtos">
-					<td class="hidden-xs" ng-class="vm.getProdutoNgClass(produto)"><i class="material-icons row-icon">receipt</i></td>
+					<td class="hidden-xs row-center" ng-class="vm.getProdutoNgClass(produto)"><i class="material-icons row-icon">receipt</i></td>
 					<td class="col-xs-10">
 						<strong>{{ produto.descricao }}</strong>
 						<br>
@@ -44,8 +44,8 @@
 							está atualmente <strong class="text-danger">INATIVO</strong>
 						</div>
 					</td>
-					<td>
-						<a class="btn btn-lg" ui-sref="app.produtos.editar({id: produto.id})" ><i class="material-icons">mode_edit</i></a>
+					<td class="row-center">
+						<a class="btn btn-default" ui-sref="app.produtos.editar({id: produto.id})" ><i class="material-icons row-icon-sm">mode_edit</i></a>
 					</td>
 				</tr>
 			</tbody>

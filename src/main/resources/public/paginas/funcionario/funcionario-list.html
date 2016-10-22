@@ -4,7 +4,7 @@
 	</div>
 	<div class="painel-filtros">
 		<h3>Filtrar consulta:</h3>
-		<form ng-submit="vm.filtros.filtrar()">
+		<form class="clearfix" ng-submit="vm.filtros.filtrar()">
 			<div class="form-group col-xs-12 col-sm-4">
 				<label class="sr-only" for="filtro_nome">Por nome</label>
 				<input type="text" class="form-control" id="filtro_nome" placeholder="Por nome" ng-model="vm.filtros.nome">
@@ -41,7 +41,7 @@
 					<td colspan="2" class="text-center"><h4>Nenhum funcionário encontrado</h4></td>
 				</tr>
 				<tr ng-repeat="funcionario in vm.funcionarios">
-					<td ng-class="{ 'text-danger': !funcionario.ativo }"><i class="material-icons row-icon">person</i></td>
+					<td class="hidden-xs row-center" ng-class="{ 'text-danger': !funcionario.ativo }"><i class="material-icons row-icon">assignment_ind</i></td>
 					<td class="col-xs-10">
 						Funcionário <strong>{{ funcionario.nome }}</strong>
 						<br>
@@ -52,8 +52,8 @@
 							está atualmente <strong class="text-danger">INATIVO</strong>
 						</div>
 					</td>
-					<td>
-						<a ui-sref="app.funcionarios.editar({id: funcionario.id})" ><i class="material-icons">mode_edit</i></a>
+					<td class="row-center">
+						<a ui-sref="app.funcionarios.editar({id: funcionario.id})" ><i class="material-icons row-icon-sm">mode_edit</i></a>
 					</td>
 				</tr>
 			</tbody>
