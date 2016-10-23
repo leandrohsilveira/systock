@@ -65,8 +65,8 @@ public class ValidacaoFuncionarioTest {
 		assertEquals("O nome é obrigatório", message);
 	}
 
-	@Ignore
 	@Test
+	@Ignore
 	public void nomeVazioCpfDuplicadoTest() {
 		Funcionario f = new Funcionario("", "06106775001", Cargo.GERENTE);
 		Set<ConstraintViolation<Object>> validar = f.validar();
@@ -79,8 +79,8 @@ public class ValidacaoFuncionarioTest {
 		assertEquals("O CPF já está cadastrado", message);
 	}
 	
-	@Ignore
 	@Test
+	@Ignore
 	public void nomeNullCpfDuplicadoTest() {
 		Funcionario f = new Funcionario(null, "06106775001", Cargo.GERENTE);
 		Set<ConstraintViolation<Object>> validar = f.validar();
