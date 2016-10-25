@@ -24,9 +24,9 @@
 			if(vm.editar) {
 				Cliente.get({id: $stateParams.id}).$promise
                     .then(function(response) {
+						vm.cpfInicial = response.cpf;
+						vm.emailInicial = response.email;
                         vm.cliente = response;
-						vm.cpfInicial = vm.cliente.cpf;
-						vm.emailInicial = vm.cliente.email;
                     });
 			} else {
 				vm.cliente = new Cliente();

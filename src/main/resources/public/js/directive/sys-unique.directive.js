@@ -15,7 +15,7 @@
             scope: {
                 res: '@uniqueRes',
                 action: '@uniqueAction',
-                except: '@uniqueExcept'
+                except: '=uniqueExcept'
             },
             link: linkFunc,
         };
@@ -23,25 +23,26 @@
         return directive;
 
         function linkFunc(scope, el, attr, ngModel) {
+			if(!attr.ngDisabled) {
+				ngModel.$asyncValidators.unique = function(modelValue, viewValue) {
+					var value = modelValue || viewValue;
 
-            ngModel.$asyncValidators.unique = function(modelValue, viewValue) {
-				var value = modelValue || viewValue;
+					return $http({
+						url: scope.res + '/search/' + (scope.action || 'unique'),
+						params: {
+							value: value || null,
+							except: scope.except || null
+						}
+					}).then(function(response) {
+						if(response.data) {
+							return $q.reject('unique')
+						} else {
+							return true;
+						}
+					});
 
-				return $http({
-					url: scope.res + '/search/' + (scope.action || 'unique'),
-					params: {
-						value: value || null,
-                        except: scope.except || null
-					}
-				}).then(function(response) {
-					if(response.data) {
-						return $q.reject('unique')
-					} else {
-						return true;
-					}
-				});
-
-			};
+				};
+			}
 
         }
     }

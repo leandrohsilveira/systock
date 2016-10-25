@@ -23,7 +23,7 @@
 
 		<div class="form-group" ng-class="{'has-success': clienteForm.cpf.$valid, 'has-error': clienteForm.cpf.$dirty && clienteForm.cpf.$invalid }">
             <label for="cpf" class="sr-only control-label" required="true">CPF</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" mask="999.999.999-99" clean="true" unique unique-res="clientes" unique-except="{{ vm.cpfInicial }}" ng-model="vm.cliente.cpf" ng-cpf ng-disabled="vm.editar" autocomplete="off" placeholder="CPF" required ng-maxlength="14">
+            <input type="text" class="form-control" id="cpf" name="cpf" mask="999.999.999-99" clean="true" unique unique-res="clientes" unique-except="vm.cpfInicial" ng-model="vm.cliente.cpf" ng-cpf ng-disabled="vm.editar" autocomplete="off" placeholder="CPF" required ng-maxlength="14">
             <div ng-if="clienteForm.cpf.$dirty" ng-messages="clienteForm.cpf.$error">
                 <span ng-message="unique" class="help-block">O CPF já está cadastrado</span>
                 <span ng-message="cpf" class="help-block">O CPF é inválido</span>
@@ -34,7 +34,7 @@
 
 		<div class="form-group" ng-class="{'has-success': clienteForm.email.$valid, 'has-error': clienteForm.email.$dirty && clienteForm.email.$invalid }">
             <label for="email" class="sr-only control-label" required="true">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" ng-model="vm.cliente.email" unique unique-res="clientes" unique-action="uniqueEmail" unique-except="{{ vm.emailInicial }}" autocomplete="off" placeholder="E-mail" required>
+            <input type="email" class="form-control" id="email" name="email" ng-model="vm.cliente.email" unique unique-res="clientes" unique-action="uniqueEmail" unique-except="vm.emailInicial" autocomplete="off" placeholder="E-mail" required>
             <div ng-if="clienteForm.email.$dirty" ng-messages="clienteForm.email.$error">
                 <span ng-message="unique" class="help-block">Já existe um cliente cadastrado com este e-mail</span>
                 <span ng-message="email" class="help-block">O e-mail do cliente é inválido</span>

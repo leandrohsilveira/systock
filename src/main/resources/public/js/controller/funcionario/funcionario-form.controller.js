@@ -22,8 +22,8 @@
 			if(vm.editar) {
 				Funcionario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
+						vm.cpfInicial = response.cpf;
                         vm.funcionario = response;
-						vm.cpfInicial = vm.funcionario.cpf;
                     });
 			} else {
                 vm.funcionario = new Funcionario();

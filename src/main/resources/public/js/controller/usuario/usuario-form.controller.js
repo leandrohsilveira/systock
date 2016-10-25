@@ -27,8 +27,8 @@
 			if(vm.editar) {
 				Usuario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
+						vm.loginInicial = response.login;
                         vm.usuario = response;
-						vm.loginInicial = vm.usuario.login;
                         return HALResourceService.follow(vm.usuario, 'GET', 'funcionario');
                     })
 					.then(function(response) {
