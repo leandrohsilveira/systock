@@ -15,6 +15,8 @@
         vm.confirmarSenha = null;
 		vm.alterarSenha = false;
 		vm.editar = false;
+		vm.loginInicial = null;
+
 		vm.selecionarFuncionario = selecionarFuncionario;
 		vm.salvar = salvar;
 
@@ -26,6 +28,7 @@
 				Usuario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
                         vm.usuario = response;
+						vm.loginInicial = vm.usuario.login;
                         return HALResourceService.follow(vm.usuario, 'GET', 'funcionario');
                     })
 					.then(function(response) {

@@ -12,6 +12,7 @@
         var vm = this;
         vm.funcionario = null;
 		vm.editar = false;
+		vm.cpfInicial = null;
         vm.salvar = salvar;
 
         activate();
@@ -22,6 +23,7 @@
 				Funcionario.get({id: $stateParams.id}).$promise
                     .then(function(response) {
                         vm.funcionario = response;
+						vm.cpfInicial = vm.funcionario.cpf;
                     });
 			} else {
                 vm.funcionario = new Funcionario();

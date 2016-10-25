@@ -14,9 +14,9 @@
         </div>
         <div class="form-group" ng-class="{'has-success': usuarioForm.login.$valid, 'has-error': usuarioForm.login.$dirty && usuarioForm.login.$invalid }">
             <label for="login" class="sr-only control-label" required="true">Login</label>
-            <input type="text" ng-disabled="vm.editar" class="form-control" id="login" name="login" ng-model="vm.usuario.login" autocomplete="off" placeholder="Login" required ng-minlength="3" ng-maxlength="16" pattern="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$" sys-login-unique>
+            <input type="text" ng-disabled="vm.editar" class="form-control" id="login" name="login" ng-model="vm.usuario.login" autocomplete="off" placeholder="Login" required ng-minlength="3" ng-maxlength="16" pattern="^[a-zA-Z]+(_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9])*$" unique unique-res="usuarios" unique-except="{{ vm.loginInicial }}">
             <div ng-if="usuarioForm.login.$dirty" ng-messages="usuarioForm.login.$error">
-                <span ng-message="loginExistente" class="help-block">Este login já está cadastrado</span>
+                <span ng-message="unique" class="help-block">Este login já está cadastrado</span>
                 <span ng-message="required" class="help-block">O login é obrigatório</span>
                 <span ng-message="pattern" class="help-block">O login deve começar com pelo menos um caracter alfabetico e ter entre 3 e 16 caracteres alfanumericos</span>
                 <span ng-message="minlength, maxlength" class="help-block">O login deve possuir entre 3 e 16 caracteres</span>

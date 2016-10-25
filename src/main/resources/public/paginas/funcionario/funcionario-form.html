@@ -24,7 +24,7 @@
 
         <div class="form-group" ng-class="{'has-success': funcionarioForm.cpf.$valid, 'has-error': funcionarioForm.cpf.$dirty && funcionarioForm.cpf.$invalid }">
             <label for="funcionario_cpf" class="sr-only control-label" required="true">CPF</label>
-            <input type="text" class="form-control" id="funcionario_cpf" unique unique-res="funcionarios" unique-except="{{ ::vm.funcionario.cpf }}" mask="999.999.999-99" clean="true" name="cpf" ng-disabled="vm.editar" ng-cpf ng-model="vm.funcionario.cpf" autocomplete="off" placeholder="CPF" required ng-maxlength="14">
+            <input type="text" class="form-control" id="funcionario_cpf" unique unique-res="funcionarios" unique-except="{{ vm.cpfInicial }}" mask="999.999.999-99" clean="true" name="cpf" ng-disabled="vm.editar" ng-cpf ng-model="vm.funcionario.cpf" autocomplete="off" placeholder="CPF" required ng-maxlength="14">
             <div ng-if="funcionarioForm.cpf.$dirty" ng-messages="funcionarioForm.cpf.$error">
                 <span ng-message="unique" class="help-block">O CPF já está cadastrado</span>
                 <span ng-message="cpf" class="help-block">O CPF é inválido</span>

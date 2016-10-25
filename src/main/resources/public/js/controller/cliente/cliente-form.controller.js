@@ -12,6 +12,9 @@
         var vm = this;
 		vm.cliente = null;
 		vm.editar = false;
+		vm.cpfInicial = null;
+		vm.emailInicial = null;
+
 		vm.salvar = salvar;
 
         activate();
@@ -22,6 +25,8 @@
 				Cliente.get({id: $stateParams.id}).$promise
                     .then(function(response) {
                         vm.cliente = response;
+						vm.cpfInicial = vm.cliente.cpf;
+						vm.emailInicial = vm.cliente.email;
                     });
 			} else {
 				vm.cliente = new Cliente();

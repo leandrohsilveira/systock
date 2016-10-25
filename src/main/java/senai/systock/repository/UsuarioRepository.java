@@ -18,8 +18,8 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, L
 
 	@Query("select u from Usuario as u join u.funcionario as f where (:login is null or u.login = :login) and (:nome is null or upper(f.nome) like concat('%', upper(:nome), '%')) and (:cpf is null or f.cpf = REGEXP_REPLACE(:cpf, '(\\.|\\-)', '')) and (:cargo is null or f.cargo = :cargo)")
 	Page<Usuario> filter(Pageable pageable, @Param("login") String login, @Param("nome") String nome, @Param("cpf") String cpf, @Param("cargo") Cargo cargo);
-
-	@Query("select count(u.id) > 0 from Usuario u where u.login = :login")
-	boolean existsWithLogin(@Param("login") String login);
+	
+	@Query("select count(u.id) > 0 from Usuario u where u.login = :value and (:except is null or u.login <> :except)")
+	boolean unique(@Param("value") String value, @Param("except") String except);
 
 }
