@@ -1,6 +1,5 @@
 package senai.systock.controllers;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +22,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,14 +70,39 @@ public class LoginController {
 		}
 	}
 	
+	@PutMapping(path="/auth", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public void alterarUsuarioAutenticado(
+				@RequestParam("nome") String nome, 
+				@RequestParam(value="alterarSenha", defaultValue="false") Boolean alterarSenha, 
+				@RequestParam("senhaAtual") String senhaAtual, 
+				@RequestParam("novaSenha") String novaSenha) {
+		
+		Usuario usuario = recuperarUsuarioAutenticado();
+		usuario.getFuncionario().setNome(nome);
+		if(alterarSenha) {
+			if(Usuario.passwordEncoder.matches(senhaAtual, usuario.getSecret())) {
+				usuario.setSecret(Usuario.passwordEncoder.encode(novaSenha));
+			} else {
+				throw new SenhaAtualIncorretaException();
+			}
+		}
+		usuarioRepository.save(usuario);
+	}
+	
+	
 	@GetMapping(path="/auth", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> getAuth() {
-		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario usuario = usuarioRepository.findByLogin(login);
+	public ResponseEntity<Usuario> getUsuarioAutenticado() {
+		Usuario usuario = recuperarUsuarioAutenticado();
 		if(usuario != null) {
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		}
 		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+	}
+
+	private Usuario recuperarUsuarioAutenticado() {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = usuarioRepository.findByLogin(login);
+		return usuario;
 	}
 	
 	@GetMapping(path="/logout")
@@ -87,6 +112,13 @@ public class LoginController {
 	
 	@ResponseStatus(code=HttpStatus.FORBIDDEN, reason="Usuário e/ou senha inválidos.")
 	protected class UsuarioSenhaInvalidosException extends RuntimeException {
+
+		private static final long serialVersionUID = 4029375442396250945L;
+		
+	}
+	
+	@ResponseStatus(code=HttpStatus.FORBIDDEN, reason="A senha atual informada está incorreta.")
+	protected class SenhaAtualIncorretaException extends RuntimeException {
 
 		private static final long serialVersionUID = 4029375442396250945L;
 		
