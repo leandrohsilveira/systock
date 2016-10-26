@@ -1,16 +1,12 @@
 package senai.systock.model;
 
-import java.util.Set;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 
 @MappedSuperclass
-public class EntidadeBase {
+public class EntidadeBase extends Validatable {
 	
 	public EntidadeBase() {
 	}
@@ -49,10 +45,6 @@ public class EntidadeBase {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
-	public Set<ConstraintViolation<Object>> validar() {
-		return Validation.buildDefaultValidatorFactory().getValidator().validate(this);
 	}
 	
 	@PrePersist

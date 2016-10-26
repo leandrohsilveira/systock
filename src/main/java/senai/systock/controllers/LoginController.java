@@ -1,13 +1,19 @@
 package senai.systock.controllers;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import senai.systock.json.LoginJson;
 import senai.systock.model.Usuario;
 import senai.systock.repository.UsuarioRepository;
 
@@ -47,20 +54,30 @@ public class LoginController {
 		response.setHeader(token.getHeaderName(), token.getToken());
 	}
 	
-	@PostMapping(path="/auth", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@PostMapping(path="/auth", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
-		try {
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, senha));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-		} catch(BadCredentialsException e) {
-			throw new UsuarioSenhaInvalidosException();
+		LoginJson json = new LoginJson(login, senha);
+		Set<ConstraintViolation<Object>> violations = json.validar();
+		if(violations.isEmpty()) {
+			try {
+				Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, senha));
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			} catch(BadCredentialsException e) {
+				throw new UsuarioSenhaInvalidosException();
+			}
+		} else {
+			throw new ConstraintViolationException(violations);
 		}
 	}
 	
 	@GetMapping(path="/auth", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Usuario getAuth() {
+	public ResponseEntity<Usuario> getAuth() {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		return usuarioRepository.findByLogin(login);
+		Usuario usuario = usuarioRepository.findByLogin(login);
+		if(usuario != null) {
+			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+		}
+		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping(path="/logout")
