@@ -12,7 +12,7 @@ import javax.validation.ValidationException;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
+
 public class ValidacaoClienteTest {
 	
 	@Test
@@ -21,17 +21,6 @@ public class ValidacaoClienteTest {
 		Set<ConstraintViolation<Object>> validacoes = cliente.validar();
 		assertNotNull(validacoes);
 		assertTrue(validacoes.isEmpty());
-	}
-	
-	@Test
-	@Ignore
-	public void cpfDuplicadoTest() {
-		Cliente cliente = new Cliente("Leandro 1","29697824991","leandro1@gmail.com");	
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
-		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF já está cadastrado para um cliente", message);
 	}
 	
 	@Test
@@ -45,6 +34,7 @@ public class ValidacaoClienteTest {
 	}
 	
 	@Test
+	@Ignore
 	public void emailDuplicadoTest() {
 		Cliente cliente = new Cliente("Leandro 1","55587135853","cliente.teste@gmail.com");	
 		Set<ConstraintViolation<Object>> validar = cliente.validar();
@@ -81,7 +71,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O Nome não pode ser vazio", message);
+		assertEquals("O Nome é obrigatório", message);
 	}
 	
 	@Test
@@ -91,7 +81,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF não pode ser vazio", message);
+		assertEquals("O CPF é obrigatório", message);
 	}
 	
 	@Test
@@ -101,7 +91,7 @@ public class ValidacaoClienteTest {
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
 		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail não pode ser vazio", message);
+		assertEquals("O E-mail é obrigatório", message);
 	}
 
 }

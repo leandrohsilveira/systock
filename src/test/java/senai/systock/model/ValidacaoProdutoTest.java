@@ -8,12 +8,10 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import senai.systock.exceptions.ValidationException;
 
-@Ignore
 public class ValidacaoProdutoTest {
 
 	@Test
@@ -85,7 +83,6 @@ public class ValidacaoProdutoTest {
 	@Test
 	public void quantidadeNegativaTest() {
 		Produto p = new Produto("Samsung Galaxy S7", 4000f, -1);
-		
 		Set<ConstraintViolation<Object>> validar = p.validar();
 		assertNotNull(validar);
 		assertTrue(validar.size() == 1);
