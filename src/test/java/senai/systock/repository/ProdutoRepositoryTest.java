@@ -58,7 +58,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtoFormAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-form.html").session(session))
 		.andExpect(status().isOk())
@@ -67,7 +67,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtoListAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-list.html").session(session))
 			.andExpect(status().isOk())
@@ -76,7 +76,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtosResourceAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/produtos").session(session))
 		.andExpect(status().isOk())
@@ -85,7 +85,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void deleteResourcesAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/produtos").session(session))
 		.andExpect(status().isForbidden());
@@ -93,7 +93,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void searchByDescricaoAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		String input = "%PROD%";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/produtos/search/searchByDescricao").param("descricao", input).session(session))
@@ -114,7 +114,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtoFormGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-form.html").session(session))
 		.andExpect(status().isOk())
@@ -123,7 +123,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtoListGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-list.html").session(session))
 		.andExpect(status().isOk())
@@ -132,7 +132,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtosResourceGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/produtos").session(session))
 		.andExpect(status().isOk())
@@ -141,7 +141,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void deleteResourcesGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/produtos").session(session))
 		.andExpect(status().isForbidden());
@@ -149,7 +149,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void searchByDescricaoGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		String input = "%PROD%";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/produtos/search/searchByDescricao").param("descricao", input).session(session))
@@ -170,7 +170,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void produtoFormVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-form.html").session(session))
 		.andExpect(status().isOk())
@@ -179,7 +179,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void produtoListVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/produto/produto-list.html").session(session))
 		.andExpect(status().isOk())
@@ -188,7 +188,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void produtosResourceVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/produtos").session(session))
 		.andExpect(status().isOk())
@@ -197,7 +197,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void deleteResourcesVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/produtos").session(session))
 		.andExpect(status().isForbidden());
@@ -205,7 +205,7 @@ public class ProdutoRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void searchByDescricaoVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		String input = "%PROD%";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/produtos/search/searchByDescricao").param("descricao", input).session(session))

@@ -99,7 +99,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuarioFormAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-form.html").session(session))
 		.andExpect(status().isOk())
@@ -108,7 +108,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuarioListAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-list.html").session(session))
 			.andExpect(status().isOk())
@@ -117,7 +117,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuariosResourceAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios").session(session))
 		.andExpect(status().isOk())
@@ -126,7 +126,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void deleteResourcesAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/usuarios").session(session))
 		.andExpect(status().isForbidden());
@@ -134,7 +134,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void findByLoginAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		String input = "admin";
 		
@@ -146,7 +146,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void findByLoginNotFoundAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		
 		String input = "adminx";
 		
@@ -156,7 +156,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void filterLoginAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		String input = "admin";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("login", input).session(session))
@@ -172,7 +172,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterNomeAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		String input = "%ADMIN%";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("nome", input).session(session))
@@ -187,7 +187,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCpfAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		String input = "94149790507";
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cpf", input).session(session))
@@ -202,7 +202,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCargoAdminTest() throws Exception {
-		authenticate("admin", "12345678");
+		autenticarOk("admin", "12345678");
 		String input = Cargo.ADMINISTRADOR.name();
 		
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cargo", input).session(session))
@@ -223,7 +223,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuarioFormGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-form.html").session(session))
 			.andExpect(status().isForbidden());
@@ -231,7 +231,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuarioListGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-list.html").session(session))
 			.andExpect(status().isForbidden());
@@ -239,7 +239,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuariosResourceGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios").session(session))
 		.andExpect(status().isForbidden());
@@ -247,7 +247,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void deleteResourcesGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/usuarios").session(session))
 		.andExpect(status().isForbidden());
@@ -255,7 +255,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void findByLoginGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		String input = "admin";
 		
@@ -266,7 +266,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void findByLoginNotFoundGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		
 		String input = "adminx";
 		
@@ -276,7 +276,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void filterLoginGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		String input = "admin";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("login", input).session(session))
@@ -285,7 +285,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterNomeGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		String input = "Admin";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("nome", input).session(session))
@@ -294,7 +294,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCpfGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		String input = "94149790507";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cpf", input).session(session))
@@ -303,7 +303,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCargoGerenteTest() throws Exception {
-		authenticate("gerente", "12345678");
+		autenticarOk("gerente", "12345678");
 		String input = Cargo.ADMINISTRADOR.name();
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cargo", input).session(session))
@@ -318,7 +318,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void usuarioFormVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-form.html").session(session))
 			.andExpect(status().isForbidden());
@@ -326,7 +326,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void usuarioListVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/paginas/usuario/usuario-list.html").session(session))
 			.andExpect(status().isForbidden());
@@ -334,7 +334,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void usuariosResourceVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios").session(session))
 		.andExpect(status().isForbidden());
@@ -342,7 +342,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void deleteResourcesVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		mvc.perform(MockMvcRequestBuilders.delete("/usuarios").session(session))
 		.andExpect(status().isForbidden());
@@ -350,7 +350,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void findByLoginVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		String input = "admin";
 		
@@ -361,7 +361,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void findByLoginNotFoundVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		
 		String input = "adminx";
 		
@@ -371,7 +371,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 	
 	@Test
 	public void filterLoginVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		String input = "admin";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("login", input).session(session))
@@ -380,7 +380,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterNomeVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		String input = "Admin";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("nome", input).session(session))
@@ -389,7 +389,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCpfVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		String input = "94149790507";
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cpf", input).session(session))
@@ -398,7 +398,7 @@ public class UsuarioRepositoryTest extends BaseRepositoryTest {
 
 	@Test
 	public void filterCargoVendedorTest() throws Exception {
-		authenticate("vendedor", "12345678");
+		autenticarOk("vendedor", "12345678");
 		String input = Cargo.ADMINISTRADOR.name();
 		
 		mvc.perform(MockMvcRequestBuilders.get("/usuarios/search/filter").param("cargo", input).session(session))

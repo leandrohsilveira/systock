@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 public class BaseRepositoryTest {
@@ -17,14 +18,17 @@ public class BaseRepositoryTest {
 	@Autowired
 	protected MockHttpSession session;
 		
-	protected void authenticate(String login, String senha) throws Exception {
-		mvc.perform(MockMvcRequestBuilders.post("/auth")
+	protected void autenticarOk(String login, String senha) throws Exception {
+		autenticar(login, senha).andExpect(status().isOk());
+	}
+
+	protected ResultActions autenticar(String login, String senha) throws Exception {
+		return mvc.perform(MockMvcRequestBuilders.post("/auth")
 										.with(csrf().asHeader())
 										.param("login", login)
 										.param("senha", senha)
 										.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-										.session(session)
-									).andExpect(status().isOk());
+										.session(session));
 	}
 	
 }
