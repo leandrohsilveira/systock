@@ -24,6 +24,12 @@
 				url: '/index',
 				templateUrl: 'paginas/index.html',
                 controller: 'MinhasVendasController as vm'
+			})
+			.state('app.meuUsuario', {
+				parent: 'app',
+				url: '/autenticado?alterarSenha',
+				controller: 'MeuUsuarioController as vm',
+				templateUrl: 'paginas/meu-usuario.html'
 			});
 
 		$urlRouterProvider.otherwise("/app/index");

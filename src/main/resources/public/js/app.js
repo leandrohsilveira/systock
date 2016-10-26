@@ -17,5 +17,6 @@
 			'ui.utils.masks',
 			'validation.match'
 		])
+		.constant('FORM_DATA_CONFIG', {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
 		.constant('jQuery', jQuery);
 })();

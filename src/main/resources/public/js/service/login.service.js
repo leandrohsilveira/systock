@@ -5,13 +5,14 @@
         .module('systock')
         .factory('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'jQuery'];
+    LoginService.$inject = ['$http', 'jQuery', 'FORM_DATA_CONFIG'];
 
     /* @ngInject */
-    function LoginService($http, jQuery) {
+    function LoginService($http, jQuery, FORM_DATA_CONFIG) {
         var service = {
             login: login,
 			getUsuarioAutenticado: getUsuarioAutenticado,
+			alterarUsuarioAutenticado: alterarUsuarioAutenticado,
 			logout: logout
         };
 
@@ -22,13 +23,12 @@
 		}
 
         function login(formParams) {
-			var config = {
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}
-				}
-			return $http.post('auth', jQuery.param(formParams), config);
+			return $http.post('auth', jQuery.param(formParams), FORM_DATA_CONFIG);
         }
+
+		function alterarUsuarioAutenticado(formParams) {
+			return $http.put('auth', jQuery.param(formParams), FORM_DATA_CONFIG);
+		}
 
 		function getUsuarioAutenticado() {
 			return $http.get('auth');

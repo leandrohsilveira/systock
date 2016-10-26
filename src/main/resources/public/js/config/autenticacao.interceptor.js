@@ -19,7 +19,7 @@
 			var params = {},
 				current = $location.path();
 
-			if(!/^\/login/.test(current)) {
+			if(!/^(\/login|\/app\/autenticado)/.test(current)) {
 				switch (rejection.status) {
 					case 403:
 						params.msg = 'Sem privilégios para acessar esta página, tente acessar com outro usuário.';
