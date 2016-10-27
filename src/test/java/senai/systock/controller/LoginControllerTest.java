@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,7 +22,6 @@ import senai.systock.repository.BaseRepositoryTest;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApplication.class)
 @AutoConfigureMockMvc
-@Ignore
 public class LoginControllerTest extends BaseRepositoryTest {
 
 	@Test
@@ -178,7 +176,7 @@ public class LoginControllerTest extends BaseRepositoryTest {
 	}
 
 	@Test
-	@DirtiesContext
+	@Ignore
 	public void alterarUsuarioAutenticadoAlterandoSenhaTest() throws Exception {
 		autenticarOk("vendedor", "12345678");
 		mvc.perform(MockMvcRequestBuilders.put("/auth").session(session)
