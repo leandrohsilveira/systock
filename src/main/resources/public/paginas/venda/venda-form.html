@@ -77,11 +77,16 @@
 				</span>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" ng-class="{'has-success': vendaForm.desconto.$valid, 'has-error': vendaForm.desconto.$dirty && vendaForm.desconto.$invalid }">
 				<div class="input-group">
 					<div class="input-group-addon">Desconto</div>
-					<input type="number" class="form-control" ng-model="vm.venda.desconto" ng-disabled="vm.situacaoInicial != 'ABERTA'" ng-min="0" ng-max="100" required>
+					<input type="number" class="form-control" id="desconto" name="desconto" ng-model="vm.venda.desconto" ng-disabled="vm.situacaoInicial != 'ABERTA'" ng-min="0" ng-max="100" required>
 					<div class="input-group-addon">%</div>
+				</div>
+				<div ng-if="vendaForm.desconto.$dirty" ng-messages="itemForm.quantidade.$error">
+					<span ng-message="required" class="help-block">O desconto é obrigatório</span>
+					<span ng-message="max" class="help-block">O desconto não pode ser superior a cem</span>
+					<span ng-message="min" class="help-block">A desconto não pode ser inferior a zero</span>
 				</div>
 			</div>
 
