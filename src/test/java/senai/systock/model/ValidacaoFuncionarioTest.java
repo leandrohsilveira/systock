@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.validation.ConstraintViolation;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import senai.systock.exceptions.ValidationException;
@@ -28,18 +27,6 @@ public class ValidacaoFuncionarioTest {
 		Collections.sort(validar, comparator);
 		assertNotNull(validar);
 		assertTrue(validar.isEmpty());
-	}
-
-	@Test
-	@Ignore
-	public void cpfDuplicadoTest() {
-		Funcionario f = new Funcionario("Leandro", "06106775001", Cargo.GERENTE);
-		List<ConstraintViolation<Object>> validar = new ArrayList<>(f.validar());
-		Collections.sort(validar, comparator);
-		assertNotNull(validar);
-		assertEquals(1, validar.size());
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF já está cadastrado", message);
 	}
 
 	@Test
@@ -73,36 +60,6 @@ public class ValidacaoFuncionarioTest {
 		assertEquals(1, validar.size());
 		String message = validar.iterator().next().getMessage();
 		assertEquals("O nome é obrigatório", message);
-	}
-
-	@Ignore
-	@Test
-	public void nomeVazioCpfDuplicadoTest() {
-		Funcionario f = new Funcionario("", "06106775001", Cargo.GERENTE);
-		List<ConstraintViolation<Object>> validar = new ArrayList<>(f.validar());
-		Collections.sort(validar, comparator);
-		assertNotNull(validar);
-		assertEquals(2, validar.size());
-		String message;
-		message = validar.iterator().next().getMessage();
-		assertEquals("O nome deve possuir entre 3 e 80 caracteres", message);
-		message = validar.iterator().next().getMessage();
-		assertEquals("O CPF já está cadastrado", message);
-	}
-
-	@Ignore
-	@Test
-	public void nomeNullCpfDuplicadoTest() {
-		Funcionario f = new Funcionario(null, "06106775001", Cargo.GERENTE);
-		List<ConstraintViolation<Object>> validar = new ArrayList<>(f.validar());
-		Collections.sort(validar, comparator);
-		assertNotNull(validar);
-		assertEquals(2, validar.size());
-		String message;
-		message = validar.iterator().next().getMessage();
-		assertEquals("O nome é obrigatório", message);
-		message = validar.iterator().next().getMessage();
-		assertEquals("O CPF já está cadastrado", message);
 	}
 
 	@Test
