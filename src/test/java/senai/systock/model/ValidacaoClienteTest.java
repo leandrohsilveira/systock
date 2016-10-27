@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,7 +14,11 @@ import javax.validation.ValidationException;
 
 import org.junit.Test;
 
+import senai.systock.util.ConstraintViolationComparator;
+
 public class ValidacaoClienteTest {
+
+	private static final ConstraintViolationComparator comparator = new ConstraintViolationComparator();
 
 	@Test
 	public void sucessoTest() throws ValidationException {
@@ -24,61 +31,62 @@ public class ValidacaoClienteTest {
 	@Test
 	public void cpfInvalidoTest() {
 		Cliente cliente = new Cliente("Leandro 1", "29697822941", "leandro1@gmail.com");
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF é inválido", message);
+		assertEquals(1, validar.size());
+		assertEquals("O CPF é inválido", validar.get(0).getMessage());
 	}
 
 	@Test
 	public void emailInvalidoTest1() {
 		Cliente cliente = new Cliente("Leandro 1", "55587135853", "leandro@");
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail é inválido", message);
+		assertEquals(1, validar.size());
+		assertEquals("O e-mail é inválido", validar.get(0).getMessage());
 	}
 
 	@Test
 	public void emailInvalidoTest2() {
 		Cliente cliente = new Cliente("Leandro 1", "55587135853", "@gmail.com");
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail é inválido", message);
+		assertEquals(1, validar.size());
+		assertEquals("O e-mail é inválido", validar.get(0).getMessage());
 	}
 
 	@Test
 	public void nomeVazioTest() {
-		Cliente cliente = new Cliente(null, "55587135853", "leandro1@gmail.com");
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		Cliente cliente = new Cliente("", "55587135853", "leandro1@gmail.com");
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O Nome é obrigatório", message);
+		assertEquals(2, validar.size());
+		assertEquals("O nome deve possuir entre 3 e 80 caracteres", validar.get(0).getMessage());
+		assertEquals("O nome é obrigatório", validar.get(1).getMessage());
 	}
 
 	@Test
 	public void cpfVazioTest() {
 		Cliente cliente = new Cliente("Leandro 1", null, "leandro1@gmail.com");
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O CPF é obrigatório", message);
+		assertEquals(1, validar.size());
+		assertEquals("O CPF é obrigatório", validar.get(0).getMessage());
 	}
 
 	@Test
 	public void emailVazioTest() {
 		Cliente cliente = new Cliente("Leandro 1", "55587135853", null);
-		Set<ConstraintViolation<Object>> validar = cliente.validar();
+		List<ConstraintViolation<Object>> validar = new ArrayList<>(cliente.validar());
+		Collections.sort(validar, comparator);
 		assertNotNull(validar);
-		assertTrue(validar.size() == 1);
-		String message = validar.iterator().next().getMessage();
-		assertEquals("O E-mail é obrigatório", message);
+		assertEquals(1, validar.size());
+		assertEquals("O e-mail é obrigatório", validar.get(0).getMessage());
 	}
 
 }
