@@ -46,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="funcionarioForm.$invalid">Salvar</button>
             <a ui-sref="app.funcionarios.consultar" class="btn btn-default">Cancelar</a>
         </div>
     </form>
