@@ -23,7 +23,7 @@
 
 		<div class="form-group" ng-class="{'has-success': produtoForm.quantidade.$valid, 'has-error': produtoForm.quantidade.$dirty && produtoForm.quantidade.$invalid }">
             <label for="quantidade" class="sr-only control-label" required="true">Quantidade</label>
-            <input type="number" class="form-control" id="quantidade" name="quantidade" ng-model="vm.produto.quantidade" autocomplete="off" placeholder="Quantidade" required ng-min="0" ng-max="999999999999" pattern="^\d+$">
+            <input type="number" class="form-control" id="quantidade" name="quantidade" ng-model="vm.produto.quantidade" autocomplete="off" placeholder="Quantidade" required ng-min="0" ng-max="999999999999" pattern="^\-?\d+$">
             <div ng-if="produtoForm.quantidade.$dirty" ng-messages="produtoForm.quantidade.$error">
                 <span ng-message="number, pattern" class="help-block">A quantidade de itens do produto deve ser um número inteiro</span>
                 <span ng-message="required" class="help-block">A quantidade de itens do produto é obrigatória</span>
