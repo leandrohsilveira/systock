@@ -34,7 +34,7 @@
 
 		<div class="form-group" ng-class="{'has-success': produtoForm.preco.$valid, 'has-error': produtoForm.preco.$dirty && produtoForm.preco.$invalid }">
             <label for="preco" class="sr-only control-label" required="true">Preço</label>
-            <input type="text" class="form-control" id="preco" name="preco" ng-model="vm.produto.preco" autocomplete="off" placeholder="Preço" ui-money-mask required ng-min="0.01" ng-max="999999999999">
+            <input type="text" class="form-control" id="preco" name="preco" ng-model="vm.produto.preco" autocomplete="off" placeholder="Preço" ui-money-mask required min="0.01" max="999999999999">
             <div ng-if="produtoForm.preco.$dirty" ng-messages="produtoForm.preco.$error">
                 <span ng-message="number" class="help-block">O preço do produto deve ser um número</span>
                 <span ng-message="required" class="help-block">O preço do produto é obrigatório</span>
