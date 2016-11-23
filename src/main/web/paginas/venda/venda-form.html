@@ -1,0 +1,162 @@
+<form name="vendaForm" ng-submit="vm.salvar()" novalidate>
+	<div class="col-xs-12 col-sm-6 form-horizontal">
+		<div class="page-header">
+			<h1>
+				Formulário de Venda
+			</h1>
+		</div>
+		<div class="well well-lg">
+
+			<div class="form-group" ng-class="{'has-error': vendaForm.funcionario.$dirty && vendaForm.funcionario.$invalid }">
+				<label for="funcionario" class="sr-only control-label" required="true">Funcionário</label>
+				<input type="text" ng-disabled="vm.funcionario" class="form-control" id="funcionario" name="funcionario" ng-model="vm.funcionario.nome" autocomplete="off" placeholder="Funcionário" required>
+				<div ng-if="vendaForm.funcionario.$dirty" ng-messages="vendaForm.funcionario.$error">
+					<span ng-message="required" class="help-block">O funcionário é obrigatório</span>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{'has-success': vendaForm.cliente.$valid, 'has-error': vendaForm.cliente.$dirty && vendaForm.cliente.$invalid }">
+				<label for="cliente_find" class="sr-only control-label">Encontrar cliente...</label>
+				<input id="cliente_find"
+						ng-if="vm.venda.situacao == 'ABERTA' || vm.venda.situacao == 'CANCELADA'"
+						type="text"
+						name="cliente"
+						ng-model="vm.cliente"
+						placeholder="Encontrar cliente..."
+						uib-typeahead="cliente as (cliente.nome + ' - ' + cliente.cpf) for cliente in vm.selecionarCliente($viewValue)"
+						typeahead-loading="carregandoClientes"
+						typeahead-no-results="nenhumClienteEncontrado"
+						typeahead-editable="false"
+						ng-disabled="vm.situacaoInicial != 'ABERTA'"
+						autocomplete="off"
+						class="form-control">
+				<input id="cliente_find"
+						ng-if="vm.venda.situacao != 'ABERTA' && vm.venda.situacao != 'CANCELADA'"
+						type="text"
+						name="cliente"
+						ng-model="vm.cliente"
+						placeholder="Encontrar cliente..."
+						uib-typeahead="cliente as (cliente.nome + ' - ' + cliente.cpf) for cliente in vm.selecionarCliente($viewValue)"
+						typeahead-loading="carregandoClientes"
+						typeahead-no-results="nenhumClienteEncontrado"
+						typeahead-editable="false"
+						ng-disabled="vm.situacaoInicial != 'ABERTA'"
+						autocomplete="off"
+						class="form-control" required>
+				<div ng-if="vendaForm.cliente.$dirty" ng-messages="vendaForm.cliente.$error">
+					<span ng-message="required" class="help-block">O vínculo com cliente é obrigatório</span>
+				</div>
+				<span ng-show="carregandoClientes">
+					Procurando clientes...
+				</span>
+				<span class="text-danger" ng-show="nenhumClienteEncontrado">
+					Nenhum cliente encontrado.
+				</span>
+			</div>
+
+			<div class="form-group" ng-if="vm.situacaoInicial == 'ABERTA'">
+				<label for="produto_find" class="sr-only control-label">Encontrar produto...</label>
+				<input id="produto_find"
+						type="text"
+						name="produto"
+						ng-model="vm.produto"
+						placeholder="Encontrar produto..."
+						uib-typeahead="produto as produto.descricao for produto in vm.selecionarProduto($viewValue)"
+						typeahead-loading="carregandoProdutos"
+						typeahead-no-results="nenhumProdutoEncontrado"
+						typeahead-editable="false"
+						typeahead-select-on-blur="true"
+						typeahead-on-select="vm.adicionarItem()"
+						autocomplete="off"
+						class="form-control">
+				<span ng-show="carregandoProdutos">
+					Procurando produtos...
+				</span>
+				<span class="text-danger" ng-show="nenhumProdutoEncontrado">
+					Nenhum produto encontrado.
+				</span>
+			</div>
+
+			<div class="form-group" ng-class="{'has-success': vendaForm.desconto.$valid, 'has-error': vendaForm.desconto.$dirty && vendaForm.desconto.$invalid }">
+				<div class="input-group">
+					<div class="input-group-addon">Desconto</div>
+					<input type="number" class="form-control" id="desconto" name="desconto" ng-model="vm.venda.desconto" ng-disabled="vm.situacaoInicial != 'ABERTA'" ng-min="0" ng-max="100" required>
+					<div class="input-group-addon">%</div>
+				</div>
+				<div ng-if="vendaForm.desconto.$dirty" ng-messages="vendaForm.desconto.$error">
+					<span ng-message="required" class="help-block">O desconto é obrigatório</span>
+					<span ng-message="max" class="help-block">O desconto não pode ser superior a cem</span>
+					<span ng-message="min" class="help-block">A desconto não pode ser inferior a zero</span>
+				</div>
+			</div>
+
+			<h4>Sub-total: {{ vm.subtotal | currency: 'R$' }}</h4>
+			<h4>Total de descontos: {{ (vm.subtotal * vm.venda.desconto / 100) || 0 | currency: 'R$' }}</h4>
+			<h3>Total: {{ (vm.subtotal - vm.subtotal * vm.venda.desconto / 100) || 0 | currency: 'R$' }}</h4>
+
+			<div class="form-group" ng-class="{'has-success': vendaForm.situacao.$valid, 'has-error': vendaForm.situacao.$dirty && vendaForm.situacao.$invalid }">
+				<label for="situacao" class="sr-only control-label" required="true">Situação</label>
+				<select name="situacao" id="situacao" class="form-control" ng-model="vm.venda.situacao" required>
+					<option ng-if="vm.situacaoInicial == 'ABERTA'" value="ABERTA">Venda aberta</option>
+					<option ng-if="vm.situacaoInicial == 'CONCLUIDA' || vm.situacaoInicial == 'ABERTA'" value="CONCLUIDA">Venda concluída</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'CANCELADA' || vm.situacaoInicial == 'ABERTA')" value="CANCELADA">Venda cancelada</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'DEVOLVIDA' || vm.situacaoInicial == 'CONCLUIDA')" value="DEVOLVIDA">Venda devolvida</option>
+					<option ng-if="vm.editar && (vm.situacaoInicial == 'TROCADA' || vm.situacaoInicial == 'CONCLUIDA')" value="TROCADA">Troca efetuada</option>
+				</select>
+				<div ng-if="vendaForm.situacao.$dirty" ng-messages="vendaForm.situacao.$error">
+					<span ng-message="required" class="help-block">A situacao da venda é obrigatória</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" ng-disabled="vendaForm.$invalid || vm.desabilitarBotaoSalvar()">Salvar</button>
+				<a ui-sref="app.vendas.consultar" class="btn btn-default">Cancelar</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-6">
+		<div class="page-header">
+			<h1>
+				Itens da venda
+			</h1>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tbody>
+					<tr ng-if="!vm.possuiItens()">
+						<td colspan="2" class="text-center"><h4>Nenhum item incluido na venda</h4></td>
+					</tr>
+					<tr ng-repeat="item in vm.itens track by $index">
+						<td class="col-xs-10">
+							<ng-form name="itemForm" novalidate>
+								<h4>{{ item.produto.descricao }}</h4>
+								<div class="form-group" ng-class="{'has-success': itemForm.quantidade.$valid, 'has-error': itemForm.quantidade.$dirty && itemForm.quantidade.$invalid }">
+									<div class="input-group">
+										<div class="input-group-addon">Qt.</div>
+										<input type="number" name="quantidade" class="form-control" ng-model="item.quantidade" ng-change="vm.calcularSubtotal()" ng-min="1" ng-max="item.produto.quantidade" ng-disabled="vm.situacaoInicial != 'ABERTA'" pattern="^\d+$" required>
+										<div class="input-group-addon">de {{ item.produto.quantidade }} em estoque.</div>
+									</div>
+									<div ng-if="itemForm.quantidade.$dirty" ng-messages="itemForm.quantidade.$error">
+										<span ng-message="number, pattern" class="help-block">A quantidade deve ser um número inteiro</span>
+										<span ng-message="required" class="help-block">A quantidade é obrigatória</span>
+										<span ng-message="max" class="help-block">A quantidade não pode ser superior ao estoque de {{ item.produto.quantidade }}.</span>
+										<span ng-message="min" class="help-block">A quantidade de itens do produto não pode ser inferior a 1</span>
+									</div>
+								</div>
+							</ng-form>
+							<div>
+								custando <strong>{{ item.valor | currency: 'R$' }}</strong> cada
+							</div>
+							<div ng-if="item.quantidade">
+								com total de <strong>{{ item.valor * item.quantidade | currency: 'R$' }}</strong>
+							</div>
+							<div>
+								<button type="button" class="btn btn-default" ng-if="vm.situacaoInicial == 'ABERTA'" ng-click="vm.removerItem($index)">Remover</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</form>

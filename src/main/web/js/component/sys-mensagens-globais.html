@@ -1,0 +1,1 @@
+<div uib-alert ng-repeat="mensagem in vm.mensagens" ng-class="'alert-' + (mensagem.status || 'info')" close="vm.removerMensagem($index)">{{mensagem.descricao}}</div>

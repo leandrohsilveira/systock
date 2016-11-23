@@ -3,3 +3,7 @@
 .classpath
 .project
 /bin/
+/.idea/
+node_modules
+bower_components
+/src/main/resources/public

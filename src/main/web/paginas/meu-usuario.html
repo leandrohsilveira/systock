@@ -1,0 +1,74 @@
+<form name="usuarioForm" class="form-horizontal" ng-submit="vm.salvar()" novalidate>
+
+	<div class="page-header">
+		<h1>
+			Meus dados
+		</h1>
+	</div>
+	<div class="well well-lg">
+
+		<div class="form-group" ng-class="{'has-success': usuarioForm.nome.$valid, 'has-error': usuarioForm.nome.$dirty && usuarioForm.nome.$invalid }">
+			<label for="funcionario_nome" class="sr-only control-label" required="true">Nome</label>
+			<input type="text" class="form-control" id="funcionario_nome" name="nome" ng-model="vm.usuario.funcionario.nome" autocomplete="off" placeholder="Nome" required ng-minlength="3" ng-maxlength="80">
+			<div ng-if="usuarioForm.nome.$dirty" ng-messages="usuarioForm.nome.$error">
+				<span ng-message="required" class="help-block">O nome do funcionário é obrigatório</span>
+				<span ng-message="minlength, maxlength" class="help-block">O nome do funcionário deve possuir entre 3 e 80 caracteres</span>
+			</div>
+		</div>
+
+		<div class="form-group has-success">
+			<label for="funcionario_cpf" class="sr-only control-label">CPF</label>
+			<input type="text" class="form-control" id="funcionario_cpf" mask="999.999.999-99" clean="true" name="cpf" disabled ng-model="vm.usuario.funcionario.cpf" autocomplete="off" placeholder="CPF">
+		</div>
+
+        <div class="form-group has-success">
+            <label for="login" class="sr-only control-label" required="true">Login</label>
+            <input type="text" disabled class="form-control" id="login" name="login" ng-model="vm.usuario.login" autocomplete="off" placeholder="Login">
+        </div>
+
+		<div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="vm.alterarSenha"> Alterar senha
+                </label>
+            </div>
+        </div>
+
+		<!-- Senha -->
+		<div ng-if="vm.alterarSenha" class="form-group" ng-class="{'has-success': usuarioForm.senhaAtual.$valid, 'has-error': usuarioForm.senhaAtual.$dirty && usuarioForm.senhaAtual.$invalid }">
+			<label for="senha" class="sr-only control-label">Senha atual</label>
+			<input type="password" class="form-control" id="senhaAtual" name="senhaAtual" ng-model="vm.senhaAtual" autocomplete="off" placeholder="Senha atual" required ng-minlength="8" ng-maxlength="32">
+			<div ng-if="usuarioForm.senhaAtual.$dirty" ng-messages="usuarioForm.senhaAtual.$error">
+				<span ng-message="required" class="help-block">A senha atual é obrigatória</span>
+				<span ng-message="minlength, maxlength" class="help-block">A senha atual deve possuir entre 8 e 32 caracteres</span>
+			</div>
+		</div>
+
+		<!-- Senha -->
+        <div ng-if="vm.alterarSenha" class="form-group" ng-class="{'has-success': usuarioForm.novaSenha.$valid, 'has-error': usuarioForm.novaSenha.$dirty && usuarioForm.novaSenha.$invalid }">
+            <label for="senha" class="sr-only control-label">Nova senha</label>
+            <input type="password" class="form-control" id="novaSenha" name="novaSenha" ng-model="vm.novaSenha" autocomplete="off" placeholder="Nova senha" required ng-minlength="8" ng-maxlength="32">
+            <div ng-if="usuarioForm.novaSenha.$dirty" ng-messages="usuarioForm.novaSenha.$error">
+                <span ng-message="required" class="help-block">A nova senha é obrigatória</span>
+                <span ng-message="minlength, maxlength" class="help-block">A nova senha deve possuir entre 8 e 32 caracteres</span>
+            </div>
+        </div>
+
+		<!-- Confirmação -->
+        <div ng-if="vm.alterarSenha" class="form-group" ng-class="{'has-success': usuarioForm.confirmarSenha.$valid, 'has-error': usuarioForm.confirmarSenha.$dirty && usuarioForm.confirmarSenha.$invalid }">
+            <label for="confirmar_senha" class="sr-only control-label">Confirmar senha</label>
+            <input type="password" class="form-control" name="confirmarSenha" id="confirmar_senha" ng-model="vm.confirmarSenha" match="vm.novaSenha" placeholder="Confirmar senha" required>
+			<div ng-if="usuarioForm.confirmarSenha.$dirty" ng-messages="usuarioForm.confirmarSenha.$error">
+				<span ng-message="required" class="help-block">A confirmação de senha é obrigatória</span>
+				<span ng-message="match" class="help-block">A confirmação deve ser igual a nova senha informada</span>
+			</div>
+        </div>
+
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" ng-disabled="usuarioForm.$invalid">Salvar</button>
+			<a ui-sref="app.usuarios.consultar" class="btn btn-default">Cancelar</a>
+		</div>
+
+	</div>
+
+</form>

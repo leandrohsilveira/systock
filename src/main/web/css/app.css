@@ -1,0 +1,143 @@
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+.app-name {
+	font-family: 'Fredericka the Great';
+}
+
+#systock-navbar {
+	border-top: none;
+}
+
+.header {
+	background-color: #222222;
+	color: #ffffff;
+	-webkit-box-shadow: 0px 1px 14px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 1px 14px 2px rgba(0,0,0,0.75);
+	box-shadow: 0px 1px 14px 2px rgba(0,0,0,0.75);
+}
+
+.dropdown-toggle {
+	vertical-align: center;
+}
+
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:active,
+.navbar-inverse .navbar-toggle:focus {
+	border: none;
+	padding: 0;
+	margin: 0 0 0 25px;
+	float: left;
+	background-color: #222222;
+	color: #ffffff;
+}
+
+.btn-primary {
+	border-color: #333333;
+	background-color: #222222;
+	color: #ffffff;
+}
+
+.btn,
+.btn:focus,
+.btn:active,
+.btn:hover {
+	border-radius: 2px;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:focus:active,
+.btn-primary:focus:hover,
+.btn-primary:focus:visited,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary:active:visited,
+.btn-primary:hover:focus,
+.btn-primary:hover:active,
+.btn-primary:hover:visited,
+.btn-primary:visited:focus,
+.btn-primary:visited:active,
+.btn-primary:visited:hover,
+.btn-primary[disabled],
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:visited,
+.btn-primary[disabled]:focus:active,
+.btn-primary[disabled]:focus:hover,
+.btn-primary[disabled]:focus:visited,
+.btn-primary[disabled]:active:focus,
+.btn-primary[disabled]:active:hover,
+.btn-primary[disabled]:active:visited,
+.btn-primary[disabled]:hover:focus,
+.btn-primary[disabled]:hover:active,
+.btn-primary[disabled]:hover:visited {
+	border-color: #555555;
+	background-color: #444444;
+	color: #ffffff;
+}
+
+.btn .material-icons {
+	vertical-align: middle;
+}
+
+.table>tbody>tr>td.row-center {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.row-icon {
+	font-size: 40px;
+}
+.row-icon-sm {
+	font-size: 25px;
+}
+
+.panel-default .panel-heading {
+	background-color: #222222;
+	border: 1px solid #222222;
+	color: #ffffff;
+}
+
+.painel-filtros	{
+	padding-bottom: 9px;
+	margin: 0 0 20px;
+	border-bottom: 1px solid #eee;
+}
+
+footer {
+	margin-top: 30px;
+	padding-bottom: 10px;
+	background-color: #fafafa;
+	webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+}
+
+.formulario {
+	display: none;
+}
+
+.aberto .formulario {
+	display: block;
+}
+
+.page-header {
+	margin: 0 0 20px;
+}
+
+.page-header .close {
+    font-size: 40px;
+    color: #000;
+    opacity: 1;
+    margin-right: 20px;
+}
+
+.form-control {
+	border-radius: 1px;
+}

@@ -1,0 +1,52 @@
+<div class="page-header">
+    <h1>
+        Formulário de Produto
+    </h1>
+</div>
+<div class="well well-lg">
+    <form name="produtoForm" class="form-horizontal" ng-submit="vm.salvar()" novalidate>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-disabled="!vm.editar" ng-model="vm.produto.ativo"> Ativo
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-success': produtoForm.descricao.$valid, 'has-error': produtoForm.descricao.$dirty && produtoForm.descricao.$invalid }">
+            <label for="descricao" class="sr-only control-label" required="true">Descrição</label>
+            <input type="text" class="form-control" id="descricao" name="descricao" ng-model="vm.produto.descricao" autocomplete="off" placeholder="Descrição" required ng-minlength="3" ng-maxlength="60">
+            <div ng-if="produtoForm.descricao.$dirty" ng-messages="produtoForm.descricao.$error">
+                <span ng-message="required" class="help-block">A descrição do produto é obrigatória</span>
+                <span ng-message="minlength, maxlength" class="help-block">A descrição do produto deve possuir entre 3 e 60 caracteres</span>
+            </div>
+        </div>
+
+		<div class="form-group" ng-class="{'has-success': produtoForm.quantidade.$valid, 'has-error': produtoForm.quantidade.$dirty && produtoForm.quantidade.$invalid }">
+            <label for="quantidade" class="sr-only control-label" required="true">Quantidade</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade" ng-model="vm.produto.quantidade" autocomplete="off" placeholder="Quantidade" required ng-min="0" ng-max="999999999999" pattern="^\-?\d+$">
+            <div ng-if="produtoForm.quantidade.$dirty" ng-messages="produtoForm.quantidade.$error">
+                <span ng-message="number, pattern" class="help-block">A quantidade de itens do produto deve ser um número inteiro</span>
+                <span ng-message="required" class="help-block">A quantidade de itens do produto é obrigatória</span>
+                <span ng-message="max" class="help-block">A quantidade de itens do produto não pode ser superior a 999.999.999.999</span>
+                <span ng-message="min" class="help-block">A quantidade de itens do produto não pode ser inferior a zero</span>
+            </div>
+        </div>
+
+		<div class="form-group" ng-class="{'has-success': produtoForm.preco.$valid, 'has-error': produtoForm.preco.$dirty && produtoForm.preco.$invalid }">
+            <label for="preco" class="sr-only control-label" required="true">Preço</label>
+            <input type="text" class="form-control" id="preco" name="preco" ng-model="vm.produto.preco" autocomplete="off" placeholder="Preço" ui-money-mask required min="0.01" max="999999999999">
+            <div ng-if="produtoForm.preco.$dirty" ng-messages="produtoForm.preco.$error">
+                <span ng-message="number" class="help-block">O preço do produto deve ser um número</span>
+                <span ng-message="required" class="help-block">O preço do produto é obrigatório</span>
+                <span ng-message="max" class="help-block">O preço do produto não pode ser superior a 999.999.999.999</span>
+                <span ng-message="min" class="help-block">O preço do produto não pode ser inferior a 0,01</span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-disabled="produtoForm.$invalid || ((!vm.editar || vm.alterarSenha) && vm.usuario.senha != vm.confirmarSenha)">Salvar</button>
+            <a ui-sref="app.produtos.consultar" class="btn btn-default">Cancelar</a>
+        </div>
+    </form>
+</div>
